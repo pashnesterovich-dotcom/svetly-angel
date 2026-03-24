@@ -397,9 +397,12 @@
     /* Events within a day */
     .event-list { margin-top: 12px; }
     .event {
-      display: flex; gap: 10px; align-items: flex-start;
+      display: flex; gap: 10px; align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
+    }
+    .event:has(.event-contacts), .event:has(em) {
+      align-items: flex-start;
     }
     .event-content { flex: 1; min-width: 0; max-width: calc(100% - 170px); }
     .event:last-child { border-bottom: none; }
