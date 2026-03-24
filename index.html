@@ -1723,7 +1723,9 @@ function renderDays() {
     card.className = 'day-card';
     card.innerHTML =
       '<div class="day-header" onclick="toggleDay(this)">' +
-        '<div class="day-badge" style="background:' + (day.badgeColor || '#EFF6FF') + '">' + day.emoji + '</div>' +
+        '<div class="day-badge" style="background:' + (day.badgeColor || '#EFF6FF') + ';border:1px solid ' + ({
+          '#FEF9C3':'#FDE68A','#FEF3C7':'#FCD34D','#F3F4F6':'#E5E7EB','#DBEAFE':'#BFDBFE','#F0FDF4':'#BBF7D0','#EFF6FF':'#BFDBFE'
+        }[day.badgeColor] || '#BFDBFE') + '">' + day.emoji + '</div>' +
         '<div class="day-info">' +
           '<div class="day-date">День ' + (i+1) + ' · ' + day.date + '</div>' +
           '<div class="day-title">' + day.title.replace(/^Глава \d+:\s*/, '').replace(/^Эпилог:\s*/, '') + '</div>' +
