@@ -2,1648 +2,1994 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Светлый Ангел — Мадейра 2026</title>
+  <title>Светлый Ангел · Мадейра 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue:     #4A9EFF;
-      --blue-soft:#EBF4FF;
-      --green:    #52C97B;
-      --green-soft:#EDFAF3;
-      --sand:     #F5A623;
-      --sand-soft:#FFF8ED;
-      --red:      #FF5A5A;
-      --red-soft: #FFF0F0;
-      --gray-50:  #F9FAFB;
-      --gray-100: #F3F4F6;
-      --gray-200: #E5E7EB;
-      --gray-400: #9CA3AF;
-      --gray-600: #6B7280;
-      --gray-800: #1F2937;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-      --shadow-lg: 0 10px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
-      --radius:   16px;
-      --radius-sm:10px;
+      --bg: #FAFAF8;
+      --text: #1A1A1A;
+      --text-secondary: #6B6B6B;
+      --accent: #2563EB;
+      --accent-light: #DBEAFE;
+      --success: #16A34A;
+      --waiting: #9CA3AF;
+      --danger: #DC2626;
+      --card: #FFFFFF;
+      --border: #E8E5E0;
+      --radius: 12px;
+      --shadow: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+      --transition: all 0.2s ease;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #fff;
-      color: var(--gray-800);
-      line-height: 1.6;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════════════
-       ЭКРАН ПАРОЛЯ
-    ═══════════════════════════════════════ */
-    #lock-screen {
-      position: fixed; inset: 0; z-index: 9999;
-      background: linear-gradient(135deg, #1a6bb5 0%, #0f9b5e 40%, #1a6bb5 70%, #0d5c3a 100%);
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.6s ease;
-    }
-    #lock-screen.hidden { opacity: 0; pointer-events: none; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    .lock-card {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 24px;
-      padding: 48px 40px;
-      width: 100%; max-width: 400px;
-      margin: 16px;
+    /* ════════════════════════════════════
+       LOGIN SCREEN
+    ════════════════════════════════════ */
+    #login-screen {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--bg);
+      transition: opacity 0.5s ease;
+    }
+    #login-screen.hidden { opacity: 0; pointer-events: none; }
+
+    .login-wrap {
       text-align: center;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      padding: 24px 24px;
+      width: 100%;
+      max-width: 360px;
     }
-    .lock-emoji { font-size: 56px; margin-bottom: 16px; display: block; }
-    .lock-title {
-      font-size: 28px; font-weight: 800; color: #fff;
-      margin-bottom: 6px; letter-spacing: -0.5px;
+    .login-emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
     }
-    .lock-sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 32px; }
-    .lock-input {
-      width: 100%; padding: 14px 18px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 12px;
-      font-size: 16px; color: #fff;
-      font-family: 'Inter', sans-serif;
-      outline: none; margin-bottom: 12px;
-      transition: border-color 0.2s, background 0.2s;
-      letter-spacing: 2px;
+    .login-title {
+      font-size: 26px; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
     }
-    .lock-input::placeholder { color: rgba(255,255,255,0.5); letter-spacing: 0; }
-    .lock-input:focus {
-      border-color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.2);
+    .login-sub {
+      font-size: 15px; color: var(--text-secondary);
+      margin-bottom: 32px;
     }
-    .lock-input.error { border-color: #ff8080; animation: shake 0.3s; }
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
     }
-    .lock-btn {
-      width: 100%; padding: 14px;
-      background: rgba(255,255,255,0.9);
-      border: none; border-radius: 12px;
-      font-size: 16px; font-weight: 700;
-      color: #1a6bb5; cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: background 0.2s, transform 0.1s;
+    .login-label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--text-secondary); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 8px; text-align: left;
     }
-    .lock-btn:hover { background: #fff; transform: translateY(-1px); }
-    .lock-btn:active { transform: translateY(0); }
-    .lock-error {
-      color: #ff9090; font-size: 13px; margin-top: 10px;
-      display: none;
+    .login-input {
+      width: 100%; padding: 12px 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text); font-size: 16px;
+      font-family: inherit; outline: none;
+      margin-bottom: 12px;
+      transition: var(--transition);
     }
-    .lock-error.visible { display: block; }
+    .login-input:focus { border-color: var(--accent); background: var(--card); }
+    .login-btn {
+      width: 100%; padding: 13px 16px;
+      background: var(--accent);
+      border: none; border-radius: 8px;
+      color: #fff; font-size: 16px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      transition: var(--transition);
+      min-height: 44px;
+    }
+    .login-btn:hover { background: #b45309; }
+    .login-error {
+      color: var(--danger); font-size: 14px;
+      margin-top: 10px; display: none; text-align: center;
+    }
 
-    /* ═══════════════════════════════════════
-       ОСНОВНОЙ КОНТЕНТ
-    ═══════════════════════════════════════ */
+    /* ════════════════════════════════════
+       MAIN CONTENT
+    ════════════════════════════════════ */
     #main-content { display: none; }
     #main-content.visible { display: block; }
 
-    /* ═══════════════════════════════════════
-       НАВИГАЦИЯ
-    ═══════════════════════════════════════ */
-    .navbar {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gray-200);
-      padding: 0 20px;
-    }
-    .navbar-inner {
-      max-width: 900px; margin: 0 auto;
-      display: flex; align-items: center;
-      justify-content: space-between;
-      height: 56px; gap: 8px;
-    }
-    .navbar-brand {
-      font-weight: 800; font-size: 16px;
-      color: var(--gray-800); letter-spacing: -0.3px;
-      white-space: nowrap;
-    }
-    .navbar-brand span { color: var(--blue); }
-    .nav-links {
-      display: flex; gap: 4px; overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a {
-      text-decoration: none; color: var(--gray-600);
-      font-size: 13px; font-weight: 500;
-      padding: 6px 10px; border-radius: 8px;
-      white-space: nowrap;
-      transition: background 0.15s, color 0.15s;
-    }
-    .nav-links a:hover { background: var(--gray-100); color: var(--gray-800); }
-
-    /* ═══════════════════════════════════════
+    /* ════════════════════════════════════
        HERO
-    ═══════════════════════════════════════ */
-    .hero {
-      background: linear-gradient(160deg, #EBF4FF 0%, #EDFAF3 50%, #FFF8ED 100%);
-      padding: 64px 20px 48px;
-      text-align: center;
+    ════════════════════════════════════ */
+    #hero {
+      position: relative;
+      background: linear-gradient(135deg, #1a5fa8, #2E86DE, #5BA4F0, #4ade80, #1a5fa8);
+      background-size: 300% 300%;
+      animation: gradShift 15s ease infinite;
+      padding: 64px 0 48px;
+      min-height: 420px;
+      display: flex; align-items: center;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      text-align: center; padding: 0 20px;
+      width: 100%;
     }
     .hero-badge {
       display: inline-block;
-      background: var(--blue-soft);
-      color: var(--blue);
-      font-size: 12px; font-weight: 600;
-      padding: 4px 12px; border-radius: 100px;
-      margin-bottom: 16px; letter-spacing: 0.5px;
-      text-transform: uppercase;
+      background: rgba(255,255,255,0.25);
+      color: #fff; font-size: 14px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 16px;
     }
     .hero-title {
-      font-size: clamp(36px, 8vw, 64px);
-      font-weight: 800; letter-spacing: -2px;
-      line-height: 1.05;
-      background: linear-gradient(135deg, #1a6bb5, #0f9b5e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 12px;
-    }
-    .hero-sub {
-      font-size: 17px; color: var(--gray-600);
-      margin-bottom: 40px; font-weight: 400;
-    }
-
-    /* Обратный отсчёт */
-    .countdown {
-      display: flex; gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap; margin-bottom: 40px;
-    }
-    .countdown-unit {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      min-width: 80px;
-      box-shadow: var(--shadow-md);
-      text-align: center;
-    }
-    .countdown-num {
-      font-size: 36px; font-weight: 800;
-      color: var(--gray-800); letter-spacing: -1px;
-      line-height: 1;
-    }
-    .countdown-label {
-      font-size: 11px; text-transform: uppercase;
-      letter-spacing: 0.5px; color: var(--gray-400);
-      font-weight: 500; margin-top: 4px;
-    }
-    .countdown-done {
-      font-size: 20px; font-weight: 700;
-      color: var(--green); padding: 16px 24px;
-      background: #fff; border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* Виджеты */
-    .widgets {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px; max-width: 560px; margin: 0 auto;
-    }
-    @media (max-width: 500px) {
-      .widgets { grid-template-columns: 1fr; max-width: 300px; }
-    }
-    .widget-card {
-      background: #fff; border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--gray-200);
-    }
-    .widget-icon { font-size: 20px; margin-bottom: 4px; }
-    .widget-val { font-size: 16px; font-weight: 700; color: var(--gray-800); }
-    .widget-label { font-size: 11px; color: var(--gray-400); margin-top: 2px; font-weight: 500; }
-
-    /* ═══════════════════════════════════════
-       ОБЩИЕ СТИЛИ СЕКЦИЙ
-    ═══════════════════════════════════════ */
-    .section {
-      max-width: 900px; margin: 0 auto;
-      padding: 56px 20px;
-    }
-    .section-title {
-      font-size: clamp(22px, 4vw, 30px);
-      font-weight: 800; letter-spacing: -0.5px;
-      margin-bottom: 8px; color: var(--gray-800);
-    }
-    .section-sub {
-      color: var(--gray-400); font-size: 15px;
-      margin-bottom: 32px;
-    }
-    .section-sep {
-      border: none; border-top: 1px solid var(--gray-200);
-    }
-
-    /* Анимация появления */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ═══════════════════════════════════════
-       КАРТА
-    ═══════════════════════════════════════ */
-    #map-section { background: var(--gray-50); }
-    #map {
-      width: 100%; height: 420px;
-      border-radius: var(--radius); overflow: hidden;
-      box-shadow: var(--shadow-md);
-    }
-    @media (max-width: 600px) { #map { height: 320px; } }
-
-    /* ═══════════════════════════════════════
-       ТАЙМЛАЙН
-    ═══════════════════════════════════════ */
-    .timeline {
-      position: relative;
-      display: flex; flex-direction: column; gap: 24px;
-    }
-    .day-card {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--gray-200);
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .day-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-    .day-header {
-      padding: 20px 24px 16px;
-      display: flex; align-items: flex-start;
-      gap: 16px; cursor: pointer;
-      user-select: none;
-    }
-    .day-num-badge {
-      width: 48px; height: 48px; border-radius: 12px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      font-weight: 800; font-size: 20px; flex-shrink: 0;
-      line-height: 1;
-    }
-    .day-num-badge .day-label {
-      font-size: 9px; font-weight: 500;
-      text-transform: uppercase; letter-spacing: 0.3px;
-      opacity: 0.7;
-    }
-    .day-meta { flex: 1; }
-    .day-date { font-size: 12px; color: var(--gray-400); font-weight: 500; margin-bottom: 2px; }
-    .day-title { font-size: 17px; font-weight: 700; color: var(--gray-800); line-height: 1.3; }
-    .day-funny { font-size: 13px; color: var(--gray-600); font-style: italic; margin-top: 2px; }
-    .day-icon { font-size: 24px; flex-shrink: 0; }
-    .day-toggle {
-      font-size: 18px; color: var(--gray-400);
-      transition: transform 0.25s; flex-shrink: 0;
-      align-self: center;
-    }
-    .day-card.open .day-toggle { transform: rotate(180deg); }
-
-    .day-body {
-      display: none; padding: 0 24px 24px;
-      border-top: 1px solid var(--gray-100);
-    }
-    .day-card.open .day-body { display: block; }
-
-    .day-section-label {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      color: var(--gray-400); margin: 16px 0 8px;
-    }
-    .day-desc {
-      font-size: 14px; color: var(--gray-600);
-      line-height: 1.7; margin-bottom: 4px;
-    }
-
-    .poi-list { display: flex; flex-direction: column; gap: 8px; }
-    .poi-item {
-      display: flex; gap: 10px; align-items: flex-start;
-      padding: 10px 12px;
-      background: var(--gray-50);
-      border-radius: var(--radius-sm);
-    }
-    .poi-emoji { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-    .poi-info { flex: 1; }
-    .poi-name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-    .poi-desc { font-size: 13px; color: var(--gray-600); margin-top: 1px; }
-    .poi-price {
-      font-size: 11px; font-weight: 600;
-      background: var(--blue-soft); color: var(--blue);
-      padding: 2px 8px; border-radius: 100px;
-      margin-top: 4px; display: inline-block;
-    }
-
-    .accommodation-card {
-      background: var(--green-soft);
-      border: 1px solid rgba(82,201,123,0.3);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      display: flex; align-items: flex-start; gap: 12px;
-    }
-    .accom-icon { font-size: 22px; flex-shrink: 0; }
-    .accom-info { flex: 1; }
-    .accom-name { font-size: 14px; font-weight: 700; color: var(--gray-800); }
-    .accom-addr { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
-    .accom-price {
-      font-size: 13px; font-weight: 700;
-      color: var(--green); margin-top: 4px;
-    }
-    .accom-link {
-      display: inline-block; margin-top: 8px;
-      font-size: 12px; font-weight: 600;
-      color: var(--blue); text-decoration: none;
-      padding: 4px 10px;
-      background: var(--blue-soft);
-      border-radius: 8px;
-      transition: background 0.15s;
-    }
-    .accom-link:hover { background: #d0e9ff; }
-
-    .transport-info {
-      background: var(--sand-soft);
-      border: 1px solid rgba(245,166,35,0.3);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      font-size: 13px; color: var(--gray-700);
-    }
-    .transport-info strong { color: var(--sand); }
-
-    .restaurant-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-    .rest-pill {
-      font-size: 12px; font-weight: 500;
-      padding: 4px 10px; border-radius: 100px;
-      background: var(--gray-100); color: var(--gray-700);
-    }
-
-    .camping-card {
-      background: linear-gradient(135deg, #EBF4FF, #EDFAF3);
-      border: 1px solid var(--blue-soft);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-    }
-    .camping-fun {
-      font-size: 13px; color: var(--blue); font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .camping-details { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
-
-    .tbd-badge {
-      display: inline-block;
-      background: var(--gray-100); color: var(--gray-400);
-      font-size: 11px; font-weight: 600;
-      padding: 3px 8px; border-radius: 100px;
-      letter-spacing: 0.3px;
-    }
-
-    /* ═══════════════════════════════════════
-       БЮДЖЕТ
-    ═══════════════════════════════════════ */
-    #budget-section { background: var(--gray-50); }
-    .budget-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-md); }
-    .budget-table {
-      width: 100%; border-collapse: collapse;
-      background: #fff; font-size: 14px;
-      border-radius: var(--radius); overflow: hidden;
-    }
-    .budget-table th {
-      background: var(--gray-800);
-      color: #fff; font-weight: 600;
-      padding: 12px 16px; text-align: left;
-      font-size: 12px; text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .budget-table td {
-      padding: 12px 16px; border-bottom: 1px solid var(--gray-100);
-      color: var(--gray-700);
-    }
-    .budget-table tr:last-child td { border-bottom: none; }
-    .budget-table tr:hover td { background: var(--gray-50); }
-    .budget-table .total-row td {
-      background: var(--blue-soft);
-      font-weight: 700; color: var(--blue);
-      border-bottom: none;
-    }
-    .budget-table .cat-row td {
-      background: var(--gray-50);
-      font-weight: 600; color: var(--gray-600);
-      font-size: 12px; text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .price-green { color: var(--green); font-weight: 600; }
-    .price-blue { color: var(--blue); font-weight: 600; }
-    .price-tbd { color: var(--gray-400); font-style: italic; }
-
-    /* ═══════════════════════════════════════
-       ЧЕК-ЛИСТ
-    ═══════════════════════════════════════ */
-    .checklist-progress-wrap { margin-bottom: 28px; }
-    .checklist-progress-label {
-      display: flex; justify-content: space-between;
-      font-size: 13px; font-weight: 600;
-      color: var(--gray-600); margin-bottom: 8px;
-    }
-    .checklist-progress-bar {
-      height: 8px; background: var(--gray-200);
-      border-radius: 100px; overflow: hidden;
-    }
-    .checklist-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue), var(--green));
-      border-radius: 100px;
-      transition: width 0.4s ease;
-    }
-
-    .checklist-cats { display: flex; flex-direction: column; gap: 24px; }
-    .checklist-cat-title {
-      font-size: 13px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      color: var(--gray-800); margin-bottom: 12px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .checklist-items { display: flex; flex-direction: column; gap: 6px; }
-    .checklist-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 14px; border-radius: var(--radius-sm);
-      cursor: pointer; transition: background 0.15s;
-      user-select: none;
-      border: 1px solid var(--gray-200);
-      background: #fff;
-    }
-    .checklist-item:hover { background: var(--gray-50); }
-    .checklist-item.checked {
-      background: var(--green-soft);
-      border-color: rgba(82,201,123,0.4);
-    }
-    .checklist-item.checked .ci-label {
-      text-decoration: line-through;
-      color: var(--gray-400);
-    }
-    .ci-checkbox {
-      width: 20px; height: 20px; flex-shrink: 0;
-      border: 2px solid var(--gray-300);
-      border-radius: 6px; display: flex;
-      align-items: center; justify-content: center;
-      transition: border-color 0.15s, background 0.15s;
-      font-size: 12px;
-    }
-    .checklist-item.checked .ci-checkbox {
-      border-color: var(--green);
-      background: var(--green);
+      font-size: 36px; font-weight: 700;
       color: #fff;
-    }
-    .ci-label { font-size: 14px; color: var(--gray-700); flex: 1; }
-
-    /* ═══════════════════════════════════════
-       ДОКУМЕНТЫ И ССЫЛКИ
-    ═══════════════════════════════════════ */
-    .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-    .doc-cat-title {
-      font-size: 13px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      color: var(--gray-600); margin: 24px 0 12px;
-      grid-column: 1 / -1;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .doc-cat-title:first-child { margin-top: 0; }
-    .link-btn {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 16px;
-      background: #fff; border-radius: var(--radius-sm);
-      border: 1px solid var(--gray-200);
-      text-decoration: none; color: var(--gray-800);
-      font-size: 14px; font-weight: 500;
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
-    }
-    .link-btn:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-1px);
-      border-color: var(--blue);
-    }
-    .link-btn .lb-icon { font-size: 20px; flex-shrink: 0; }
-    .link-btn .lb-text { flex: 1; }
-    .link-btn .lb-title { font-weight: 600; font-size: 14px; display: block; }
-    .link-btn .lb-sub { font-size: 12px; color: var(--gray-400); display: block; margin-top: 1px; }
-    .link-btn .lb-arrow { color: var(--gray-400); font-size: 16px; }
-
-    /* ═══════════════════════════════════════
-       ЭКСТРЕННЫЕ ТЕЛЕФОНЫ
-    ═══════════════════════════════════════ */
-    .emergency-section {
-      background: linear-gradient(135deg, #fff0f0, #fff8ed);
-      border: 1px solid rgba(255,90,90,0.2);
-      border-radius: var(--radius);
-      padding: 28px; margin: 0 20px 40px;
-      max-width: 860px; margin-left: auto; margin-right: auto;
-    }
-    .emergency-title {
-      font-size: 18px; font-weight: 800; color: var(--red);
-      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-    }
-    .emergency-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-    }
-    .emergency-item {
-      background: #fff;
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      border: 1px solid rgba(255,90,90,0.15);
-    }
-    .emergency-item .em-label {
-      font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      color: var(--gray-400); margin-bottom: 4px;
-    }
-    .emergency-item .em-num {
-      font-size: 20px; font-weight: 800;
-      color: var(--red); font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
       letter-spacing: -0.5px;
     }
-    .emergency-item .em-name {
-      font-size: 12px; color: var(--gray-600); margin-top: 2px;
+    .hero-sub {
+      font-size: 16px; color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
     }
 
-    /* ═══════════════════════════════════════
-       ФУТЕР
-    ═══════════════════════════════════════ */
-    .footer {
-      text-align: center; padding: 40px 20px 60px;
-      color: var(--gray-400); font-size: 13px;
+    /* Countdown */
+    @keyframes gradShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .footer strong { color: var(--gray-600); }
+    .countdown-box {
+      max-width: 420px;
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+    .countdown-until {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .countdown-grid {
+      display: flex; gap: 10px; align-items: center; justify-content: center;
+    }
+    .countdown-item {
+      text-align: center;
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 12px 4px 10px;
+      flex: 1;
+      min-width: 60px;
+    }
+    .countdown-num {
+      font-size: 32px; font-weight: 700;
+      color: #fff; line-height: 1;
+      display: block;
+    }
+    .countdown-label {
+      font-size: 11px; color: rgba(255,255,255,0.5);
+      display: block; margin-top: 5px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .countdown-sep {
+      color: rgba(255,255,255,0.3); font-size: 24px;
+      font-weight: 300; line-height: 1;
+      flex-shrink: 0;
+    }
+    .countdown-done {
+      font-size: 20px; font-weight: 600; color: #fff;
+      padding: 20px;
+    }
 
-    /* ═══════════════════════════════════════
-       LEAFLET КАСТОМ
-    ═══════════════════════════════════════ */
+    /* Widgets */
+    .widgets-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; max-width: 420px; margin: 0 auto;
+    }
+    .widget-card {
+      background: var(--card);
+      border-radius: 12px; padding: 14px 10px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .widget-icon { font-size: 22px; margin-bottom: 4px; }
+    .widget-val {
+      font-size: 17px; font-weight: 700;
+      color: var(--text); line-height: 1.2;
+    }
+    .widget-label {
+      font-size: 13px; color: var(--text-secondary);
+      margin-top: 2px; font-weight: 500;
+    }
+
+    /* ════════════════════════════════════
+       SECTION BASICS
+    ════════════════════════════════════ */
+    .section { padding: 48px 0; }
+    .section-alt { background: #F5F3EF; }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+    .section-header {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 20px;
+    }
+    .section-icon { font-size: 28px; line-height: 1.2; }
+    .section-title {
+      font-size: 28px; font-weight: 700;
+      color: var(--text);
+    }
+    .section-desc {
+      font-size: 14px; color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ════════════════════════════════════
+       NAV BAR
+    ════════════════════════════════════ */
+    #nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 1000;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .nav-inner {
+      display: flex; gap: 0;
+      padding: 0 8px;
+      white-space: nowrap;
+      justify-content: center;
+    }
+    .nav-item {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 12px 12px;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      text-decoration: none;
+      min-height: 44px;
+      line-height: 1.4;
+    }
+    .nav-item svg { flex-shrink: 0; }
+    .nav-item:hover { color: var(--accent); text-decoration: none; border-bottom-color: var(--accent); }
+    .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ════════════════════════════════════
+       MAP
+    ════════════════════════════════════ */
+    #map {
+      width: 100%; height: 340px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    @media (min-width: 480px) { #map { height: 420px; } }
+
     .leaflet-popup-content-wrapper {
-      border-radius: 12px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+      border-radius: 10px !important;
+      box-shadow: var(--shadow) !important;
+      font-family: 'DM Sans', sans-serif !important;
     }
-    .leaflet-popup-content { font-family: 'Inter', sans-serif; }
-    .popup-title { font-weight: 700; font-size: 14px; color: #1F2937; margin-bottom: 4px; }
-    .popup-desc { font-size: 12px; color: #6B7280; line-height: 1.5; }
-    .popup-num {
-      font-size: 10px; font-weight: 700;
-      color: #4A9EFF; text-transform: uppercase;
-      letter-spacing: 0.5px; margin-bottom: 4px;
+    .leaflet-popup-content { font-size: 14px !important; }
+    .popup-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .popup-body { font-size: 13px; color: #555; line-height: 1.4; }
+    .popup-link { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--accent); font-weight: 600; }
+
+    /* ════════════════════════════════════
+       DAY CARDS (TIMELINE)
+    ════════════════════════════════════ */
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .day-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      min-height: 64px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .day-header:hover { background: rgba(37,99,235,0.03); }
+    .day-badge {
+      flex-shrink: 0;
+      width: 52px; height: 52px;
+      background: var(--bg);
+      border: none;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+    }
+    .day-card.open .day-badge {
+      transform: scale(1.05);
+    }
+    .day-info { flex: 1; min-width: 0; }
+    .day-date {
+      font-size: 13px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .day-title {
+      font-size: 18px; font-weight: 700;
+      color: var(--text); margin-top: 1px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .day-num {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .day-chapter {
+      display: inline-flex; align-items: center;
+      font-size: 12px; font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-right: 4px;
+      vertical-align: middle;
+      line-height: 20px;
+    }
+    .day-subtitle {
+      font-size: 14px; color: var(--text-secondary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .day-chevron {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: opacity 0.25s ease;
+    }
+    .day-chevron .chev-down { display: block; }
+    .day-chevron .chev-up { display: none; }
+    .day-card.open .day-chevron .chev-down { display: none; }
+    .day-card.open .day-chevron .chev-up { display: block; }
+
+    .day-body {
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      padding: 0 16px;
+      border-top: 1px solid transparent;
+      transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease, border-color 0.2s ease;
+    }
+    .day-card.open .day-body {
+      opacity: 1;
+      padding: 0 16px 16px;
+      border-top-color: var(--border);
     }
 
-    /* ═══════════════════════════════════════
-       АДАПТИВ
-    ═══════════════════════════════════════ */
-    @media (max-width: 640px) {
-      .day-header { padding: 16px 18px 12px; gap: 12px; }
-      .day-body { padding: 0 18px 18px; }
-      .day-title { font-size: 15px; }
-      .section { padding: 40px 16px; }
-      .emergency-section { margin: 0 16px 32px; }
+    .day-card {
+      transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .day-card.open {
+      box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+    }
+
+    /* Events within a day */
+    .event-list { margin-top: 12px; }
+    .event {
+      display: flex; gap: 10px; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-content { flex: 1; min-width: 0; max-width: calc(100% - 170px); }
+    .event:last-child { border-bottom: none; }
+    .event-time {
+      flex-shrink: 0;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-secondary);
+      width: 72px; min-width: 72px; max-width: 72px;
+      padding-top: 2px;
+      text-align: right;
+      padding-right: 12px;
+    }
+    .event-time-icon {
+      width: 72px; min-width: 72px; max-width: 72px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 12px; padding-top: 4px;
+    }
+    .event-time-icon svg { width: 18px; height: 18px; color: var(--text-secondary); stroke-width: 1.5; }
+    .event-text {
+      font-size: 16px; color: var(--text);
+      line-height: 1.45;
+    }
+    .event-text strong { font-weight: 600; }
+    .event-text em { font-style: normal; font-size: 14px; color: var(--text-secondary); display: block; margin-top: 3px; line-height: 1.5; word-spacing: 1px; }
+    .inline-icon { width: 16px; height: 16px; vertical-align: -3px; display: inline; color: var(--text-secondary); }
+    .event-text a { color: var(--accent); font-size: 14px; }
+    .event-text a:hover { text-decoration: underline; }
+    .event-text a[href*="maps.google"] { display: block; margin-top: 2px; }
+    .event-info { opacity: 0.85; }
+    .event-text-secondary { font-size: 13px; color: var(--text-secondary); }
+    .day-note {
+      font-size: 14px; color: var(--text-secondary);
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 14px 18px;
+      padding-right: 30%;
+      margin-top: 16px;
+      line-height: 1.5;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .day-note-icon {
+      font-size: 16px; flex-shrink: 0; display: flex; align-items: center;
+    }
+    .day-tip-icon {
+      font-size: 16px; flex-shrink: 0; display: flex; align-items: center;
+    }
+
+    /* Tags */
+    .section-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .tag {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+    }
+    .tag-blue { background: rgba(37,99,235,0.06); color: #2563EB; border: 1px solid rgba(37,99,235,0.12); }
+    .tag-green { background: rgba(22,163,74,0.06); color: #16A34A; border: 1px solid rgba(22,163,74,0.12); }
+    .tag-orange { background: rgba(234,88,12,0.06); color: #EA580C; border: 1px solid rgba(234,88,12,0.12); }
+
+    /* Contacts row (phone + website) */
+    .event-contacts {
+      display: flex; gap: 16px; margin-top: 6px; flex-wrap: wrap;
+    }
+    .event-contact {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 14px; color: var(--accent);
+      text-decoration: none;
+    }
+    .event-contact:hover { opacity: 0.8; text-decoration: none; }
+    .event-contact svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--text-secondary); stroke-width: 1.5; }
+
+    /* Tip block (recommendations, yellow-orange) */
+    .day-tip {
+      font-size: 14px; color: #92400E;
+      background: #FEF3C7;
+      border-radius: 12px;
+      padding: 14px 18px;
+      padding-right: 30%;
+      margin-top: 10px;
+      line-height: 1.5;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .day-tip-icon {
+      font-size: 16px; flex-shrink: 0; line-height: 1.3;
+    }
+
+    /* Tabs inside events */
+    .event-tabs { flex: 1; min-width: 0; }
+    .event-tabs-bar {
+      display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 10px;
+    }
+    .event-tab-btn {
+      padding: 6px 14px; font-size: 13px; font-weight: 600;
+      color: var(--text-secondary); background: none; border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer; font-family: inherit;
+      transition: var(--transition);
+    }
+    .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .event-tab-btn:hover { color: var(--text); }
+    .event-tab-panel { display: none; font-size: 14px; color: var(--text); line-height: 1.45; }
+    .event-tab-panel.active { display: block; }
+    .event-actions {
+      display: flex; gap: 20px; flex-shrink: 0; margin-left: auto; padding-left: 8px;
+    }
+    .event-action {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--accent);
+      transition: var(--transition);
+    }
+    .event-action:hover { background: rgba(37,99,235,0.12); text-decoration: none; border-color: rgba(37,99,235,0.20); }
+    .event-action svg { width: 18px; height: 18px; }
+
+    /* Info blocks inside day */
+    .info-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 12px;
+    }
+    .info-block-title {
+      font-size: 14px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-secondary); margin-bottom: 8px;
+    }
+    .info-row {
+      display: flex; align-items: flex-start; gap: 6px;
+      font-size: 13px; color: var(--text);
+      padding: 3px 0;
+    }
+    .info-row-icon { flex-shrink: 0; font-size: 14px; }
+    .info-row a { color: var(--accent); }
+
+    /* Chips */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 14px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .chip-green { background: #DCFCE7; color: var(--success); }
+    .chip-gray { background: #F3F4F6; color: var(--text-secondary); }
+
+    /* Tag "free" */
+    .tag-free {
+      font-size: 13px; font-weight: 600;
+      background: #DCFCE7; color: var(--success);
+      padding: 2px 8px; border-radius: 6px;
+      vertical-align: middle;
+    }
+    .tag-price {
+      font-size: 13px; font-weight: 600;
+      background: #DCFCE7; color: #16A34A;
+      padding: 2px 8px; border-radius: 6px;
+      vertical-align: middle;
+    }
+
+    /* ════════════════════════════════════
+       BUDGET TABLE
+    ════════════════════════════════════ */
+    .budget-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .budget-table th {
+      text-align: left;
+      font-size: 14px; font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 8px 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .budget-table td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .budget-table tr:last-child td { border-bottom: none; }
+    .budget-table .total-row td {
+      font-weight: 700; font-size: 15px;
+      background: var(--accent-light);
+      border-top: 2px solid var(--border);
+    }
+    .budget-table .waiting { color: var(--waiting); font-style: italic; }
+    td.amount { font-weight: 600; text-align: right; white-space: nowrap; }
+    td.per-person { color: var(--text-secondary); text-align: right; white-space: nowrap; }
+
+    /* ════════════════════════════════════
+       CHECKLIST
+    ════════════════════════════════════ */
+    .checklist-group { margin-bottom: 24px; }
+    .checklist-group-title {
+      font-size: 14px; font-weight: 700;
+      color: var(--text); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .checklist-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      min-height: 44px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: var(--transition);
+    }
+    .checklist-item:hover { border-color: var(--accent); }
+    .checklist-item.checked {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+    .checklist-item.checked .check-text {
+      color: var(--text-secondary);
+      text-decoration: line-through;
+    }
+    .check-box {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; transition: var(--transition);
+    }
+    .checklist-item.checked .check-box {
+      background: var(--success); border-color: var(--success); color: #fff;
+    }
+    .check-text { font-size: 14px; color: var(--text); }
+    .check-note { font-size: 14px; color: var(--text-secondary); }
+
+    /* ════════════════════════════════════
+       DOCUMENTS & BOOKINGS
+    ════════════════════════════════════ */
+    .doc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: var(--transition);
+      min-height: 64px;
+    }
+    .doc-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      text-decoration: none;
+    }
+    .doc-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .doc-info { flex: 1; min-width: 0; }
+    .doc-title {
+      font-size: 14px; font-weight: 600; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .doc-sub { font-size: 14px; color: var(--text-secondary); margin-top: 2px; }
+    .doc-arrow {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 14px; font-weight: 700;
+      padding: 6px 10px; border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════
+       EMERGENCY
+    ════════════════════════════════════ */
+    .emergency-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .emergency-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      min-height: 60px;
+      transition: var(--transition);
+    }
+    .emergency-item:last-child { border-bottom: none; }
+    .emergency-item:hover { background: #FFF5F5; text-decoration: none; }
+    .emergency-dot {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border-radius: 50%;
+      background: #FEE2E2;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .emergency-info { flex: 1; }
+    .emergency-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .emergency-num { font-size: 15px; font-weight: 700; color: var(--danger); margin-top: 1px; }
+    .emergency-note { font-size: 14px; color: var(--text-secondary); margin-top: 1px; }
+
+    /* ════════════════════════════════════
+       PERMIT CARD
+    ════════════════════════════════════ */
+    .permit-card {
+      background: var(--accent-light);
+      border: 1px solid #FCD34D;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .permit-title { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+    /* ════════════════════════════════════
+       FLIGHT TABLE
+    ════════════════════════════════════ */
+    .flights-wrap { overflow-x: auto; }
+    .flights-table {
+      width: 100%; border-collapse: collapse; font-size: 13px; min-width: 380px;
+    }
+    .flights-table th {
+      font-size: 13px; font-weight: 700; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 8px 10px; border-bottom: 2px solid var(--border);
+      background: var(--bg); text-align: left;
+    }
+    .flights-table td {
+      padding: 10px 10px; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .flights-table tr:last-child td { border-bottom: none; }
+    .flight-num { font-weight: 700; color: var(--accent); }
+
+    /* ════════════════════════════════════
+       ACCOMMODATION SUMMARY TABLE
+    ════════════════════════════════════ */
+    .stay-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .stay-table th {
+      font-size: 13px; font-weight: 700; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 8px 8px; border-bottom: 2px solid var(--border); text-align: left;
+    }
+    .stay-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .stay-table tr:last-child td { border-bottom: none; }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (min-width: 480px) {
+      .hero-title { font-size: 42px; }
+      .countdown-num { font-size: 40px; }
+      .countdown-item { min-width: 72px; padding: 14px 6px 12px; }
+    }
+
+    /* ════════════════════════════════════
+       PROGRESS BAR (checklist)
+    ════════════════════════════════════ */
+    .progress-bar-wrap {
+      background: var(--border); border-radius: 4px;
+      height: 6px; margin-bottom: 20px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; background: var(--success);
+      border-radius: 4px; transition: width 0.3s ease;
+    }
+    .progress-label {
+      font-size: 13px; color: var(--text-secondary);
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     ЭКРАН ПАРОЛЯ
-═══════════════════════════════════════ -->
-<div id="lock-screen">
-  <div class="lock-card">
-    <span class="lock-emoji">🏝️</span>
-    <div class="lock-title">Светлый Ангел</div>
-    <div class="lock-sub">Это закрытый путеводитель.<br>Введи пароль, чтобы войти.</div>
-    <input type="password" id="lock-input" class="lock-input" placeholder="пароль..." maxlength="20">
-    <button class="lock-btn" onclick="checkPassword()">Войти</button>
-    <div class="lock-error" id="lock-error">Неверный пароль. Подумай хорошенько.</div>
+<!-- ════════════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-wrap">
+    <span class="login-emoji">🌴</span>
+    <div class="login-title">Светлый Ангел</div>
+    <div class="login-sub">Мадейра, апрель 2026 · только для своих</div>
+    <div class="login-card">
+      <label class="login-label" for="pwd">Пароль</label>
+      <input class="login-input" type="password" id="pwd" placeholder="••••" autocomplete="current-password">
+      <button class="login-btn" onclick="doLogin()">Войти →</button>
+      <div class="login-error" id="login-error">Неверный пароль. Попробуй ещё раз.</div>
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     ОСНОВНОЙ КОНТЕНТ
-═══════════════════════════════════════ -->
+<!-- ════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════ -->
 <div id="main-content">
 
-  <!-- НАВИГАЦИЯ -->
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <div class="navbar-brand">🏝️ <span>Светлый</span> Ангел</div>
-      <div class="nav-links">
-        <a href="#countdown-section">Старт</a>
-        <a href="#map-section">Карта</a>
-        <a href="#timeline-section">Дни</a>
-        <a href="#budget-section">Бюджет</a>
-        <a href="#checklist-section">Чек-лист</a>
-        <a href="#docs-section">Документы</a>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">18 апр — 1 мая 2026</div>
+      <h1 class="hero-title">Светлый Ангел 🪽</h1>
+      <p class="hero-sub">Трое из Минска. Один остров. Тринадцать дней без плана&nbsp;Б.</p>
+
+      <div class="countdown-box">
+        <div class="countdown-until" id="countdown-until">до старта экспедиции</div>
+        <div id="countdown-grid" class="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-num" id="cd-days">—</span>
+            <span class="countdown-label">дней</span>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="cd-hrs">—</span>
+            <span class="countdown-label">часов</span>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="cd-min">—</span>
+            <span class="countdown-label">минут</span>
+          </div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="cd-sec">—</span>
+            <span class="countdown-label">секунд</span>
+          </div>
+        </div>
       </div>
+
+      <div class="widgets-row">
+        <div class="widget-card">
+          <div class="widget-icon">🌤</div>
+          <div class="widget-val" id="w-temp">—°</div>
+          <div class="widget-label">Мадейра сейчас</div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-icon">💶</div>
+          <div class="widget-val" id="w-eur">—</div>
+          <div class="widget-label">EUR/BYN</div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-icon">⛽</div>
+          <div class="widget-val">~€1.75</div>
+          <div class="widget-label">Бензин 95</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a class="nav-item" href="#map-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg> Карта</a>
+      <a class="nav-item" href="#days-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Дни</a>
+      <a class="nav-item" href="#budget-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Бюджет</a>
+      <a class="nav-item" href="#checklist-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg> Чеклист</a>
+      <a class="nav-item" href="#docs-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Доки</a>
+      <a class="nav-item" href="#emergency-section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3"/><line x1="23" y1="1" x2="17" y2="7"/><line x1="17" y1="1" x2="23" y2="7"/></svg> SOS</a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="countdown-section">
-    <div class="hero-badge">18 апреля — 1 мая 2026</div>
-    <h1 class="hero-title">Светлый Ангел</h1>
-    <p class="hero-sub">Мадейра 2026 · Трое друзей · Один остров · Много приключений</p>
-
-    <div id="countdown" class="countdown"></div>
-
-    <div class="widgets">
-      <div class="widget-card">
-        <div class="widget-icon">🌤️</div>
-        <div class="widget-val" id="weather-val">~18°C</div>
-        <div class="widget-label">Погода, Фуншал</div>
+  <!-- MAP -->
+  <section class="section" id="map-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">🗺</span>
+        <div>
+          <div class="section-title">Маршрут</div>
+          <div class="section-desc">Кликни на маркер — увидишь детали</div>
+        </div>
       </div>
-      <div class="widget-card">
-        <div class="widget-icon">💶</div>
-        <div class="widget-val">≈3.5 BYN</div>
-        <div class="widget-label">Курс EUR/BYN</div>
-      </div>
-      <div class="widget-card">
-        <div class="widget-icon">⛽</div>
-        <div class="widget-val">~€1.65</div>
-        <div class="widget-label">Бензин 95, /л</div>
-      </div>
+      <div id="map"></div>
     </div>
   </section>
 
-  <hr class="section-sep">
-
-  <!-- КАРТА -->
-  <section id="map-section">
-    <div class="section">
-      <div class="fade-up">
-        <div class="section-title">🗺️ Маршрут</div>
-        <div class="section-sub">17 точек. Почти вся Мадейра. Плюс кусочек Вильнюса и Цюриха.</div>
+  <!-- DAYS TIMELINE -->
+  <section class="section section-alt" id="days-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">🧭</span>
+        <div>
+          <div class="section-title">Хроники экспедиции</div>
+          <div class="section-tags"><span class="tag tag-blue">📅 13 дней</span><span class="tag tag-green">🏝 1 остров</span><span class="tag tag-orange">∞ историй</span></div>
+        </div>
       </div>
-      <div id="map" class="fade-up"></div>
+      <div id="days-list"></div>
     </div>
   </section>
 
-  <hr class="section-sep">
-
-  <!-- ТАЙМЛАЙН -->
-  <section id="timeline-section">
-    <div class="section">
-      <div class="fade-up">
-        <div class="section-title">📅 По дням</div>
-        <div class="section-sub">14 дней · 9 ночёвок · бесчисленное количество фотографий. Жми на день.</div>
+  <!-- BUDGET -->
+  <section class="section" id="budget-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">💰</span>
+        <div>
+          <div class="section-title">Бюджет экспедиции</div>
+          <div class="section-desc">Всё что тратим — здесь</div>
+        </div>
       </div>
-      <div class="timeline" id="timeline"></div>
-    </div>
-  </section>
 
-  <hr class="section-sep">
-
-  <!-- БЮДЖЕТ -->
-  <section id="budget-section">
-    <div class="section">
-      <div class="fade-up">
-        <div class="section-title">💰 Бюджет</div>
-        <div class="section-sub">Что успели посчитать. Перелёт и один отель ещё уточняем.</div>
-      </div>
-      <div class="budget-table-wrap fade-up">
+      <div style="overflow-x:auto">
         <table class="budget-table">
           <thead>
             <tr>
               <th>Статья</th>
-              <th>Детали</th>
-              <th>Итого</th>
-              <th>На чел.</th>
+              <th style="text-align:right">Всего</th>
+              <th style="text-align:right">На чел.</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="cat-row"><td colspan="4">✈️ Перелёт</td></tr>
             <tr>
-              <td>Swiss Air туда-обратно</td>
-              <td>LX1339/8264/8265/1338 · XPVXVH</td>
-              <td class="price-tbd">уточняем</td>
-              <td class="price-tbd">уточняем</td>
-            </tr>
-            <tr class="cat-row"><td colspan="4">🚌 Автобус</td></tr>
-            <tr>
-              <td>Минск → Вильнюс (18 апр)</td>
-              <td>Ecolines, 15:00, ул. Бобруйская</td>
-              <td class="price-tbd">уточняем</td>
-              <td class="price-tbd">уточняем</td>
+              <td>✈️ Перелёты Swiss Air (4 рейса)</td>
+              <td class="amount waiting">ждём</td>
+              <td class="per-person waiting">ждём</td>
             </tr>
             <tr>
-              <td>Вильнюс → Минск (1 мая)</td>
-              <td>—</td>
-              <td class="price-tbd">уточняем</td>
-              <td class="price-tbd">уточняем</td>
-            </tr>
-            <tr class="cat-row"><td colspan="4">🚗 Машина</td></tr>
-            <tr>
-              <td>STONES Rent-A-Car</td>
-              <td>Dacia Stepway · 8 дней · #4730</td>
-              <td class="price-blue">€390</td>
-              <td class="price-blue">€130</td>
-            </tr>
-            <tr class="cat-row"><td colspan="4">🏠 Жильё</td></tr>
-            <tr>
-              <td>Вильнюс, Cozy Flat</td>
-              <td>18–20 апр · 2 ночи</td>
-              <td class="price-blue">€103,66</td>
-              <td class="price-blue">€34,55</td>
+              <td>🚌 Автобус Минск → Вильнюс (Ecolines)</td>
+              <td class="amount waiting">ждём</td>
+              <td class="per-person waiting">ждём</td>
             </tr>
             <tr>
-              <td>Фуншал, Funchal 19</td>
-              <td>20–21 апр · 1 ночь</td>
-              <td class="price-blue">€93,48</td>
-              <td class="price-blue">€31,16</td>
+              <td>🚌 Автобус Вильнюс → Минск</td>
+              <td class="amount waiting">ждём</td>
+              <td class="per-person waiting">ждём</td>
             </tr>
             <tr>
-              <td>Кемпинг Порту-Мониш</td>
-              <td>21–22 апр · 1 ночь</td>
-              <td class="price-green">~€15</td>
-              <td class="price-green">~€5</td>
+              <td>🏠 Вильнюс, Cozy Flat (2 ночи)</td>
+              <td class="amount">€103,66</td>
+              <td class="per-person">€34,55</td>
             </tr>
             <tr>
-              <td>Рибейра-да-Жанела, Quinta' Home</td>
-              <td>22–23 апр · 1 ночь</td>
-              <td class="price-blue">€116,01</td>
-              <td class="price-blue">€38,67</td>
+              <td>🏨 Фуншал, Funchal 19 (1 ночь)</td>
+              <td class="amount">€93,48</td>
+              <td class="per-person">€31,16</td>
             </tr>
             <tr>
-              <td>Chão das Feiteiras</td>
-              <td>23–24 апр · дикий кемпинг</td>
-              <td class="price-green">€0</td>
-              <td class="price-green">€0</td>
+              <td>⛺ Кемпинг Porto Moniz (1 ночь)</td>
+              <td class="amount">~€15</td>
+              <td class="per-person">~€5</td>
             </tr>
             <tr>
-              <td>Порту-да-Круш, Caminho da Praia</td>
-              <td>24–26 апр · 2 ночи · бронь 5910.940.333</td>
-              <td class="price-blue">€222</td>
-              <td class="price-blue">€74</td>
+              <td>🏡 Quinta' Home, Рибейра-да-Жанела (1 ночь)</td>
+              <td class="amount">€116,01</td>
+              <td class="per-person">€38,67</td>
             </tr>
             <tr>
-              <td>Boca das Voltas</td>
-              <td>26–27 апр · кемпинг · разрешение 419372</td>
-              <td class="price-green">€0</td>
-              <td class="price-green">€0</td>
+              <td>⛺ Chão das Feiteiras (1 ночь)</td>
+              <td class="amount"><span class="tag-free">бесплатно</span></td>
+              <td class="per-person"><span class="tag-free">€0</span></td>
             </tr>
             <tr>
-              <td>Casa do Sardinha (Ponta de S. Lourenço)</td>
-              <td>27–28 апр · кемпинг · разрешение 415506</td>
-              <td class="price-green">€0</td>
-              <td class="price-green">€0</td>
+              <td>🏡 Порту-да-Круш, Caminho da Praia (2 ночи)</td>
+              <td class="amount">€222</td>
+              <td class="per-person">€74</td>
             </tr>
             <tr>
-              <td>Фуншал, Вилла у Flávio</td>
-              <td>28–30 апр · 2 ночи</td>
-              <td class="price-tbd">уточняем</td>
-              <td class="price-tbd">уточняем</td>
-            </tr>
-            <tr class="cat-row"><td colspan="4">🎫 Входные билеты (план)</td></tr>
-            <tr>
-              <td>Cabo Girão Skywalk</td>
-              <td>21 апр</td>
-              <td>€9</td>
-              <td>€3</td>
+              <td>⛺ Boca das Voltas (1 ночь)</td>
+              <td class="amount"><span class="tag-free">бесплатно</span></td>
+              <td class="per-person"><span class="tag-free">€0</span></td>
             </tr>
             <tr>
-              <td>Природные бассейны Порту-Мониш</td>
-              <td>21 апр</td>
-              <td>€9</td>
-              <td>€3</td>
+              <td>⛺ Casa do Sardinha / PR8 (1 ночь)</td>
+              <td class="amount"><span class="tag-free">бесплатно</span></td>
+              <td class="per-person"><span class="tag-free">€0</span></td>
             </tr>
             <tr>
-              <td>Pico do Arieiro → Pico Ruivo (план Б)</td>
-              <td>24 апр · если откроют PR1</td>
-              <td>€21–31,50</td>
-              <td>€7–10,50</td>
+              <td>🏠 Вилла у Flávio, Фуншал (2 ночи)</td>
+              <td class="amount waiting">ждём</td>
+              <td class="per-person waiting">ждём</td>
             </tr>
             <tr>
-              <td>Парковка Baía d'Abra</td>
-              <td>27 апр</td>
-              <td>€9–12</td>
-              <td>€3–4</td>
+              <td>🚗 Аренда авто STONES (8 дней)</td>
+              <td class="amount">€390</td>
+              <td class="per-person">€130</td>
             </tr>
             <tr class="total-row">
-              <td colspan="2">✅ ИТОГО (без перелёта, автобусов и виллы Flávio)</td>
-              <td>€987 +</td>
-              <td>€329 +</td>
+              <td><strong>Итого (известные)</strong></td>
+              <td class="amount"><strong>~€940+</strong></td>
+              <td class="per-person"><strong>~€313+</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top: 14px; font-size: 12px; color: var(--gray-400);">
-        * Не включены: еда, бензин (~€120 на всех за 8 дней), мелкие расходы. Перелёт, обратный автобус и вилла Flávio уточняются.
-      </p>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:12px">* Плюс еда, топливо, активности, сувениры. Закладывай +€200-300 на человека.</p>
     </div>
   </section>
 
-  <hr class="section-sep">
-
-  <!-- ЧЕК-ЛИСТ -->
-  <section id="checklist-section">
-    <div class="section">
-      <div class="fade-up">
-        <div class="section-title">🎒 Что взять</div>
-        <div class="section-sub">Галочки сохраняются. Даже если закроешь вкладку.</div>
-      </div>
-      <div class="fade-up">
-        <div class="checklist-progress-wrap">
-          <div class="checklist-progress-label">
-            <span id="progress-text">Собрано: 0 из 0</span>
-            <span id="progress-pct">0%</span>
-          </div>
-          <div class="checklist-progress-bar">
-            <div class="checklist-progress-fill" id="progress-fill" style="width: 0%"></div>
-          </div>
+  <!-- CHECKLIST -->
+  <section class="section section-alt" id="checklist-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">✅</span>
+        <div>
+          <div class="section-title">Что взять</div>
+          <div class="section-desc">Отмечай — сохраняется в телефоне</div>
         </div>
-        <div class="checklist-cats" id="checklist"></div>
+      </div>
+
+      <div class="progress-label">Собрано: <span id="check-count">0</span> из <span id="check-total">0</span></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="check-progress" style="width:0%"></div>
+      </div>
+
+      <div id="checklist-container"></div>
+
+      <button onclick="resetChecklist()" style="margin-top:8px;padding:10px 16px;font-size:13px;font-weight:600;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text-secondary);cursor:pointer;font-family:inherit">Сбросить всё</button>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS & BOOKINGS -->
+  <section class="section" id="docs-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">📄</span>
+        <div>
+          <div class="section-title">Документы и брони</div>
+          <div class="section-desc">Всё под рукой, в одном месте</div>
+        </div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:10px">✈️ Перелёты</div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">Swiss Air · Бронирование XPVXVH</div>
+        <div class="flights-wrap">
+          <table class="flights-table">
+            <thead>
+              <tr>
+                <th>Рейс</th>
+                <th>Маршрут</th>
+                <th>Дата</th>
+                <th>Вылет → Прил.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="flight-num">LX1339</span></td>
+                <td>VNO → ZRH</td>
+                <td>20 апр</td>
+                <td>05:00 → 06:30</td>
+              </tr>
+              <tr>
+                <td><span class="flight-num">LX8264</span></td>
+                <td>ZRH → FNC</td>
+                <td>20 апр</td>
+                <td>13:45 → 16:45</td>
+              </tr>
+              <tr>
+                <td><span class="flight-num">LX8265</span></td>
+                <td>FNC → ZRH</td>
+                <td>30 апр</td>
+                <td>10:00 → 14:50</td>
+              </tr>
+              <tr>
+                <td><span class="flight-num">LX1338</span></td>
+                <td>ZRH → VNO</td>
+                <td>30 апр</td>
+                <td>21:50 → 01:20 (+1)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-secondary)">
+          Билет: 7242347372767 · Miles &amp; More · Economy Light (V) — только ручная кладь!
+        </div>
+        <a href="https://www.swiss.com/ru/ru/fly/myflight/my-booking.html" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 14px;background:var(--accent-light);color:var(--accent);font-size:13px;font-weight:700;border-radius:8px;text-decoration:none">✈️ Управление бронью →</a>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);margin:16px 0 10px">🏠 Жильё</div>
+
+      <a class="doc-card" href="https://www.booking.com/Share-7Nf6uR5" target="_blank">
+        <div class="doc-icon">📄</div>
+        <div class="doc-info">
+          <div class="doc-title">Cozy Flat — Вильнюс</div>
+          <div class="doc-sub">Linkmenų Gatvė 6-4 · 18–20 апр · €103,66</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <a class="doc-card" href="https://www.airbnb.ru/rooms/1637584730331319648?guests=1&adults=1&s=67&unique_share_id=084f0369-6931-495a-be87-1f8f79c3be88" target="_blank">
+        <div class="doc-icon">📄</div>
+        <div class="doc-info">
+          <div class="doc-title">Funchal 19 — Фуншал</div>
+          <div class="doc-sub">Rua Hospital Velho 19 A · 20–21 апр · €93,48 · Бронь: 5930.341.647 / PIN 9762</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <a class="doc-card" href="https://www.booking.com/Share-CPfUlM" target="_blank">
+        <div class="doc-icon">📄</div>
+        <div class="doc-info">
+          <div class="doc-title">Quinta' Home — Рибейра-да-Жанела</div>
+          <div class="doc-sub">Caminho Dr Francisco Rodrigues Jardim n 29 · 22–23 апр · €116,01 · Бронь: 5792.590.384 / PIN 6851</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <a class="doc-card" href="https://www.booking.com/Share-A3hqfkW" target="_blank">
+        <div class="doc-icon">📄</div>
+        <div class="doc-info">
+          <div class="doc-title">Caminho da Praia — Порту-да-Круш</div>
+          <div class="doc-sub">Caminho da Praia da Maiata · 24–26 апр · €222 · Бронь: 5910.940.333 / PIN 3603</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">🏠 Вилла у Flávio — Фуншал</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Entrada das Casas Novas 12, 9050-058 · 28–30 апр · ждём данные</div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);margin:16px 0 10px">⛺ Кемпинги</div>
+
+      <a class="doc-card" href="https://www.madeiracamping.com/porto-moniz/" target="_blank">
+        <div class="doc-icon">⛺</div>
+        <div class="doc-info">
+          <div class="doc-title">Кемпинг Porto Moniz</div>
+          <div class="doc-sub">Sítio da Ponte, Ribeira da Janela, 9270-105 · 21–22 апр · ~€12-16 за троих</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <a class="doc-card" href="https://www.madeiracamping.com/boca-das-voltas/" target="_blank">
+        <div class="doc-icon">⛺</div>
+        <div class="doc-info">
+          <div class="doc-title">Кемпинг Boca das Voltas</div>
+          <div class="doc-sub">São Jorge, ~750м · 26–27 апр · Разрешение: 419372/2026</div>
+        </div>
+        <div class="doc-arrow">Скачать PDF →</div>
+      </a>
+
+      <a class="doc-card" href="https://www.madeiracamping.com/ponta-de-sao-lourenco/" target="_blank">
+        <div class="doc-icon">⛺</div>
+        <div class="doc-info">
+          <div class="doc-title">Casa do Sardinha / Ponta de São Lourenço</div>
+          <div class="doc-sub">PR8, 4км от парковки · 27–28 апр · Разрешение: 415506/2026</div>
+        </div>
+        <div class="doc-arrow">Скачать PDF →</div>
+      </a>
+
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);margin:16px 0 10px">🚗 Транспорт</div>
+
+      <a class="doc-card" href="https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069" target="_blank">
+        <div class="doc-icon">🚗</div>
+        <div class="doc-info">
+          <div class="doc-title">STONES Rent-A-Car · Заказ #4730</div>
+          <div class="doc-sub">Dacia Stepway Extreme TCe 90 CVT · 20–28 апр · €390 · Meet &amp; Greet в аэропорту</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <a class="doc-card" href="https://ecolines.net" target="_blank">
+        <div class="doc-icon">🚌</div>
+        <div class="doc-info">
+          <div class="doc-title">Ecolines · Минск → Вильнюс</div>
+          <div class="doc-sub">18 апр, 15:00 · Центральный вокзал, ул. Бобруйская</div>
+        </div>
+        <div class="doc-arrow">Открыть →</div>
+      </a>
+
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);margin:16px 0 10px">🥾 Регистрация маршрутов</div>
+
+      <a class="doc-card" href="https://simplifica.madeira.gov.pt/services/78-82-259" target="_blank">
+        <div class="doc-icon">🏔</div>
+        <div class="doc-info">
+          <div class="doc-title">Регистрация хайкинг-маршрутов Мадейры</div>
+          <div class="doc-sub">PR1, PR1.1, PR1.2 — нужна регистрация перед трекингом</div>
+        </div>
+        <div class="doc-arrow">Зарегистрироваться →</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EMERGENCY -->
+  <section class="section section-alt" id="emergency-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">🆘</span>
+        <div>
+          <div class="section-title">Экстренные контакты</div>
+          <div class="section-desc">Нажми — сразу звонок</div>
+        </div>
+      </div>
+
+      <div class="emergency-card">
+        <a class="emergency-item" href="tel:112">
+          <div class="emergency-dot">🚨</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Экстренная служба</div>
+            <div class="emergency-num">112</div>
+            <div class="emergency-note">Полиция, скорая, пожарные — работает везде</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:291706112">
+          <div class="emergency-dot">🛡</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Гражданская защита Мадейры</div>
+            <div class="emergency-num">291 706 112</div>
+            <div class="emergency-note">Кризисные ситуации на острове</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:963817883">
+          <div class="emergency-dot">🌲</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Лесной пост — Boca das Voltas</div>
+            <div class="emergency-num">963 817 883</div>
+            <div class="emergency-note">Кемпинг 26–27 апр · разрешение 419372/2026</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:968334032">
+          <div class="emergency-dot">🌲</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Лесной пост — Casa do Sardinha</div>
+            <div class="emergency-num">968 334 032</div>
+            <div class="emergency-note">Кемпинг 27–28 апр · разрешение 415506/2026</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:+351961423326">
+          <div class="emergency-dot">🏨</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Funchal 19 — хозяин</div>
+            <div class="emergency-num">+351 961 423 326</div>
+            <div class="emergency-note">Заселение 20 апр, 20:00–21:00</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:+351968509710">
+          <div class="emergency-dot">🏡</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Quinta' Home — хозяин</div>
+            <div class="emergency-num">+351 968 509 710</div>
+            <div class="emergency-note">22–23 апр</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:+351967858836">
+          <div class="emergency-dot">🌊</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Caminho da Praia — хозяин</div>
+            <div class="emergency-num">+351 967 858 836</div>
+            <div class="emergency-note">24–26 апр · заезд с 15:00</div>
+          </div>
+        </a>
+        <a class="emergency-item" href="tel:+351291853856">
+          <div class="emergency-dot">⛺</div>
+          <div class="emergency-info">
+            <div class="emergency-name">Кемпинг Porto Moniz</div>
+            <div class="emergency-num">+351 291 853 856</div>
+            <div class="emergency-note">21–22 апр</div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
-  <hr class="section-sep">
-
-  <!-- ДОКУМЕНТЫ И ССЫЛКИ -->
-  <section id="docs-section">
-    <div class="section">
-      <div class="fade-up">
-        <div class="section-title">📎 Документы и ссылки</div>
-        <div class="section-sub">Всё важное под рукой. Лучше закинуть в оффлайн заранее.</div>
-      </div>
-      <div class="fade-up" id="docs-grid"></div>
-    </div>
-  </section>
-
-  <!-- ЭКСТРЕННЫЕ ТЕЛЕФОНЫ -->
-  <div class="emergency-section fade-up">
-    <div class="emergency-title">🚨 Экстренные телефоны</div>
-    <div class="emergency-grid">
-      <div class="emergency-item">
-        <div class="em-label">Экстренная помощь</div>
-        <div class="em-num">112</div>
-        <div class="em-name">Вся Европа, всегда</div>
-      </div>
-      <div class="emergency-item">
-        <div class="em-label">Гражданская защита Мадейры</div>
-        <div class="em-num">291 706 112</div>
-        <div class="em-name">Местные спасатели</div>
-      </div>
-      <div class="emergency-item">
-        <div class="em-label">Лесной пост, Boca das Voltas</div>
-        <div class="em-num">963 817 883</div>
-        <div class="em-name">Кемпинг 26–27 апр</div>
-      </div>
-      <div class="emergency-item">
-        <div class="em-label">Лесной пост, Casa do Sardinha</div>
-        <div class="em-num">968 334 032</div>
-        <div class="em-name">Кемпинг 27–28 апр</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ФУТЕР -->
-  <footer class="footer">
-    <div>🏝️ <strong>Светлый Ангел · Мадейра 2026</strong></div>
-    <div style="margin-top: 6px; color: var(--gray-400);">Закрытый путеводитель для своих. Все данные актуальны на март 2026.</div>
+  <footer style="padding:32px 16px;text-align:center;border-top:1px solid var(--border)">
+    <p style="font-size:13px;color:var(--text-secondary)">Светлый Ангел · Мадейра 2026 · сделано с 🧡 для троих</p>
   </footer>
 
 </div><!-- /main-content -->
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* ═══════════════════════════════════════
-   ПАРОЛЬ
-═══════════════════════════════════════ */
-const PASSWORD = 'madeira2026';
+// ════════════════════════════════════
+// AUTH
+// ════════════════════════════════════
+const PASSWORD = '123';
 
-function checkPassword() {
-  const input = document.getElementById('lock-input');
-  const error = document.getElementById('lock-error');
-  if (input.value === PASSWORD) {
+function doLogin() {
+  const val = document.getElementById('pwd').value;
+  if (val === PASSWORD) {
     localStorage.setItem('sa_auth', '1');
-    document.getElementById('lock-screen').classList.add('hidden');
-    setTimeout(() => {
-      document.getElementById('lock-screen').style.display = 'none';
-      document.getElementById('main-content').classList.add('visible');
-      initAll();
-    }, 600);
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main-content').classList.add('visible');
+    setTimeout(initApp, 100);
   } else {
-    input.classList.add('error');
-    error.classList.add('visible');
-    setTimeout(() => input.classList.remove('error'), 400);
-    input.value = '';
-    input.focus();
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pwd').value = '';
   }
 }
 
-document.getElementById('lock-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkPassword();
+document.getElementById('pwd').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
 });
 
 if (localStorage.getItem('sa_auth') === '1') {
-  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('main-content').classList.add('visible');
-  window.addEventListener('DOMContentLoaded', initAll);
+  setTimeout(initApp, 0);
 }
 
-/* ═══════════════════════════════════════
-   ОБРАТНЫЙ ОТСЧЁТ
-═══════════════════════════════════════ */
-function updateCountdown() {
+// ════════════════════════════════════
+// APP INIT
+// ════════════════════════════════════
+function initApp() {
+  try { initCountdown(); } catch(e) { console.error('initCountdown error:', e); }
+  try { initWidgets(); } catch(e) { console.error('initWidgets error:', e); }
+  try { initMap(); } catch(e) { console.error('initMap error:', e); }
+  try { renderDays(); } catch(e) { console.error('renderDays error:', e); }
+  try { initChecklist(); } catch(e) { console.error('initChecklist error:', e); }
+  console.log('initApp done. Days rendered:', document.querySelectorAll('.day-card').length, 'Checklist items:', document.querySelectorAll('.checklist-item').length);
+  initScrollSpy();
+}
+
+function initScrollSpy() {
+  const sections = ['map-section','days-section','budget-section','checklist-section','docs-section','emergency-section'];
+  const navItems = document.querySelectorAll('.nav-item');
+  window.addEventListener('scroll', function() {
+    let current = '';
+    sections.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 80) current = id;
+    });
+    navItems.forEach(function(item) {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+}
+
+// ════════════════════════════════════
+// COUNTDOWN
+// ════════════════════════════════════
+function initCountdown() {
   const target = new Date('2026-04-18T15:00:00+03:00');
-  const now = new Date();
-  const diff = target - now;
+  function update() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('countdown-grid').innerHTML = '<div class="countdown-done">🎉 Экспедиция началась!</div>';
+      document.getElementById('countdown-until').textContent = '';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hrs').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+}
 
-  const el = document.getElementById('countdown');
-  if (!el) return;
+// ════════════════════════════════════
+// WIDGETS
+// ════════════════════════════════════
+function initWidgets() {
+  // Weather — Funchal, Madeira (lat=32.65, lon=-16.91)
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=32.65&longitude=-16.91&current=temperature_2m,weathercode&timezone=Atlantic/Madeira')
+    .then(r => r.json())
+    .then(data => {
+      const t = Math.round(data.current.temperature_2m);
+      const code = data.current.weathercode;
+      const icons = {0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',71:'🌨',73:'🌨',80:'🌦',81:'🌧',95:'⛈'};
+      const icon = icons[code] || '🌡';
+      document.getElementById('w-temp').textContent = t + '°C';
+      document.querySelector('.widget-card .widget-icon').textContent = icon;
+    })
+    .catch(() => { document.getElementById('w-temp').textContent = '~20°C'; });
 
-  if (diff <= 0) {
-    el.innerHTML = '<div class="countdown-done">🛫 Мы уже летим! Поехали!</div>';
-    return;
+  // EUR/BYN via exchangerate-api (free tier)
+  fetch('https://open.er-api.com/v6/latest/EUR')
+    .then(r => r.json())
+    .then(data => {
+      if (data.rates && data.rates.BYN) {
+        document.getElementById('w-eur').textContent = data.rates.BYN.toFixed(2);
+      }
+    })
+    .catch(() => { document.getElementById('w-eur').textContent = '~3.65'; });
+}
+
+// ════════════════════════════════════
+// MAP
+// ════════════════════════════════════
+function initMap() {
+  const map = L.map('map', { zoomControl: true }).setView([32.75, -16.95], 10);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  const accent = '#2563EB';
+
+  function makeIcon(num) {
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:32px;height:32px;background:' + accent + ';color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:DM Sans,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.25);border:2px solid #fff">' + num + '</div>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -18]
+    });
   }
 
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-
-  el.innerHTML = `
-    <div class="countdown-unit">
-      <div class="countdown-num">${days}</div>
-      <div class="countdown-label">дней</div>
-    </div>
-    <div class="countdown-unit">
-      <div class="countdown-num">${String(hours).padStart(2,'0')}</div>
-      <div class="countdown-label">часов</div>
-    </div>
-    <div class="countdown-unit">
-      <div class="countdown-num">${String(mins).padStart(2,'0')}</div>
-      <div class="countdown-label">минут</div>
-    </div>
-    <div class="countdown-unit">
-      <div class="countdown-num">${String(secs).padStart(2,'0')}</div>
-      <div class="countdown-label">секунд</div>
-    </div>`;
-}
-
-/* ═══════════════════════════════════════
-   ПОГОДА (Open-Meteo, реальные данные)
-═══════════════════════════════════════ */
-async function loadWeather() {
-  try {
-    const resp = await fetch(
-      'https://api.open-meteo.com/v1/forecast?latitude=32.65&longitude=-16.9&current=temperature_2m,weather_code&timezone=Atlantic%2FMadeira'
-    );
-    const data = await resp.json();
-    const temp = Math.round(data.current.temperature_2m);
-    const code = data.current.weather_code;
-
-    const icons = {
-      0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
-      45: '🌫️', 48: '🌫️',
-      51: '🌦️', 53: '🌦️', 55: '🌧️',
-      61: '🌧️', 63: '🌧️', 65: '🌧️',
-      71: '🌨️', 73: '🌨️', 75: '❄️',
-      80: '🌦️', 81: '🌦️', 82: '⛈️',
-      95: '⛈️', 96: '⛈️', 99: '⛈️'
-    };
-    const icon = icons[code] || '🌤️';
-
-    const el = document.getElementById('weather-val');
-    if (el) el.innerHTML = `${icon} ${temp}°C`;
-  } catch {}
-}
-
-/* ═══════════════════════════════════════
-   КАРТА LEAFLET
-═══════════════════════════════════════ */
-function initMap() {
   const points = [
-    { num: 1,  name: 'Минск',                  lat: 53.9045,  lon: 27.5615,  desc: 'Старт. Отсюда всё начинается. Автобус в 15:00.',  type: '🏠' },
-    { num: 2,  name: 'Вильнюс',                lat: 54.6872,  lon: 25.2797,  desc: 'Cozy Flat · 2 ночи · Старый город, гуляем.',         type: '🏙️' },
-    { num: 3,  name: 'Цюрих',                  lat: 47.4502,  lon: 8.5628,   desc: '7 часов пересадки. Выходим в город!',               type: '✈️' },
-    { num: 4,  name: 'Фуншал',                 lat: 32.6489,  lon: -16.9098, desc: 'Столица Мадейры. Funchal 19, первая ночь.',          type: '🌆' },
-    { num: 5,  name: 'Камара-ди-Лобуш',        lat: 32.6500,  lon: -16.9833, desc: 'Рыбацкая деревня. Понча. Черчилль тут рисовал.',    type: '⚓' },
-    { num: 6,  name: 'Кабу-Жиран',             lat: 32.6500,  lon: -17.0500, desc: 'Skywalk 580м над морем. €3. Колени трясутся.',      type: '😱' },
-    { num: 7,  name: 'Paul da Serra',           lat: 32.7500,  lon: -17.1500, desc: 'Плато 1500м. Ветряки. Вид на оба побережья.',        type: '🌬️' },
-    { num: 8,  name: 'Порту-Мониш',            lat: 32.8669,  lon: -17.1726, desc: 'Природные бассейны. Кемпинг. €3 и €4 с носа.',      type: '🏊' },
-    { num: 9,  name: 'Fanal Forest',            lat: 32.7883,  lon: -17.1150, desc: 'Лавровый лес UNESCO. 500+ лет. Подъём в 5 утра.',   type: '🌲' },
-    { num: 10, name: 'Рибейра-да-Жанела',      lat: 32.8497,  lon: -17.1557, desc: 'Quinta\' Home · Poça das Lesmas · чёрный пляж.',    type: '🏡' },
-    { num: 11, name: 'Сейшал',                 lat: 32.8250,  lon: -17.1083, desc: 'Лавовая арка 6м. Чёрный вулканический пляж.',       type: '🖤' },
-    { num: 12, name: 'Сан-Висенти',            lat: 32.7894,  lon: -17.0431, desc: 'Обед. Водопад Véu da Noiva. Перевал Encumeada.',    type: '⛰️' },
-    { num: 13, name: 'Chão das Feiteiras',      lat: 32.7167,  lon: -17.0333, desc: 'Дикий кемпинг 1200м. Мангал. 8-12°C ночью. Бррр.', type: '⛺' },
-    { num: 14, name: 'Порту-да-Круш',          lat: 32.7644,  lon: -16.8272, desc: '2 ночи. Бассейны. Ромовая фабрика Engenho Velho.',  type: '🍹' },
-    { num: 15, name: 'Boca das Voltas',         lat: 32.7917,  lon: -16.8917, desc: 'Кемпинг с разрешением. Звёзды. 750м над морем.',    type: '⭐' },
-    { num: 16, name: 'Ponta de São Lourenço',   lat: 32.7406,  lon: -16.6842, desc: 'Край земли. PR8. Океан с двух сторон. Финальный кемпинг.', type: '🌊' },
-    { num: 17, name: 'Фуншал (финал)',          lat: 32.6500,  lon: -16.9083, desc: 'Вилла у Flávio. 2 ночи. Заслуженный отдых.',       type: '🏆' },
+    { n: 1, lat: 54.6872, lng: 25.2797, title: 'Вильнюс', body: '18–20 апр · Cozy Flat, Linkmenų Gatvė 6-4', link: 'https://www.booking.com/Share-7Nf6uR5' },
+    { n: 2, lat: 32.6669, lng: -16.9241, title: 'Фуншал — Funchal 19', body: 'Rua Hospital Velho 19 A · 20–21 апр · €93,48', link: 'https://maps.google.com/?q=32.649050,−16.903617' },
+    { n: 3, lat: 32.6502, lng: -17.1178, title: 'Кабу-Жиран (Skywalk)', body: '580м над океаном · €3 · стеклянная площадка', link: 'https://maps.google.com/?q=32.6502,-17.1178' },
+    { n: 4, lat: 32.7672, lng: -17.1647, title: 'Порту-Мониш (кемпинг)', body: '21–22 апр · Sítio da Ponte, 9270-105 · +351 291 853 856', link: 'https://www.madeiracamping.com/porto-moniz/' },
+    { n: 5, lat: 32.8050, lng: -17.1500, title: 'Fanal Forest', body: '22 апр, 05:45 · Лавровый лес UNESCO, туман, 1150м', link: 'https://maps.google.com/?q=32.8050,-17.1500' },
+    { n: 6, lat: 32.8469, lng: -17.1559, title: 'Quinta\' Home', body: 'Caminho Dr Francisco Rodrigues Jardim 29 · 22–23 апр · €116,01', link: 'https://www.booking.com/Share-CPfUlM' },
+    { n: 7, lat: 32.8250, lng: -17.1020, title: 'Сейшал — Poça das Lesmas', body: 'Лавовая арка 6м · бесплатно / €2.50', link: 'https://maps.google.com/?q=32.8250,-17.1020' },
+    { n: 8, lat: 32.7647, lng: -17.0027, title: 'Chão das Feiteiras (1200м)', body: '23–24 апр · бесплатно · мангалы, вода, ночью 8-12°C', link: 'https://maps.google.com/?q=32.7647,-17.0027' },
+    { n: 9, lat: 32.7611, lng: -16.9419, title: 'Pico Ruivo (1862м)', body: '24 апр · Высшая точка Мадейры · PR1.1 + PR1.2', link: 'https://simplifica.madeira.gov.pt/services/78-82-259' },
+    { n: 10, lat: 32.7644, lng: -16.8214, title: 'Порту-да-Круш — жильё', body: '24–26 апр · 7 Rua Dos Muros, 9225-190 · €222 · +351 967 858 836', link: 'https://www.booking.com/Share-A3hqfkW' },
+    { n: 11, lat: 32.7777, lng: -16.8752, title: 'Levada do Rei / Castelejo', body: '25 апр · PR18 Levada do Rei: 10км, 2.5-3.5ч', link: 'https://maps.google.com/?q=32.7777,-16.8752' },
+    { n: 12, lat: 32.7731, lng: -16.8417, title: 'Boca das Voltas', body: '26–27 апр · São Jorge, 750м · Разрешение 419372/2026 · Лесной пост: 963 817 883', link: 'https://www.madeiracamping.com/boca-das-voltas/' },
+    { n: 13, lat: 32.7486, lng: -16.7080, title: 'Ponta de São Lourenço', body: '27–28 апр · Край земли · PR8 (~4км от парковки) · Разрешение 415506/2026', link: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/' },
+    { n: 14, lat: 32.6495, lng: -16.9088, title: 'Фуншал — Вилла Flávio', body: 'Entrada das Casas Novas 12, 9050-058 · 28–30 апр', link: 'https://maps.google.com/?q=32.6495,-16.9088' },
   ];
 
-  const map = L.map('map', {
-    center: [32.75, -17.0],
-    zoom: 9
-  });
+  // Route polyline with intermediate waypoints following approximate roads/coast
+  // Points are ordered chronologically matching the trip itinerary
+  const routeLatlngs = [
+    // 2: Funchal
+    [32.6669, -16.9241],
+    // south coast west toward Cabo Girão
+    [32.6502, -17.0200],
+    // 3: Cabo Girão (Skywalk)
+    [32.6502, -17.1178],
+    // coast road northwest
+    [32.6800, -17.1350],
+    [32.7200, -17.1580],
+    // 4: Porto Moniz camping
+    [32.7672, -17.1647],
+    // road east to Fanal (inland, uphill)
+    [32.7900, -17.1580],
+    // 5: Fanal Forest
+    [32.8050, -17.1500],
+    // down to Ribeira da Janela
+    [32.8300, -17.1530],
+    // 6: Quinta' Home
+    [32.8469, -17.1559],
+    // coast road east to Seixal
+    [32.8380, -17.1200],
+    // 7: Seixal
+    [32.8250, -17.1020],
+    // ER104 inland toward central mountains
+    [32.8100, -17.0500],
+    [32.7900, -17.0200],
+    // 8: Chão das Feiteiras
+    [32.7647, -17.0027],
+    // trail south to Pico Ruivo area
+    [32.7630, -16.9700],
+    // 9: Pico Ruivo
+    [32.7611, -16.9419],
+    // descent north coast to Porto da Cruz
+    [32.7650, -16.9100],
+    [32.7640, -16.8700],
+    // 10: Porto da Cruz
+    [32.7644, -16.8214],
+    // 11: Levada do Rei / Castelejo area
+    [32.7777, -16.8752],
+    // east along north coast
+    [32.7750, -16.8500],
+    // 12: Boca das Voltas (São Jorge)
+    [32.7731, -16.8417],
+    // east coast to Ponta de São Lourenço
+    [32.7600, -16.8000],
+    [32.7500, -16.7400],
+    // 13: Ponta de São Lourenço
+    [32.7409, -16.6924],
+    // back west along south coast to Funchal
+    [32.7200, -16.7500],
+    [32.7000, -16.8000],
+    [32.6800, -16.8500],
+    // 14: Funchal (Flávio villa)
+    [32.6495, -16.9088],
+  ];
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>',
-    maxZoom: 18
-  }).addTo(map);
-
-  // Определяем какие точки на Мадейре для линии маршрута по острову
-  const madeiraPoints = points.slice(3); // от Фуншала до конца
-  const madeiraCoordsLine = madeiraPoints.map(p => [p.lat, p.lon]);
-
-  // Линия маршрута по Мадейре
-  L.polyline(madeiraCoordsLine, {
-    color: '#4A9EFF', weight: 3,
-    opacity: 0.7, dashArray: '8, 6'
-  }).addTo(map);
+  L.polyline(routeLatlngs, { color: accent, weight: 2.5, opacity: 0.7, dashArray: '6,6' }).addTo(map);
 
   points.forEach(p => {
-    const isMadeira = p.num >= 4;
-    const color = isMadeira ? '#4A9EFF' : '#9CA3AF';
-
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        width:32px;height:32px;
-        background:${color};
-        border:3px solid #fff;
-        border-radius:50%;
-        display:flex;align-items:center;justify-content:center;
-        font-size:11px;font-weight:800;color:#fff;
-        box-shadow:0 2px 8px rgba(0,0,0,0.2);
-        font-family:'Inter',sans-serif;
-      ">${p.num}</div>`,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
-
-    const marker = L.marker([p.lat, p.lon], { icon }).addTo(map);
-    marker.bindPopup(`
-      <div class="popup-num">Точка ${p.num}</div>
-      <div class="popup-title">${p.type} ${p.name}</div>
-      <div class="popup-desc">${p.desc}</div>
-    `, { maxWidth: 220 });
+    const marker = L.marker([p.lat, p.lng], { icon: makeIcon(p.n) }).addTo(map);
+    const linkHtml = p.link ? '<a class="popup-link" href="' + p.link + '" target="_blank">Открыть →</a>' : '';
+    marker.bindPopup(
+      '<div class="popup-title">' + p.title + '</div>' +
+      '<div class="popup-body">' + p.body + '</div>' +
+      linkHtml
+    );
   });
 }
 
-/* ═══════════════════════════════════════
-   ДАННЫЕ ТАЙМЛАЙНА
-═══════════════════════════════════════ */
-const days = [
+// ════════════════════════════════════
+// DAYS DATA
+// ════════════════════════════════════
+const DAYS = [
   {
-    num: 1, date: '18 апреля', dow: 'суббота',
-    title: 'Побег из Минска', funny: 'Операция началась. Обратной дороги нет.',
-    icon: '🚌', color: '#6B7280', bg: '#F9FAFB',
-    desc: 'Отправление из Минска в 15:00 с Центрального вокзала. Шесть часов автобуса, зато в Вильнюсе.',
-    pois: [
-      { emoji: '🚌', name: 'Автобус Ecolines', desc: 'Минск → Вильнюс · 15:00 → ~21:00 · Центральный вокзал, ул. Бобруйская' },
+    date: '18 апр (Сб)',
+    emoji: '🚌',
+    title: 'Глава 1: Побег из Минска',
+    subtitle: 'Автобус → Вильнюс · Старт экспедиции',
+    events: [
+      { time: '15:00', text: '<strong>Минск → Вильнюс</strong><em>Центральный вокзал, ул. Бобруйская</em>', map: 'https://maps.google.com/?q=Центральный+автовокзал,+Бобруйская,+Минск&navigate=yes', link: 'https://ecolines.net', icon: 'ticket', linkTitle: 'Билет', contacts: { web: 'https://ecolines.net', webLabel: 'ecolines.net' } },
+      { time: '~21:00', text: '<strong>Прибытие в Вильнюс</strong>' },
+      { time: 'Ночь', text: '<strong>Заселение: Cozy Flat</strong> · <a href="https://maps.google.com/?q=Linkmenų+Gatvė+6-4,+Vilnius" target="_blank">Linkmenų Gatvė 6-4</a><em>2 ночи</em>', map: 'https://maps.google.com/?q=54.6872,25.2797&navigate=yes', link: 'https://www.booking.com/Share-7Nf6uR5' },
     ],
-    accommodation: {
-      icon: '🛋️', name: 'Cozy Flat', type: 'Квартира',
-      addr: 'Linkmenų Gatvė 6-4, Вильнюс',
-      price: '€103,66 за 2 ночи (€34,55/чел)',
-      link: 'https://www.booking.com/Share-7Nf6uR5', linkText: 'Бронь на Booking'
-    },
-    transport: '🚌 Стоимость автобуса уточняем. Ссылка: ecolines.net',
-    transportTbd: true
+    note: 'Встречаемся на вокзале заранее. Проверь паспорт, страховку, распечатки.', noteIcon: '🧳'
   },
   {
-    num: 2, date: '19 апреля', dow: 'воскресенье',
-    title: 'Вильнюс: прелюдия к приключению', funny: 'Пока ещё холодно, зато арт-квартал близко.',
-    icon: '🏙️', color: '#6B7280', bg: '#F9FAFB',
-    desc: 'Свободный день в Вильнюсе. Погулять по Старому городу, поесть чего-нибудь литовского, морально подготовиться.',
-    pois: [
-      { emoji: '🏰', name: 'Старый город', desc: 'Вильнюс — один из самых красивых барочных старых городов Европы. ЮНЕСКО.' },
-      { emoji: '🎨', name: 'Ужупис', desc: 'Независимая республика художников внутри города. Конституция на 45 языках.' },
+    date: '19 апр (Вс)',
+    emoji: '🐺',
+    title: 'Глава 2: Вильнюс — разминка',
+    subtitle: 'Свободный день · Старый город',
+    events: [
+      { time: 'День', text: 'Свободный день в Вильнюсе' },
+      { time: 'Ночь', text: 'Тёплый Вильнюс не кусается — но кровать в Cozy Flat всё равно ждёт. Та же квартира, что и вчера.' },
     ],
-    accommodation: {
-      icon: '🛋️', name: 'Cozy Flat', type: 'Квартира',
-      addr: 'Linkmenų Gatvė 6-4, Вильнюс',
-      price: 'Включено в общую стоимость',
-      link: 'https://www.booking.com/Share-7Nf6uR5', linkText: 'Бронь на Booking'
-    },
+    note: 'Гуляем, едим кибинай, пробуем трайниус. Акклиматизация перед большим прыжком.', noteIcon: '🍺'
   },
   {
-    num: 3, date: '20 апреля', dow: 'понедельник',
-    title: 'Взлёт + 7 часов в Цюрихе', funny: 'Подъём в 4:00. Да, именно так путешествия начинаются с бюджетными билетами.',
-    icon: '✈️', color: '#4A9EFF', bg: '#EBF4FF',
-    desc: 'Вылет в 05:00. 7 часов в Цюрихе — хватит выйти в город, выпить кофе, почувствовать себя европейцами. Потом Фуншал.',
-    pois: [
-      { emoji: '✈️', name: 'LX1339 VNO→ZRH', desc: '05:00 → 06:30 · Economy Light · только ручная кладь!' },
-      { emoji: '🇨🇭', name: '7 часов в Цюрихе', desc: '06:30–13:45 · Выйти в город, погулять по набережной, покормить лебедей' },
-      { emoji: '✈️', name: 'LX8264 ZRH→FNC', desc: '13:45 → 16:45 · И вот мы на Мадейре!' },
-      { emoji: '🚗', name: 'Получение машины', desc: 'STONES Rent-A-Car · Dacia Stepway · ~18:00 · Meet & Greet в аэропорту · #4730' },
+    date: '20 апр (пн)',
+    emoji: '✈️',
+    title: 'Глава 3: В небо через Цюрих',
+    subtitle: 'Вильнюс → Цюрих → Фуншал · 4 рейса, 1 день',
+    events: [
+      { time: '~02:30', text: 'Подъём. Собраться. Кофе по желанию.' },
+      { time: '~03:00', text: 'Такси / Bolt → аэропорт Вильнюса (~20 мин)' },
+      { time: '03:30', text: 'Регистрация и досмотр<em>Регистрация закрывается в 04:20 (за 40 мин до вылета)</em>' },
+      { time: '05:00', text: '<strong>Вылет LX1339</strong> VNO → ZRH<em>Бронь: XPVXVH · 1 багаж 25кг, остальные — только ручная кладь</em>', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
+      { time: '06:30', text: '<strong>Прибытие в Цюрих</strong> · 7 часов до следующего рейса<em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2H3z"/><path d="M5 11l1-5h12l1 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg> Автобус ~€4</em>' },
+      { time: '13:45', text: '<strong>Вылет LX8264</strong> ZRH → FNC · прибытие 16:45', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
+      { time: '18:00', text: '<strong>Получение машины</strong> · STONES Rent-A-Car<em>Аэропорт (Meet & Greet) · Dacia Stepway · Заказ #4730</em>', link: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069', icon: 'doc', linkTitle: 'Контракт' },
+      { time: '~20:00', text: '<strong>Заселение: Funchal 19</strong> · <a href="https://maps.google.com/?q=Rua+Hospital+Velho+19+A,+Funchal,+Madeira" target="_blank">Rua Hospital Velho 19 A</a><em>Заезд 14:00 · 1 ночь</em>', map: 'https://maps.google.com/?q=32.649050,-16.903617&navigate=yes', link: 'https://www.airbnb.ru/rooms/1637584730331319648', tel: '+351961423326' },
     ],
-    accommodation: {
-      icon: '🏨', name: 'Funchal 19', type: 'Отель',
-      addr: 'Rua Hospital Velho 19 A, Фуншал · GPS: N 032°38.943, W 16°54.217',
-      price: '€93,48 (€31,16/чел) · Бронь: 5930.341.647',
-      link: null, linkText: null
-    },
-    transport: '🛫 Бронирование Swiss Air: XPVXVH · Билет: 7242347372767 · Стоимость уточняем',
-    transportTbd: true
+    tip: '7 часов в Цюрихе — смело садитесь на S-Bahn и езжайте в центр. Старый город, набережная, шоколад Sprüngli, фондю на Niederdorfstrasse. Пара часов — и вы довольные вернётесь в аэропорт. Много не потратите, а впечатлений — на весь перелёт.'
   },
   {
-    num: 4, date: '21 апреля', dow: 'вторник',
-    title: 'Южный берег и первая палатка', funny: 'Черчилль одобрил бы. Мы тоже одобряем.',
-    icon: '🌊', color: '#52C97B', bg: '#EDFAF3',
-    desc: 'Первый полноценный день на Мадейре! Выезд из Фуншала до 12:00, едем по южному берегу на север.',
-    pois: [
-      { emoji: '⚓', name: 'Камара-ди-Лобуш', desc: 'Рыбацкая деревня. Черчилль приезжал рисовать. Понча — главный напиток острова.', price: 'Бесплатно' },
-      { emoji: '😱', name: 'Кабу-Жиран (Skywalk)', desc: '580м над океаном. Стеклянная площадка. Колени трясутся — это нормально.', price: '€3/чел' },
-      { emoji: '🌬️', name: 'Paul da Serra', desc: 'Плато 1500м. 24км² ветра и ветряков. Отсюда стартуют левады.', price: 'Бесплатно' },
-      { emoji: '🏊', name: 'Природные бассейны Порту-Мониш', desc: 'Лавовые бассейны у океана. Работают до 19:00.', price: '€3/чел' },
+    date: '21 апр (вт)',
+    emoji: '🚗',
+    title: 'Глава 4: Южное побережье → Дикий Север',
+    subtitle: 'Funchal → Кабу-Жиран → Paul da Serra → Порту-Мониш',
+    events: [
+      { time: 'До 12:00', text: 'Выезд из Funchal 19' },
+      { time: 'Утро', text: '<strong>Камара-ди-Лобуш</strong><em>Рыбацкая деревня, где рисовал Черчилль. Понча, набережная 2.2км</em>', map: 'https://maps.google.com/?q=Câmara+de+Lobos,+Madeira&navigate=yes' },
+      { time: 'Утро', text: '<strong>Кабу-Жиран (Cabo Girão)</strong> <span class="tag-price">€3</span><em>Skywalk на 580м — стеклянная площадка над океаном</em>', map: 'https://maps.google.com/?q=Cabo+Girão+Skywalk,+Madeira&navigate=yes' },
+      { time: 'День', text: '<strong>Paul da Serra</strong><em>Плато 1500м, ветряки, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Paul+da+Serra,+Madeira&navigate=yes' },
+      { time: 'Вечер', text: '<strong>Природные бассейны Порту-Мониш</strong> <span class="tag-price">€3</span><em>Работают до 19:00</em>', map: 'https://maps.google.com/?q=Piscinas+Naturais+Porto+Moniz,+Madeira&navigate=yes' },
+      { time: 'Ночь', text: '<strong>Кемпинг Porto Moniz</strong><a href="https://maps.google.com/?q=Sítio+da+Ponte,+Ribeira+da+Janela,+Madeira" target="_blank">Sítio da Ponte, Ribeira da Janela</a><em>1 ночь · ~€15 (~€5/чел) · бронь не нужна</em>', map: 'https://maps.google.com/?q=32.7672,-17.1647&navigate=yes', contacts: { tel: '+351291853856', telLabel: '+351 291 853 856', web: 'https://www.madeiracamping.com/porto-moniz/', webLabel: 'madeiracamping.com' } },
     ],
-    accommodation: {
-      icon: '⛺', name: 'Кемпинг Porto Moniz', type: 'Кемпинг',
-      addr: 'Sítio da Ponte, Ribeira da Janela, 9270-105 · Тел: +351 291 853 856',
-      price: '~€12-16 за троих (~€4-5/чел) · Бронь не нужна · Ночью ~14-15°C',
-      link: 'https://www.madeiracamping.com/porto-moniz/', linkText: 'Кемпинг Porto Moniz'
-    },
-    restaurants: ['Pólo Norte', 'Sea View', 'Orca']
+    note: 'Ночью ~14-15°C — спальник на 10-15°C обязателен.', noteIcon: '🌡',
+    tip: 'Рестораны рядом: Pólo Norte, Sea View, Orca (~5 мин на машине). Барбекю на кемпинге тоже вариант.'
   },
   {
-    num: 5, date: '22 апреля', dow: 'среда',
-    title: 'Лавровый туман в 05:45', funny: 'Подъём в 5 утра. Да, мы серьёзно. Деревья ждут.',
-    icon: '🌲', color: '#52C97B', bg: '#EDFAF3',
-    desc: 'Самый ранний подъём за весь поход — ради тумана в Fanal Forest. К 8 утра завтрак на горелке. Потом чилл и Quinta\' Home.',
-    pois: [
-      { emoji: '🌲', name: 'Fanal Forest', desc: 'Лавровый лес ЮНЕСКО. Деревьям 500+ лет. Туман появляется утром. Это как сказка.', price: 'Бесплатно' },
-      { emoji: '🫧', name: 'Poça das Lesmas', desc: 'Лавовые бассейны с каменной аркой 6м. Чёрный пляж рядом.', price: 'Бесплатно / €2,50' },
-      { emoji: '🖤', name: 'Praia do Porto do Seixal', desc: 'Чёрный вулканический пляж. Дикий и красивый.', price: 'Бесплатно' },
+    date: '22 апр (ср)',
+    emoji: '🌫',
+    title: 'Глава 5: Туманный лес ждёт',
+    subtitle: 'Fanal 05:45 → Quinta\' Home → Сейшал · Ранний подъём обязателен',
+    events: [
+      { time: '05:00', text: 'Подъём. Кофе на горелке. Звёзды ещё есть.' },
+      { time: '05:30', text: 'Выезд → Fanal Forest (~15 мин)' },
+      { time: '05:45', text: '<strong>Fanal Forest</strong><em>Лавровый лес UNESCO, деревьям 500+ лет, туман клубится. Самое магическое место Мадейры</em>', map: 'https://maps.google.com/?q=Fanal+Forest,+Madeira&navigate=yes' },
+      { time: '08:00', text: 'Завтрак на горелке. Заслужили.' },
+      { time: '~13:00', text: '<strong>Заселение: Quinta\' Home</strong> · <a href="https://maps.google.com/?q=Caminho+Dr+Francisco+Rodrigues+Jardim+29,+Ribeira+da+Janela,+Madeira" target="_blank">Caminho Dr Francisco Rodrigues Jardim 29</a><em>Заезд 13:00 · 1 ночь</em>', map: 'https://maps.google.com/?q=32.8469,-17.1559&navigate=yes', link: 'https://www.booking.com/Share-CPfUlM', tel: '+351968509710' },
+      { time: '14:30', text: 'Выезд в Сейшал (~15 мин)' },
+      { time: 'День', text: '<strong>Poça das Lesmas</strong> <span class="tag-free">бесплатно</span> / <span class="tag-price">€2,50</span><em>Лавовая арка 6м, природные бассейны</em>', map: 'https://maps.google.com/?q=Poça+das+Lesmas,+Seixal,+Madeira&navigate=yes' },
+      { time: 'День', text: '<strong>Praia do Porto do Seixal</strong> <span class="tag-free">бесплатно</span><em>Чёрный вулканический пляж</em>', map: 'https://maps.google.com/?q=Praia+do+Porto+do+Seixal,+Madeira&navigate=yes' },
+      { time: 'Вечер', text: '<strong>Чилл в Quinta\' Home</strong><em>Тот самый дом, в который заселились в обед. Самое время сварить первый честный кофе на горелке с видом на океан. Или не кофе.</em>' },
     ],
-    accommodation: {
-      icon: '🏡', name: "Quinta' Home", type: 'Квартира',
-      addr: 'Caminho Dr Francisco Rodrigues Jardim n 29, Ribeira da Janela · GPS: N 032°50.813, W 17°9.357',
-      price: '€116,01 (€38,67/чел) · Бронь: 5792.590.384 · Заезд 13:00–14:00',
-      link: 'https://www.booking.com/Share-CPfUlM', linkText: 'Бронь на Booking'
-    },
-    restaurants: ['Pedra do Mar', 'On The Rocks', 'Terras do Avô']
+    tip: 'Рестораны рядом: Pedra do Mar, On The Rocks, Terras do Avô'
   },
   {
-    num: 6, date: '23 апреля', dow: 'четверг',
-    title: 'Сан-Висенти → Высотный лагерь', funny: 'Барбекю на 1200м — это другой уровень шашлычника.',
-    icon: '🔥', color: '#F5A623', bg: '#FFF8ED',
-    desc: 'Выезд из Quinta\' Home до 11:00. Обед в Сан-Висенти. Закупаем мясо. Вечером — лагерь на плато 1200м.',
-    pois: [
-      { emoji: '⛪', name: 'Сан-Висенти', desc: 'Симпатичный городок, белая церковь, хороший обед.' },
-      { emoji: '💧', name: 'Véu da Noiva', desc: 'Водопад "Фата невесты" по дороге.', price: 'Бесплатно' },
-      { emoji: '⛰️', name: 'Перевал Encumeada', desc: 'Высота 1000м. Вид на оба побережья одновременно.', price: 'Бесплатно' },
+    date: '23 апр (чт)',
+    emoji: '🏔',
+    title: 'Глава 6: В горы с мясом',
+    subtitle: 'Сан-Висенти → Chão das Feiteiras 1200м · Ночь у костра',
+    events: [
+      { time: 'До 11:00', text: 'Выезд из Quinta\' Home' },
+      { time: 'Обед', text: '<strong>Сан-Висенти</strong><em>Рестораны: Caravela, Lavrador</em>', map: 'https://maps.google.com/?q=São+Vicente,+Madeira&navigate=yes' },
+      { time: 'Дорога', text: '<strong>Miradouro do Véu da Noiva</strong><em>Водопад с видовой площадки</em>', map: 'https://maps.google.com/?q=Miradouro+Véu+da+Noiva,+Madeira&navigate=yes' },
+      { time: 'Дорога', text: '<strong>Перевал Encumeada</strong><em>1000м, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Encumeada,+Madeira&navigate=yes' },
+      { time: 'День', text: 'Закупить мясо в магазине' },
+      { time: 'Вечер', text: '<strong>Chão das Feiteiras (1200м)</strong><em>Бесплатно · Столы · Мангалы · Вода · Кострище</em>', map: 'https://maps.google.com/?q=32.7647,-17.0027&navigate=yes' },
     ],
-    accommodation: {
-      icon: '⛺', name: 'Chão das Feiteiras', type: 'Дикий кемпинг',
-      addr: 'Высота 1200м · Столы, мангалы, вода, кострище',
-      price: 'Бесплатно · Ночью 8-12°C — тёплый спальник обязателен!',
-      link: null, linkText: null
-    },
-    restaurants: ['Caravela', 'Lavrador']
+    note: 'Ночью 8-12°C — термобельё обязательно. Ранний отбой — подъём в 05:00. Горы не ждут тех, кто проспал рассвет.', noteIcon: '🌡'
   },
   {
-    num: 7, date: '24 апреля', dow: 'пятница',
-    title: 'На вершину острова', funny: '1862 метра. Облака под ногами. Ноги отдельно.',
-    icon: '🥾', color: '#4A9EFF', bg: '#EBF4FF',
-    desc: 'Главный хайк экспедиции! Подъём в 06:00. Либо PR 1.1 + PR 1.2, либо Pico do Arieiro → Pico Ruivo — если успеют открыть.',
-    pois: [
-      { emoji: '🏔️', name: 'Вариант А: PR 1.1 + PR 1.2', desc: 'Vereda da Ilha (8.2км, ~3ч) + Vereda do Pico Ruivo (5.6км, ~3ч). Вершина 1862м.', price: 'Бесплатно' },
-      { emoji: '🏔️', name: 'Вариант Б: Pico do Arieiro → Pico Ruivo', desc: '7км по хребту. Если откроют до 25-26 апр. Самый красивый маршрут.', price: '€7–10,50' },
-    ],
-    accommodation: {
-      icon: '🏘️', name: 'Caminho da Praia da Maiata', type: 'Квартира',
-      addr: '7 Rua Dos Muros, Порту-да-Круш, 9225-190 · GPS: N 032°45.867, W 16°49.278',
-      price: '€222 на 2 ночи (€74/чел) · Бронь: 5910.940.333 · Заезд 15:00',
-      link: 'https://www.booking.com/Share-A3hqfkW', linkText: 'Бронь на Booking'
-    },
-    transport: '📋 Не забудь зарегистрировать маршрут: simplifica.madeira.gov.pt',
+    date: '24 апр (пт)',
+    emoji: '🥾',
+    title: 'Глава 7: На вершину мира',
+    subtitle: 'PR1.1 + PR1.2 → Pico Ruivo 1862м · Потом — тёплое жильё',
+    events: [
+      { time: '06:00', text: 'Выезд на трекинг. Горы ждут.' },
+      { time: 'День', tabs: [
+        { label: 'План А', text: '<strong>PR1.1 + PR1.2 → Pico Ruivo (1862м)</strong><br>Два маршрута подряд: Vereda da Ilha (8.2км, ~3ч, средняя) + Vereda do Pico Ruivo (5.6км, ~1.5-3ч). Финиш — высшая точка Мадейры. Туман, ветер, вид на весь остров. Это тот самый момент, ради которого всё затевалось.<br><em>Итого: ~14км, 4.5-6ч · Набор высоты ~800м · Сложность: средняя-высокая</em>', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' },
+        { label: 'План Б', text: '<strong>Pico do Arieiro → Pico Ruivo</strong><br>Легендарная тропа между двумя пиками. Тоннели, лестницы, облака под ногами. Самый красивый и самый популярный маршрут острова. Но: его регулярно закрывают на ремонт. Если к 24 апреля откроют — идём сюда.<br><em>7км, ~3-4ч · €7–10.50 · Сложность: средняя · Старт с парковки Pico do Arieiro</em>', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' }
+      ] },
+      { time: 'Вечер', text: '<strong>Заселение: Caminho da Praia da Maiata</strong> · <a href="https://maps.google.com/?q=7+Rua+Dos+Muros,+Porto+da+Cruz,+Madeira" target="_blank">7 Rua Dos Muros, Порту-да-Круш</a><em>Заезд 15:00 · 2 ночи</em>', map: 'https://maps.google.com/?q=32.7644,-16.8214&navigate=yes', link: 'https://www.booking.com/Share-A3hqfkW', tel: '+351967858836' },
+    ]
   },
   {
-    num: 8, date: '25 апреля', dow: 'суббота',
-    title: 'Левада + Ромовая фабрика', funny: 'После вчерашнего подъёма — спокойная прогулка по воде.',
-    icon: '💧', color: '#4A9EFF', bg: '#EBF4FF',
-    desc: 'Неспешный день: левада утром, бассейны днём, ромовая фабрика вечером. Заслужили.',
-    pois: [
-      { emoji: '💧', name: 'PR18 Levada do Rei', desc: '10км, 2.5–3.5ч, лёгкая, ~30 мин на машине. Водопады в конце.', price: 'Бесплатно' },
-      { emoji: '🌉', name: 'Levada do Castelejo', desc: '11км, 3-4ч, лёгкая-средняя, старт пешком от дома. Подвесной мост!', price: 'Бесплатно' },
-      { emoji: '🏊', name: 'Porto da Cruz Bathing Complex', desc: 'Бассейны. После трекинга — самое оно.', price: 'Платно' },
-      { emoji: '🍶', name: 'Ромовая фабрика Engenho Velho', desc: 'Старейшая на Мадейре. Вход бесплатный. Дегустация за деньги.', price: 'Бесплатно' },
+    date: '25 апр (сб)',
+    emoji: '🚶',
+    title: 'Глава 8: Левада, ром и чилл',
+    subtitle: 'Порту-да-Круш · Левада утром — бар вечером',
+    events: [
+      { time: 'Утро', tabs: [
+        { label: 'Levada do Rei', text: '<strong>PR18 Levada do Rei</strong><br>Самая красивая левада Мадейры. Водопады в финале, тропический лес, деревянные мостики. Едем на машине ~30 мин.<br><em>10км, 2.5-3.5ч · Сложность: лёгкая · На машине от дома</em>' },
+        { label: 'Levada do Castelejo', text: '<strong>Levada do Castelejo</strong><br>Стартуем пешком от дома — не нужна машина. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но атмосфернее.<br><em>11км, 3-4ч · Сложность: лёгкая-средняя · Старт от двери</em>' }
+      ] },
+      { time: 'День', text: '<strong>Бассейны Porto da Cruz</strong><em>Bathing Complex — морские бассейны</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
+      { time: 'Обед', text: '<strong>A Pipa</strong><em>Praça Velha, Порту-да-Круш</em>', map: 'https://maps.google.com/?q=A+Pipa,+Porto+da+Cruz,+Madeira&navigate=yes' },
+      { time: 'Вечер', text: '<strong>Ромовая фабрика Engenho Velho</strong> <span class="tag-free">бесплатно</span><em>Дегустация рома, история производства</em>', map: 'https://maps.google.com/?q=Engenho+Velho,+Porto+da+Cruz,+Madeira&navigate=yes' },
+      { time: 'Ночь', text: '<strong>Dino\'s Bar</strong><em>Набережная · Порту-да-Круш</em>', map: 'https://maps.google.com/?q=Dinos+Bar,+Porto+da+Cruz,+Madeira&navigate=yes' },
     ],
-    accommodation: {
-      icon: '🏘️', name: 'Caminho da Praia da Maiata', type: 'Квартира',
-      addr: '7 Rua Dos Muros, Порту-да-Круш',
-      price: 'Включено в предыдущую ночь',
-      link: 'https://www.booking.com/Share-A3hqfkW', linkText: 'Бронь'
-    },
-    restaurants: ['A Pipa (обед)', 'Dino\'s Bar (вечер)', 'Praça Velha']
+    tip: 'Набережная Порту-да-Круш, утёс Penha d\'Águia — если останется время.'
   },
   {
-    num: 9, date: '26 апреля', dow: 'воскресенье',
-    title: 'Последний чилл → Звёздный кемпинг', funny: '€4 с носа за кемпинг. Черчилль бы одобрил.',
-    icon: '⭐', color: '#6B7280', bg: '#F9FAFB',
-    desc: 'Утро чилл в Порту-да-Круш. Закупка мяса/рыбы в Machico. Выезд в Boca das Voltas на 750м — лавровый лес, панорама, звёзды.',
-    pois: [
-      { emoji: '🛒', name: 'Закупка в Machico', desc: 'Мясо/рыба на барбекю. Не забыть воду!' },
-      { emoji: '⭐', name: 'Boca das Voltas', desc: 'Панорама на долину Боа-Вентура. Огонь только в отведённых местах. Мусор с собой!', price: 'Бесплатно' },
+    date: '26 апр (вс)',
+    emoji: '⛺',
+    title: 'Глава 9: Последний цивилизованный день',
+    subtitle: 'Чилл → закупка → Boca das Voltas 750м',
+    events: [
+      { time: 'Утро', text: 'Чилл, бассейны' },
+      { time: 'Обед', text: 'В Порту-да-Круш. Не забудь выехать до 11:00!' },
+      { time: 'День', text: 'Закупка мяса/рыбы (Machico)' },
+      { time: 'Вечер', text: '<strong>Boca das Voltas (São Jorge, ~750м)</strong><em>Бесплатно · Разрешение: 419372/2026</em>', map: 'https://maps.google.com/?q=32.7731,-16.8417&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883 (лесной пост)', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' } },
     ],
-    accommodation: {
-      icon: '⛺', name: 'Boca das Voltas (São Jorge)', type: 'Кемпинг с разрешением',
-      addr: 'Высота ~750м · Разрешение: 419372/2026 (1 палатка, 3 чел, 26→27 апр)',
-      price: 'Бесплатно · Лесной пост: 963 817 883',
-      link: 'https://www.madeiracamping.com/boca-das-voltas/', linkText: 'Boca das Voltas'
-    },
+    note: 'Огонь только в отведённых местах. Мусор с собой. Панорама на долину Боа-Вентура — звёзды и лавровый лес.', noteIcon: '🌿'
   },
   {
-    num: 10, date: '27 апреля', dow: 'понедельник',
-    title: 'Край земли — финальный кемпинг', funny: 'Океан слева, океан справа. Где мы вообще?',
-    icon: '🌊', color: '#4A9EFF', bg: '#EBF4FF',
-    desc: 'Опциональный трекинг от лагеря, потом — Ponta de São Lourenço. 4км пешком к самому восточному краю острова. Ночь на скалах.',
-    pois: [
-      { emoji: '🥾', name: 'Вариант А: Pico do Alto Ridge', desc: '10.6км, 5-7ч, по хребту, 360° панорама. Если есть силы после всего.' },
-      { emoji: '🌊', name: 'PR8 → Casa do Sardinha', desc: '~4км с рюкзаками. Тропа по хребту — океан с двух сторон. Туалет €1, воды нет — взять с собой!', price: 'Парковка Baía d\'Abra €3-4/день' },
+    date: '27 апр (пн)',
+    emoji: '🌊',
+    title: 'Глава 10: Край земли',
+    subtitle: 'Pica do Alto Ridge или чилл → PR8 → Casa do Sardinha · Океан с двух сторон',
+    events: [
+      { time: 'Утро', tabs: [
+        { label: 'Хардкор', text: '<strong>Pico do Alto Ridge — 360° хребет</strong><br>Длинный маршрут по хребту с панорамой на весь остров. Океан слева и справа, зелёные долины внизу. Физически тяжело, но виды — те самые, из National Geographic.<br><em>10.6км, 5-7ч · Набор высоты ~600м · Стартуем от лагеря · Сложность: высокая</em>' },
+        { label: 'Чилл', text: '<strong>Прогулка + кофе + природа</strong><br>Спокойное утро без рюкзаков. Пройтись по окрестностям, подышать лавровым лесом, сварить кофе на горелке. Иногда лучшее приключение — никуда не спешить.<br><em>2-3 часа · Вокруг лагеря · Сложность: нулевая · Удовольствие: максимальное</em>' }
+      ] },
+      { time: 'День', text: 'Сборы, выезд · Обед в Santana или Machico · Закупка воды и еды' },
+      { time: '~13:00', text: '<strong>Парковка Baía d\'Abra</strong> <span class="tag-price">€3-4/день</span>', map: 'https://maps.google.com/?q=Baía+d+Abra,+Madeira&navigate=yes' },
+      { time: '~14:00', text: '<strong>Пешком по PR8</strong> до Casa do Sardinha (~4км, 1-1.5ч с рюкзаками)<em>Тропа по хребту — океан с двух сторон!</em>' },
+      { time: 'Вечер', text: '<strong>Лагерь Casa do Sardinha</strong><em>Бесплатно · Разрешение: 415506/2026</em>', map: 'https://maps.google.com/?q=32.7486,-16.7080&navigate=yes', contacts: { tel: '968334032', telLabel: '968 334 032 (лесной пост)', web: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/', webLabel: 'madeiracamping.com' } },
     ],
-    accommodation: {
-      icon: '⛺', name: "Casa do Sardinha (Ponta de São Lourenço)", type: 'Кемпинг с разрешением',
-      addr: 'Самый восточный мыс Мадейры · Разрешение: 415506/2026',
-      price: 'Бесплатно · Ветер сильный — крепить палатку надёжно! · Лесной пост: 968 334 032',
-      link: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/', linkText: 'Ponta de São Lourenço'
-    },
+    note: 'Воды питьевой НЕТ — тащить с собой! Туалет €1. Ветер сильный — палатку крепить на совесть. Край земли не прощает лени.', noteIcon: '💨'
   },
   {
-    num: 11, date: '28 апреля', dow: 'вторник',
-    title: 'Назад в цивилизацию', funny: 'Горячий душ. Кровать. Это лучший day 11.',
-    icon: '🏆', color: '#F5A623', bg: '#FFF8ED',
-    desc: 'Пешком обратно по PR8 к парковке. Заезд в рыбацкий Каниçал. Потом вилла у Flávio в Фуншале — 2 ночи роскоши.',
-    pois: [
-      { emoji: '🐟', name: 'Каниçал', desc: 'Небольшой рыбацкий городок. Свежая рыба, местная атмосфера.' },
-      { emoji: '🚗', name: 'Возврат машины', desc: 'STONES приедет к вилле в 18:00. Заказ #4730.' },
+    date: '28 апр (вт)',
+    emoji: '🏙',
+    title: 'Глава 11: Возвращение в цивилизацию',
+    subtitle: 'PR8 обратно → Каниçал → Фуншал · Вилла у Flávio',
+    events: [
+      { time: 'Утро', text: 'Сборы · пешком обратно по PR8 к парковке Baía d\'Abra' },
+      { time: 'Дорога', text: '<strong>Каниçал</strong><em>Рыбацкий городок</em>', map: 'https://maps.google.com/?q=Caniçal,+Madeira&navigate=yes' },
+      { time: '~14:00', text: '<strong>Заселение: Вилла у Flávio</strong> · <a href="https://maps.google.com/?q=Entrada+das+Casas+Novas+12,+Funchal,+Madeira" target="_blank">Entrada das Casas Novas 12, Фуншал</a> · <em>Заезд 14:00 · 2 ночи</em>', map: 'https://maps.google.com/?q=32.6495,-16.9088&navigate=yes' },
+      { time: '18:00', text: '<strong>STONES забирают машину</strong> прямо у виллы' },
     ],
-    accommodation: {
-      icon: '🏡', name: 'Вилла у Flávio', type: 'Вилла',
-      addr: 'Entrada das Casas Novas 12, Фуншал, 9050-058 · Заезд после 14:00',
-      price: 'Уточняем · 2 ночи',
-      link: null, linkText: null
-    },
   },
   {
-    num: 12, date: '29 апреля', dow: 'среда',
-    title: 'Фуншал пешком (без машины)', funny: 'Машина уехала. Ноги ещё есть. Используем.',
-    icon: '🚶', color: '#6B7280', bg: '#F9FAFB',
-    desc: 'Свободный день в Фуншале. Ботанический сад, рынок Меркадо-душ-Лаврадорыш, набережная, понча на закуску.',
-    pois: [
-      { emoji: '🌺', name: 'Jardim Botânico', desc: 'Ботанический сад с видом на Фуншал. Один из лучших в Европе.' },
-      { emoji: '🐟', name: 'Mercado dos Lavradores', desc: 'Крытый рынок. Свежие тропические фрукты, цветы, рыба.' },
-      { emoji: '🎭', name: 'Старый город Фуншала', desc: 'Разрисованные двери, кафе, набережная.' },
-    ],
-    accommodation: {
-      icon: '🏡', name: 'Вилла у Flávio', type: 'Вилла',
-      addr: 'Entrada das Casas Novas 12, Фуншал',
-      price: 'Включено в предыдущую ночь',
-      link: null, linkText: null
-    },
+    date: '29 апр (ср)',
+    emoji: '🚶',
+    title: 'Глава 12: Фуншал пешком',
+    subtitle: 'Свободный день · Без машины · Последний день на острове',
+    events: [
+      { time: 'День', text: 'Свободный день в Фуншале' },
+      { time: '', text: 'Меркадо (рынок), Монте, тобогганы, набережная, Сё (собор), Zona Velha' },
+      { time: '', text: 'Последний ужин на Мадейре. Эспада с бананами.' },
+    ]
   },
   {
-    num: 13, date: '30 апреля', dow: 'четверг',
-    title: 'Вылет домой (почти)', funny: 'До свидания, Мадейра. Спасибо за всё.',
-    icon: '✈️', color: '#4A9EFF', bg: '#EBF4FF',
-    desc: 'Выезд из виллы до 11:00. Аэропорт. Вылет в 10:00. Снова 7 часов в Цюрихе. Потом Вильнюс.',
-    pois: [
-      { emoji: '✈️', name: 'LX8265 FNC→ZRH', desc: '10:00 → 14:50 · Прощай, тёплый остров!' },
-      { emoji: '🇨🇭', name: '7 часов в Цюрихе', desc: '14:50–21:50 · Финальный кофе с видом на Альпы' },
-      { emoji: '✈️', name: 'LX1338 ZRH→VNO', desc: '21:50 → 01:20 (1 мая) · Прибытие в Вильнюс' },
+    date: '30 апр (чт)',
+    emoji: '✈️',
+    title: 'Глава 13: Домой через облака',
+    subtitle: 'Фуншал → Цюрих → Вильнюс · Конец экспедиции',
+    events: [
+      { time: '~06:30', text: 'Подъём. Сборы. Последний завтрак на Мадейре.' },
+      { time: '~07:15', text: 'Такси / Bolt → аэропорт Фуншала (~20 мин)<em>Машины уже нет — отдали 28-го. Вызывай Bolt заранее!</em>' },
+      { time: '08:00', text: 'Регистрация и досмотр<em>Регистрация закрывается в 09:20 (за 40 мин до вылета)</em>' },
+      { time: '10:00', text: '<strong>Вылет LX8265</strong> FNC → ZRH · прибытие 14:50', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
+      { time: '14:50', text: '<strong>Прибытие в Цюрих</strong> · 7 часов до рейса домой<em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37</em>' },
+      { time: '21:10', text: 'Посадка на LX1338<em>Регистрация закрывается в 21:10 (за 40 мин)</em>' },
+      { time: '21:50', text: '<strong>Вылет LX1338</strong> ZRH → VNO · прибытие 01:20 (1 мая)', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
     ],
-    accommodation: { icon: '🛋️', name: 'Вильнюс (транзит)', type: '', addr: '', price: '', link: null },
+    info: [
+      { icon: '✈️', text: 'Бронь Swiss Air: <strong>XPVXVH</strong>' },
+      { icon: '⚠️', text: 'Economy Light — только ручная кладь!' },
+    ]
   },
   {
-    num: 14, date: '1 мая', dow: 'пятница',
-    title: 'Финал. Мы это сделали.', funny: '01:20 ночи в Вильнюсе. Автобус домой уточняем. Рассвет встречаем в пути.',
-    icon: '🏠', color: '#52C97B', bg: '#EDFAF3',
-    desc: 'Прилёт в Вильнюс в 01:20. Обратный автобус в Минск — уточняем расписание. Конец экспедиции.',
-    pois: [
-      { emoji: '🚌', name: 'Автобус Вильнюс → Минск', desc: 'Расписание и билеты уточняем. Ecolines / LuxExpress.' },
+    date: '1 мая (пт)',
+    emoji: '🏠',
+    title: 'Эпилог: Вильнюс, потом Минск',
+    subtitle: 'Приземление → автобус домой',
+    events: [
+      { time: '01:20', text: 'Прибытие в Вильнюс' },
+      { time: 'Утро', text: '<strong>Автобус Вильнюс → Минск</strong> · данные уточняются' },
     ],
-    accommodation: { icon: '🏠', name: 'Минск', type: 'Дом', addr: '', price: 'Бесплатно :)', link: null },
+    info: [
+      { icon: '🚌', text: '<a href="https://ecolines.net" target="_blank">Ecolines — билеты обратно →</a>' },
+    ]
   },
 ];
 
-function renderTimeline() {
-  const container = document.getElementById('timeline');
-  if (!container) return;
-
-  days.forEach((day, idx) => {
+function renderDays() {
+  const list = document.getElementById('days-list');
+  console.log('renderDays: starting, DAYS.length =', DAYS.length);
+  DAYS.forEach((day, i) => {
+    try {
     const card = document.createElement('div');
-    card.className = 'day-card fade-up';
-
-    // Шапка
-    let pois = '';
-    if (day.pois && day.pois.length) {
-      pois = `
-        <div class="day-section-label">Достопримечательности</div>
-        <div class="poi-list">
-          ${day.pois.map(p => `
-            <div class="poi-item">
-              <div class="poi-emoji">${p.emoji}</div>
-              <div class="poi-info">
-                <div class="poi-name">${p.name}</div>
-                <div class="poi-desc">${p.desc}</div>
-                ${p.price ? `<span class="poi-price">${p.price}</span>` : ''}
-              </div>
-            </div>
-          `).join('')}
-        </div>`;
-    }
-
-    let accom = '';
-    if (day.accommodation && day.accommodation.name) {
-      const a = day.accommodation;
-      accom = `
-        <div class="day-section-label">Ночёвка</div>
-        <div class="accommodation-card">
-          <div class="accom-icon">${a.icon || '🏠'}</div>
-          <div class="accom-info">
-            <div class="accom-name">${a.name} ${a.type ? `<span style="font-weight:400;color:var(--gray-400);font-size:12px;">(${a.type})</span>` : ''}</div>
-            ${a.addr ? `<div class="accom-addr">${a.addr}</div>` : ''}
-            ${a.price ? `<div class="accom-price">${a.price}</div>` : ''}
-            ${a.link ? `<a href="${a.link}" target="_blank" rel="noopener" class="accom-link">🔗 ${a.linkText || 'Ссылка'}</a>` : ''}
-          </div>
-        </div>`;
-    }
-
-    let transport = '';
-    if (day.transport) {
-      transport = `
-        <div class="day-section-label">Транспорт</div>
-        <div class="transport-info">${day.transport} ${day.transportTbd ? '<span class="tbd-badge">TBD</span>' : ''}</div>`;
-    }
-
-    let restaurants = '';
-    if (day.restaurants && day.restaurants.length) {
-      restaurants = `
-        <div class="day-section-label">Где поесть</div>
-        <div class="restaurant-pills">
-          ${day.restaurants.map(r => `<span class="rest-pill">🍽️ ${r}</span>`).join('')}
-        </div>`;
-    }
-
-    card.innerHTML = `
-      <div class="day-header" onclick="toggleDay(this)">
-        <div class="day-num-badge" style="background:${day.bg};color:${day.color};">
-          <span>${day.num}</span>
-          <span class="day-label">день</span>
-        </div>
-        <div class="day-meta">
-          <div class="day-date">${day.date} · ${day.dow}</div>
-          <div class="day-title">${day.icon} ${day.title}</div>
-          <div class="day-funny">${day.funny}</div>
-        </div>
-        <div class="day-toggle">⌄</div>
-      </div>
-      <div class="day-body">
-        <div class="day-section-label" style="margin-top:16px;">Программа дня</div>
-        <div class="day-desc">${day.desc}</div>
-        ${pois}
-        ${accom}
-        ${transport}
-        ${restaurants}
-      </div>`;
-
-    container.appendChild(card);
+    card.className = 'day-card';
+    card.innerHTML =
+      '<div class="day-header" onclick="toggleDay(this)">' +
+        '<div class="day-badge">' + day.emoji + '</div>' +
+        '<div class="day-info">' +
+          '<div class="day-date">' + day.date + ' · <span class="day-num">День ' + (i+1) + '</span></div>' +
+          '<div class="day-title">' + day.title.replace(/^Глава \d+:\s*/, '').replace(/^Эпилог:\s*/, '') + '</div>' +
+          '<div class="day-subtitle">' + day.subtitle + '</div>' +
+        '</div>' +
+        '<div class="day-chevron"><svg class="chev-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><svg class="chev-up" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></div>' +
+      '</div>' +
+      '<div class="day-body">' + buildDayBody(day) + '</div>';
+    list.appendChild(card);
+    console.log('Day', i+1, 'rendered:', day.date);
+    } catch(err) { console.error('Day', i+1, 'FAILED:', day.date, err.message); }
   });
+}
+
+// SVG icons as functions
+function svgNav() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>';
+}
+function svgBooking() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>';
+}
+function svgPhone() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>';
+}
+function svgDoc() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+}
+function svgLink() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+}
+function svgTicket() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 013-3h14a3 3 0 013 3v0a3 3 0 01-3 3v0a3 3 0 013 3v0a3 3 0 01-3 3H5a3 3 0 01-3-3v0a3 3 0 013-3v0a3 3 0 01-3-3z"/><line x1="13" y1="6" x2="13" y2="9"/><line x1="13" y1="15" x2="13" y2="18"/></svg>';
+}
+function svgAlert() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+}
+
+function buildDayBody(day) {
+  let html = '<div class="event-list">';
+
+  // Main events
+  day.events.forEach(e => {
+    let actions = '';
+    if (e.map || e.link) {
+      var iconFn = { nav: svgNav, booking: svgBooking, phone: svgPhone, ticket: svgTicket, doc: svgDoc, link: svgLink };
+      actions = '<div class="event-actions">';
+      // Other actions first
+      if (e.link) {
+        var ic = e.icon ? iconFn[e.icon]() : svgBooking();
+        actions += '<a href="' + e.link + '" target="_blank" class="event-action" title="' + (e.linkTitle || 'Открыть') + '">' + ic + '</a>';
+      }
+      // Map always last (rightmost)
+      if (e.map) actions += '<a href="' + e.map + '" target="_blank" class="event-action" title="Навигация">' + svgNav() + '</a>';
+      actions += '</div>';
+    }
+    var timeIcons = {
+      'Дорога': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+      'День': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+      'Ночь': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+      'Утро': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/></svg>',
+      'Вечер': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/></svg>',
+      'Обед': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>'
+    };
+    var timeCol;
+    if (timeIcons[e.time]) {
+      timeCol = '<div class="event-time-icon">' + timeIcons[e.time] + '</div>';
+    } else {
+      timeCol = '<div class="event-time">' + (e.time || '') + '</div>';
+    }
+
+    if (e.tabs) {
+      var tabId = 'tab_' + Math.random().toString(36).substr(2,6);
+      var tabBar = '<div class="event-tabs-bar">';
+      var tabPanels = '';
+      e.tabs.forEach(function(t, ti) {
+        var act = ti === 0 ? ' active' : '';
+        tabBar += '<button class="event-tab-btn' + act + '" onclick="switchTab(this,\'' + tabId + '\',' + ti + ')">' + t.label + '</button>';
+        var tabActions = '';
+        if (t.link) {
+          var ic2 = t.icon ? (iconFn[t.icon] ? iconFn[t.icon]() : svgLink()) : svgLink();
+          tabActions = '<div class="event-actions" style="margin-top:8px;margin-left:0;padding-left:0"><a href="' + t.link + '" target="_blank" class="event-action" title="' + (t.linkTitle || 'Открыть') + '">' + ic2 + '</a></div>';
+        }
+        tabPanels += '<div class="event-tab-panel' + act + '" data-tabgroup="' + tabId + '" data-tabidx="' + ti + '">' + t.text + tabActions + '</div>';
+      });
+      tabBar += '</div>';
+      html += '<div class="event">' + timeCol + '<div class="event-tabs">' + tabBar + tabPanels + '</div></div>';
+    } else {
+      var contactsHtml = '';
+      var hasContacts = e.contacts || e.tel;
+      if (hasContacts) {
+        contactsHtml = '<div class="event-contacts">';
+        if (e.tel) contactsHtml += '<a href="tel:' + e.tel + '" class="event-contact">' + svgPhone() + ' ' + e.tel.replace('+', '').replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 $4') + '</a>';
+        if (e.contacts && e.contacts.tel) contactsHtml += '<a href="tel:' + e.contacts.tel + '" class="event-contact">' + svgPhone() + ' ' + e.contacts.telLabel + '</a>';
+        if (e.contacts && e.contacts.web) contactsHtml += '<a href="' + e.contacts.web + '" target="_blank" class="event-contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> ' + e.contacts.webLabel + '</a>';
+        contactsHtml += '</div>';
+      }
+      html += '<div class="event">' + timeCol + '<div class="event-content"><div class="event-text">' + e.text + '</div>' + contactsHtml + '</div>' + actions + '</div>';
+    }
+  });
+
+  // Info items merged into timeline
+  if (day.info && day.info.length) {
+    day.info.forEach(r => {
+      html += '<div class="event event-info"><div class="event-time"></div><div class="event-content"><div class="event-text event-text-secondary">' + r.text + '</div></div></div>';
+    });
+  }
+
+  html += '</div>';
+
+  // Tip (recommendations, yellow-orange)
+  if (day.tip) {
+    html += '<div class="day-tip"><span class="day-tip-icon">🌴</span>' + day.tip + '</div>';
+  }
+
+  // Note as callout with context icon
+  if (day.note) {
+    var ni = day.noteIcon || 'ℹ️';
+    html += '<div class="day-note"><span class="day-note-icon">' + ni + '</span>' + day.note + '</div>';
+  }
+
+  return html;
 }
 
 function toggleDay(header) {
-  const card = header.closest('.day-card');
-  card.classList.toggle('open');
+  const card = header.parentElement;
+  const body = card.querySelector('.day-body');
+  if (card.classList.contains('open')) {
+    // Closing
+    body.style.height = body.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      body.style.height = '0px';
+    });
+    card.classList.remove('open');
+  } else {
+    // Opening
+    card.classList.add('open');
+    body.style.height = body.scrollHeight + 'px';
+    body.addEventListener('transitionend', function handler() {
+      body.style.height = 'auto';
+      body.removeEventListener('transitionend', handler);
+    });
+  }
 }
 
-/* ═══════════════════════════════════════
-   ЧЕК-ЛИСТ
-═══════════════════════════════════════ */
-const checklistData = [
+function switchTab(btn, groupId, idx) {
+  // Toggle buttons
+  btn.parentElement.querySelectorAll('.event-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  // Toggle panels
+  document.querySelectorAll('[data-tabgroup="' + groupId + '"]').forEach(function(p) {
+    p.classList.toggle('active', parseInt(p.dataset.tabidx) === idx);
+  });
+}
+
+// ════════════════════════════════════
+// CHECKLIST
+// ════════════════════════════════════
+const CHECKLIST = [
   {
-    cat: '⛺ Кемпинг', items: [
-      'Палатка (2 шт нужны для Ponta de São Lourenço)',
-      'Спальник (на 10-15°C)',
-      'Коврик/каремат',
-      'Горелка + газ',
-      'Котелок / турка',
-      'Кофе, чай',
-      'Нож / мультитул',
-      'Фонарик / налобный фонарь',
-      'Зажигалка / спички',
-      'Мусорные пакеты — обязательно!'
+    group: '⛺ Кемпинг',
+    items: [
+      { id: 'tent', text: 'Палатка (2 шт на 27–28 апр)' },
+      { id: 'sleeping', text: 'Спальник (на 10-15°C)' },
+      { id: 'mat', text: 'Коврик / каремат' },
+      { id: 'stove', text: 'Горелка + газ' },
+      { id: 'pot', text: 'Котелок / турка' },
+      { id: 'coffee', text: 'Кофе, чай' },
+      { id: 'knife', text: 'Нож / мультитул' },
+      { id: 'torch', text: 'Фонарик / налобный фонарь' },
+      { id: 'fire', text: 'Зажигалка / спички' },
+      { id: 'trash', text: 'Мусорные пакеты (обязательно!)', note: 'Правила кемпинга — мусор с собой' },
     ]
   },
   {
-    cat: '👕 Одежда', items: [
-      'Дождевик / ветровка (обязательно!)',
-      'Тёплая кофта / флис (ночью в горах 8-12°C)',
-      'Треккинговые ботинки',
-      'Шлёпки / сандалии (для бассейнов)',
-      'Купальник',
-      'Солнцезащитные очки',
-      'Кепка / шляпа'
+    group: '👕 Одежда',
+    items: [
+      { id: 'rain', text: 'Дождевик / ветровка', note: 'Обязательно! Мадейра — остров дождей' },
+      { id: 'fleece', text: 'Тёплая кофта / флис', note: 'Ночью в горах 8-12°C' },
+      { id: 'boots', text: 'Треккинговые ботинки' },
+      { id: 'sandals', text: 'Шлёпки / сандалии', note: 'Для природных бассейнов' },
+      { id: 'swim', text: 'Купальник' },
+      { id: 'sunglasses', text: 'Солнцезащитные очки' },
+      { id: 'cap', text: 'Кепка / шляпа' },
     ]
   },
   {
-    cat: '📄 Документы', items: [
-      'Паспорт',
-      'Водительские права (международные?)',
-      'Страховка',
-      'Распечатки бронирований',
-      'Разрешения на кемпинг (PDF) — Boca das Voltas + Casa do Sardinha'
+    group: '📄 Документы',
+    items: [
+      { id: 'passport', text: 'Паспорт' },
+      { id: 'license', text: 'Водительские права', note: 'Международные? Уточни' },
+      { id: 'insurance', text: 'Страховка' },
+      { id: 'bookings', text: 'Распечатки бронирований' },
+      { id: 'permits', text: 'Разрешения на кемпинг (PDF)', note: '419372/2026 + 415506/2026' },
     ]
   },
   {
-    cat: '💻 Техника', items: [
-      'Powerbank',
-      'Зарядка телефона',
-      'Камера / GoPro',
-      'Переходник розетки (Португалия = тип F, как в Европе)'
+    group: '🔋 Техника',
+    items: [
+      { id: 'powerbank', text: 'Powerbank' },
+      { id: 'charger', text: 'Зарядка телефона' },
+      { id: 'camera', text: 'Камера / GoPro' },
+      { id: 'adapter', text: 'Переходник розетки', note: 'Португалия = тип F, как в Европе' },
     ]
   },
   {
-    cat: '✨ Полезное', items: [
-      'Солнцезащитный крем',
-      'Бутылка для воды (1.5л+ на человека для кемпинга)',
-      'Аптечка (пластыри, обезболивающее)',
-      'Полотенце быстросохнущее'
+    group: '🧴 Полезное',
+    items: [
+      { id: 'sunscreen', text: 'Солнцезащитный крем' },
+      { id: 'bottle', text: 'Бутылка для воды (1.5л+)', note: 'На PR8 питьевой воды НЕТ' },
+      { id: 'aid', text: 'Аптечка (пластыри, обезболивающее)' },
+      { id: 'towel', text: 'Полотенце быстросохнущее' },
     ]
-  }
+  },
 ];
 
-function renderChecklist() {
-  const container = document.getElementById('checklist');
-  if (!container) return;
+function initChecklist() {
+  const container = document.getElementById('checklist-container');
+  const stored = JSON.parse(localStorage.getItem('sa_checklist') || '{}');
 
-  let allItems = 0;
-  let checkedItems = 0;
-
-  checklistData.forEach(cat => {
-    const catDiv = document.createElement('div');
-    catDiv.innerHTML = `<div class="checklist-cat-title">${cat.cat}</div>`;
-    const itemsDiv = document.createElement('div');
-    itemsDiv.className = 'checklist-items';
-
-    cat.items.forEach(item => {
-      const key = 'sa_cl_' + btoa(encodeURIComponent(item)).slice(0, 20);
-      const checked = localStorage.getItem(key) === '1';
-      allItems++;
-      if (checked) checkedItems++;
-
-      const div = document.createElement('div');
-      div.className = 'checklist-item' + (checked ? ' checked' : '');
-      div.innerHTML = `
-        <div class="ci-checkbox">${checked ? '✓' : ''}</div>
-        <div class="ci-label">${item}</div>`;
-
-      div.addEventListener('click', () => {
-        const isChecked = div.classList.toggle('checked');
-        div.querySelector('.ci-checkbox').textContent = isChecked ? '✓' : '';
-        localStorage.setItem(key, isChecked ? '1' : '0');
-        updateProgress();
-      });
-
-      itemsDiv.appendChild(div);
+  CHECKLIST.forEach(group => {
+    const div = document.createElement('div');
+    div.className = 'checklist-group';
+    let html = '<div class="checklist-group-title">' + group.group + '</div>';
+    group.items.forEach(item => {
+      const checked = stored[item.id] ? 'checked' : '';
+      const noteHtml = item.note ? '<div class="check-note">' + item.note + '</div>' : '';
+      html +=
+        '<div class="checklist-item ' + checked + '" onclick="toggleCheck(\'' + item.id + '\')" data-id="' + item.id + '">' +
+          '<div class="check-box">' + (checked ? '✓' : '') + '</div>' +
+          '<div><div class="check-text">' + item.text + '</div>' + noteHtml + '</div>' +
+        '</div>';
     });
-
-    catDiv.appendChild(itemsDiv);
-    container.appendChild(catDiv);
+    div.innerHTML = html;
+    container.appendChild(div);
   });
 
   updateProgress();
 }
 
+function toggleCheck(id) {
+  const stored = JSON.parse(localStorage.getItem('sa_checklist') || '{}');
+  stored[id] = !stored[id];
+  localStorage.setItem('sa_checklist', JSON.stringify(stored));
+
+  const el = document.querySelector('[data-id="' + id + '"]');
+  const box = el.querySelector('.check-box');
+  if (stored[id]) {
+    el.classList.add('checked');
+    box.textContent = '✓';
+  } else {
+    el.classList.remove('checked');
+    box.textContent = '';
+  }
+  updateProgress();
+}
+
 function updateProgress() {
-  const allDivs = document.querySelectorAll('.checklist-item');
-  const total = allDivs.length;
-  const checked = document.querySelectorAll('.checklist-item.checked').length;
-  const pct = total > 0 ? Math.round(checked / total * 100) : 0;
-
-  const pText = document.getElementById('progress-text');
-  const pPct = document.getElementById('progress-pct');
-  const pFill = document.getElementById('progress-fill');
-
-  if (pText) pText.textContent = `Собрано: ${checked} из ${total}`;
-  if (pPct) pPct.textContent = `${pct}%`;
-  if (pFill) pFill.style.width = `${pct}%`;
+  const stored = JSON.parse(localStorage.getItem('sa_checklist') || '{}');
+  const all = CHECKLIST.reduce((acc, g) => acc + g.items.length, 0);
+  const done = Object.values(stored).filter(Boolean).length;
+  document.getElementById('check-count').textContent = done;
+  document.getElementById('check-total').textContent = all;
+  document.getElementById('check-progress').style.width = (all ? Math.round(done / all * 100) : 0) + '%';
 }
 
-/* ═══════════════════════════════════════
-   ДОКУМЕНТЫ И ССЫЛКИ
-═══════════════════════════════════════ */
-function renderDocs() {
-  const container = document.getElementById('docs-grid');
-  if (!container) return;
-
-  const categories = [
-    {
-      title: '🏠 Жильё',
-      items: [
-        { icon: '🏡', title: 'Вильнюс · Cozy Flat', sub: 'Booking · 18–20 апр', url: 'https://www.booking.com/Share-7Nf6uR5' },
-        { icon: '🏨', title: 'Фуншал · Funchal 19', sub: 'Airbnb · Бронь: 5930.341.647', url: 'https://www.airbnb.ru/rooms/1637584730331319648' },
-        { icon: "🏡", title: "Рибейра-да-Жанела · Quinta' Home", sub: 'Booking · Бронь: 5792.590.384', url: 'https://www.booking.com/Share-CPfUlM' },
-        { icon: '🏘️', title: 'Порту-да-Круш · Caminho da Praia', sub: 'Booking · Бронь: 5910.940.333', url: 'https://www.booking.com/Share-A3hqfkW' },
-      ]
-    },
-    {
-      title: '🚗 Транспорт',
-      items: [
-        { icon: '🚗', title: 'STONES Rent-A-Car · Dacia Stepway', sub: 'Заказ #4730 · 20–28 апр', url: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069' },
-        { icon: '🚌', title: 'Ecolines · Автобус Минск–Вильнюс', sub: '18 апр 15:00 · Ул. Бобруйская', url: 'https://ecolines.net' },
-      ]
-    },
-    {
-      title: '⛺ Кемпинг',
-      items: [
-        { icon: '⛺', title: 'Кемпинг Porto Moniz', sub: '21–22 апр · ~€4-5/чел', url: 'https://www.madeiracamping.com/porto-moniz/' },
-        { icon: '⭐', title: 'Boca das Voltas · Разрешение 419372/2026', sub: '26–27 апр · Лесной пост: 963 817 883', url: 'https://www.madeiracamping.com/boca-das-voltas/' },
-        { icon: '🌊', title: 'Ponta de São Lourenço · Разр. 415506/2026', sub: '27–28 апр · Лесной пост: 968 334 032', url: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/' },
-      ]
-    },
-    {
-      title: '🥾 Маршруты',
-      items: [
-        { icon: '📋', title: 'Регистрация маршрутов (Мадейра)', sub: 'Обязательно для PR1 и кемпингов', url: 'https://simplifica.madeira.gov.pt/services/78-82-259' },
-      ]
-    }
-  ];
-
-  categories.forEach(cat => {
-    const titleDiv = document.createElement('div');
-    titleDiv.className = 'doc-cat-title';
-    titleDiv.textContent = cat.title;
-    container.appendChild(titleDiv);
-
-    const grid = document.createElement('div');
-    grid.className = 'docs-grid';
-    grid.style.gridColumn = '1 / -1';
-
-    cat.items.forEach(item => {
-      const a = document.createElement('a');
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'link-btn';
-      a.innerHTML = `
-        <span class="lb-icon">${item.icon}</span>
-        <span class="lb-text">
-          <span class="lb-title">${item.title}</span>
-          <span class="lb-sub">${item.sub}</span>
-        </span>
-        <span class="lb-arrow">→</span>`;
-      grid.appendChild(a);
-    });
-
-    container.appendChild(grid);
+function resetChecklist() {
+  if (!confirm('Сбросить весь чеклист?')) return;
+  localStorage.removeItem('sa_checklist');
+  document.querySelectorAll('.checklist-item').forEach(el => {
+    el.classList.remove('checked');
+    el.querySelector('.check-box').textContent = '';
   });
-}
-
-/* ═══════════════════════════════════════
-   INTERSECTION OBSERVER
-═══════════════════════════════════════ */
-function initObserver() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-}
-
-/* ═══════════════════════════════════════
-   INIT
-═══════════════════════════════════════ */
-function initAll() {
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  loadWeather();
-  initMap();
-  renderTimeline();
-  renderChecklist();
-  renderDocs();
-  setTimeout(initObserver, 100);
+  updateProgress();
 }
 </script>
-
 </body>
 </html>
