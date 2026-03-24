@@ -477,8 +477,9 @@
 
     /* Tip block (recommendations, yellow-orange) */
     .day-tip {
-      font-size: 14px; color: #92400E;
-      background: #FEF3C7;
+      font-size: 14px; color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid rgba(0,0,0,0.04);
       border-radius: 12px;
       padding: 14px 18px;
       padding-right: 30%;
@@ -1560,8 +1561,7 @@ const DAYS = [
       { time: 'Вечер', text: '<strong>Природные бассейны Порту-Мониш</strong> <span class="tag-price">€3</span><em>Работают до 19:00</em>', map: 'https://maps.google.com/?q=Piscinas+Naturais+Porto+Moniz,+Madeira&navigate=yes' },
       { time: 'Ночь', text: '<strong>Кемпинг Porto Moniz</strong><a href="https://maps.google.com/?q=Sítio+da+Ponte,+Ribeira+da+Janela,+Madeira" target="_blank">Sítio da Ponte, Ribeira da Janela</a><em>1 ночь · ~€15 (~€5/чел) · бронь не нужна</em>', map: 'https://maps.google.com/?q=32.7672,-17.1647&navigate=yes', contacts: { tel: '+351291853856', telLabel: '+351 291 853 856', web: 'https://www.madeiracamping.com/porto-moniz/', webLabel: 'madeiracamping.com' } },
     ],
-    note: 'Ночью ~14-15°C — спальник на 10-15°C обязателен.', noteIcon: '🌡',
-    tip: 'Рестораны рядом: Pólo Norte, Sea View, Orca (~5 мин на машине). Барбекю на кемпинге тоже вариант.'
+    note: 'Ночью ~14-15°C — спальник на 10-15°C обязателен.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Рестораны рядом: Pólo Norte, Sea View, Orca (~5 мин на машине). Барбекю на кемпинге тоже вариант.', noteIcon: '🌡'
   },
   {
     date: '22 апр (ср)',
