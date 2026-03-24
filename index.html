@@ -231,10 +231,10 @@
     .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
 
     .section-header {
-      display: flex; align-items: flex-start; gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       margin-bottom: 20px;
     }
-    .section-icon { font-size: 28px; line-height: 1.2; }
+    .section-icon { font-size: 28px; line-height: 1; }
     .section-title {
       font-size: 28px; font-weight: 700;
       color: var(--text);
@@ -317,22 +317,21 @@
     .day-header:hover { background: rgba(37,99,235,0.03); }
     .day-badge {
       flex-shrink: 0;
-      width: 52px; height: 52px;
+      width: 60px; height: 60px;
       background: var(--bg);
       border: none;
-      border-radius: 14px;
+      border-radius: 16px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .day-card.open .day-badge {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
     .day-info { flex: 1; min-width: 0; }
     .day-date {
-      font-size: 13px; font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-secondary);
     }
     .day-title {
       font-size: 18px; font-weight: 700;
