@@ -1720,7 +1720,7 @@ function renderDays() {
       '<div class="day-header" onclick="toggleDay(this)">' +
         '<div class="day-badge">' + day.emoji + '</div>' +
         '<div class="day-info">' +
-          '<div class="day-date">' + day.date + ' · <span class="day-num">День ' + (i+1) + '</span></div>' +
+          '<div class="day-date">День ' + (i+1) + ' · ' + day.date + '</div>' +
           '<div class="day-title">' + day.title.replace(/^Глава \d+:\s*/, '').replace(/^Эпилог:\s*/, '') + '</div>' +
           '<div class="day-subtitle">' + day.subtitle + '</div>' +
         '</div>' +
