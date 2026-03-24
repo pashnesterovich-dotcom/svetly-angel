@@ -403,6 +403,7 @@
     }
     .event-content { flex: 1; min-width: 0; max-width: calc(100% - 170px); }
     .event:last-child { border-bottom: none; }
+    .event-time small { font-size: 12px; font-weight: 400; }
     .event-time {
       flex-shrink: 0;
       font-size: 14px; font-weight: 400;
@@ -1504,7 +1505,7 @@ function initMap() {
 const DAYS = [
   {
     date: '18 апр (Сб)',
-    emoji: '🚌',
+    emoji: '🚌', badgeColor: '#FEF9C3',
     title: 'Глава 1: Побег из Минска',
     subtitle: 'Автобус → Вильнюс · Старт экспедиции',
     events: [
@@ -1516,7 +1517,7 @@ const DAYS = [
   },
   {
     date: '19 апр (Вс)',
-    emoji: '🐺',
+    emoji: '🐺', badgeColor: '#F3F4F6',
     title: 'Глава 2: Вильнюс — разминка',
     subtitle: 'Свободный день · Старый город',
     events: [
@@ -1527,7 +1528,7 @@ const DAYS = [
   },
   {
     date: '20 апр (пн)',
-    emoji: '✈️',
+    emoji: '✈️', badgeColor: '#DBEAFE',
     title: 'Глава 3: В небо через Цюрих',
     subtitle: 'Вильнюс → Цюрих → Фуншал · 4 рейса, 1 день',
     events: [
@@ -1543,11 +1544,11 @@ const DAYS = [
   },
   {
     date: '21 апр (вт)',
-    emoji: '🚗',
+    emoji: '🚗', badgeColor: '#FEF3C7',
     title: 'Глава 4: Южное побережье → Дикий Север',
     subtitle: 'Funchal → Кабу-Жиран → Paul da Serra → Порту-Мониш',
     events: [
-      { time: 'До 12:00', text: 'Выезд из Funchal 19' },
+      { time: '<small>до</small> 12:00', text: 'Выезд из Funchal 19' },
       { time: 'Утро', text: '<strong>Камара-ди-Лобуш</strong><em>Рыбацкая деревня, где рисовал Черчилль. Понча, набережная 2.2км</em>', map: 'https://maps.google.com/?q=Câmara+de+Lobos,+Madeira&navigate=yes' },
       { time: 'Утро', text: '<strong>Кабу-Жиран (Cabo Girão)</strong> <span class="tag-price">€3</span><em>Skywalk на 580м — стеклянная площадка над океаном</em>', map: 'https://maps.google.com/?q=Cabo+Girão+Skywalk,+Madeira&navigate=yes' },
       { time: 'День', text: '<strong>Paul da Serra</strong><em>Плато 1500м, ветряки, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Paul+da+Serra,+Madeira&navigate=yes' },
@@ -1559,7 +1560,7 @@ const DAYS = [
   },
   {
     date: '22 апр (ср)',
-    emoji: '🌫',
+    emoji: '🌫', badgeColor: '#F0FDF4',
     title: 'Глава 5: Туманный лес ждёт',
     subtitle: 'Fanal 05:45 → Quinta\' Home → Сейшал · Ранний подъём обязателен',
     events: [
@@ -1571,17 +1572,17 @@ const DAYS = [
       { time: '14:30', text: 'Выезд в Сейшал (~15 мин)' },
       { time: 'День', text: '<strong>Poça das Lesmas</strong> <span class="tag-free">бесплатно</span> / <span class="tag-price">€2,50</span><em>Лавовая арка 6м, природные бассейны</em>', map: 'https://maps.google.com/?q=Poça+das+Lesmas,+Seixal,+Madeira&navigate=yes' },
       { time: 'День', text: '<strong>Praia do Porto do Seixal</strong> <span class="tag-free">бесплатно</span><em>Чёрный вулканический пляж</em>', map: 'https://maps.google.com/?q=Praia+do+Porto+do+Seixal,+Madeira&navigate=yes' },
-      { time: 'Вечер', text: '<strong>Чилл в Quinta\' Home</strong><em>Тот самый дом, в который заселились в обед. Самое время сварить первый честный кофе на горелке с видом на океан. Или не кофе.</em>' },
+      { time: 'Вечер', text: '<strong>Чилл в Quinta\' Home</strong><em>Тот самый дом, в который заселились в обед. Мадейра славится своими растениями — лавр, эвкалипт и кое-что повеселее. Ну и портвейн, конечно. Крепкий, как ваши намерения.</em>' },
     ],
     tip: 'Рестораны рядом: Pedra do Mar, On The Rocks, Terras do Avô'
   },
   {
     date: '23 апр (чт)',
-    emoji: '🏔',
+    emoji: '🏔', badgeColor: '#F3F4F6',
     title: 'Глава 6: В горы с мясом',
     subtitle: 'Сан-Висенти → Chão das Feiteiras 1200м · Ночь у костра',
     events: [
-      { time: 'До 11:00', text: 'Выезд из Quinta\' Home' },
+      { time: '<small>до</small> 11:00', text: 'Выезд из Quinta\' Home' },
       { time: 'Обед', text: '<strong>Сан-Висенти</strong><em>Рестораны: Caravela, Lavrador</em>', map: 'https://maps.google.com/?q=São+Vicente,+Madeira&navigate=yes' },
       { time: 'Дорога', text: '<strong>Miradouro do Véu da Noiva</strong><em>Водопад с видовой площадки</em>', map: 'https://maps.google.com/?q=Miradouro+Véu+da+Noiva,+Madeira&navigate=yes' },
       { time: 'Дорога', text: '<strong>Перевал Encumeada</strong><em>1000м, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Encumeada,+Madeira&navigate=yes' },
@@ -1592,7 +1593,7 @@ const DAYS = [
   },
   {
     date: '24 апр (пт)',
-    emoji: '🥾',
+    emoji: '🥾', badgeColor: '#FEF3C7',
     title: 'Глава 7: На вершину мира',
     subtitle: 'PR1.1 + PR1.2 → Pico Ruivo 1862м · Потом — тёплое жильё',
     events: [
@@ -1606,7 +1607,7 @@ const DAYS = [
   },
   {
     date: '25 апр (сб)',
-    emoji: '🚶',
+    emoji: '🚶', badgeColor: '#F0FDF4',
     title: 'Глава 8: Левада, ром и чилл',
     subtitle: 'Порту-да-Круш · Левада утром — бар вечером',
     events: [
@@ -1623,7 +1624,7 @@ const DAYS = [
   },
   {
     date: '26 апр (вс)',
-    emoji: '⛺',
+    emoji: '⛺', badgeColor: '#FEF9C3',
     title: 'Глава 9: Последний цивилизованный день',
     subtitle: 'Чилл → закупка → Boca das Voltas 750м',
     events: [
@@ -1636,7 +1637,7 @@ const DAYS = [
   },
   {
     date: '27 апр (пн)',
-    emoji: '🌊',
+    emoji: '🌊', badgeColor: '#DBEAFE',
     title: 'Глава 10: Край земли',
     subtitle: 'Pica do Alto Ridge или чилл → PR8 → Casa do Sardinha · Океан с двух сторон',
     events: [
@@ -1653,7 +1654,7 @@ const DAYS = [
   },
   {
     date: '28 апр (вт)',
-    emoji: '🏙',
+    emoji: '🏙', badgeColor: '#F3F4F6',
     title: 'Глава 11: Возвращение в цивилизацию',
     subtitle: 'PR8 обратно → Каниçал → Фуншал · Вилла у Flávio',
     events: [
@@ -1665,7 +1666,7 @@ const DAYS = [
   },
   {
     date: '29 апр (ср)',
-    emoji: '🚶',
+    emoji: '🚶', badgeColor: '#FEF3C7',
     title: 'Глава 12: Фуншал пешком',
     subtitle: 'Свободный день · Без машины · Последний день на острове',
     events: [
@@ -1676,7 +1677,7 @@ const DAYS = [
   },
   {
     date: '30 апр (чт)',
-    emoji: '✈️',
+    emoji: '✈️', badgeColor: '#DBEAFE',
     title: 'Глава 13: Домой через облака',
     subtitle: 'Фуншал → Цюрих → Вильнюс · Конец экспедиции',
     events: [
@@ -1695,7 +1696,7 @@ const DAYS = [
   },
   {
     date: '1 мая (пт)',
-    emoji: '🏠',
+    emoji: '🏠', badgeColor: '#F3F4F6',
     title: 'Эпилог: Вильнюс, потом Минск',
     subtitle: 'Приземление → автобус домой',
     events: [
@@ -1717,7 +1718,7 @@ function renderDays() {
     card.className = 'day-card';
     card.innerHTML =
       '<div class="day-header" onclick="toggleDay(this)">' +
-        '<div class="day-badge">' + day.emoji + '</div>' +
+        '<div class="day-badge" style="background:' + (day.badgeColor || '#EFF6FF') + '">' + day.emoji + '</div>' +
         '<div class="day-info">' +
           '<div class="day-date">День ' + (i+1) + ' · ' + day.date + '</div>' +
           '<div class="day-title">' + day.title.replace(/^Глава \d+:\s*/, '').replace(/^Эпилог:\s*/, '') + '</div>' +
