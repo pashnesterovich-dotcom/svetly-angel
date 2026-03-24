@@ -7,7 +7,7 @@
   <title>Светлый Ангел · Мадейра 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
       font-size: 16px;
@@ -340,8 +340,12 @@
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .day-num {
+      display: inline-flex; align-items: center;
+      font-size: 12px; font-weight: 600;
       color: var(--text-secondary);
-      font-weight: 500;
+      background: var(--bg);
+      padding: 1px 7px;
+      border-radius: 6px;
     }
     .day-chapter {
       display: inline-flex; align-items: center;
