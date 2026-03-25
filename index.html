@@ -485,8 +485,8 @@
       padding: 6px 12px; border-radius: 12px;
     }
     .event-doc-btn:hover { opacity: 0.8; }
-    .event-doc-disabled { opacity: 1; cursor: default; pointer-events: none; background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.04); color: #C0C0C0; }
-    .event-doc-disabled svg { color: #C0C0C0; }
+    .event-doc-disabled { opacity: 1; cursor: default; pointer-events: none; background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.06); color: #999; }
+    .event-doc-disabled svg { color: #999; }
     .event-doc-btn svg { flex-shrink: 0; color: var(--accent); }
 
     /* Tip block (recommendations, yellow-orange) */
@@ -520,8 +520,8 @@
     }
     .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
     .event-tab-btn:hover { color: var(--text); }
-    .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 2px; }
-    .event-tab-panel strong { display: block; margin-bottom: 1px; }
+    .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.7; padding-top: 2px; }
+    .event-tab-panel strong { display: block; margin-bottom: 0; line-height: 1.3; }
     .event-tab-panel.active { display: block; }
     .event-actions {
       display: flex; gap: 20px; flex-shrink: 0; margin-left: auto; padding-left: 8px;
@@ -1621,8 +1621,8 @@ const DAYS = [
     events: [
       { time: '06:00', text: 'Выезд на трекинг. Горы ждут.' },
       { time: 'День', text: '<strong>Хайкинг на\u00a0Pico Ruivo</strong><em><a href="https://simplifica.madeira.gov.pt/services/78-82-259" target="_blank" style="color:var(--accent)">Регистрация маршрута →</a></em>', tabs: [
-        { label: 'План А', text: '<strong>PR1.1 + PR1.2 → Pico Ruivo (1862м)</strong><br>~14км · 4.5-6ч · Набор ~800м · Средняя-высокая<br>Два маршрута подряд: Vereda da\u00a0Ilha (8.2км, ~3ч) + Vereda do\u00a0Pico Ruivo (5.6км, ~1.5-3ч). Финиш — высшая точка Мадейры. Туман, ветер, вид на\u00a0весь остров. Это тот самый момент, ради которого всё затевалось.' },
-        { label: 'План Б', text: '<strong>Pico do\u00a0Arieiro → Pico Ruivo</strong><br>7км · 3-4ч · Средняя<br>Легендарная тропа между двумя пиками. Тоннели, лестницы, облака под ногами. Самый красивый маршрут острова. Регулярно закрывают на\u00a0ремонт — проверь перед поездкой.' }
+        { label: 'План А', text: '<strong>PR1.1 + PR1.2 → Pico Ruivo (1862м)</strong><div style="margin-top:6px">~14км · 4.5-6ч · Набор ~800м · Средняя-высокая</div><div style="margin-top:6px">Два маршрута подряд: Vereda da\u00a0Ilha (8.2км, ~3ч) + Vereda do\u00a0Pico Ruivo (5.6км, ~1.5-3ч). Финиш — высшая точка Мадейры. Туман, ветер, вид на\u00a0весь остров. Это тот самый момент, ради которого всё затевалось.</div>' },
+        { label: 'План Б', text: '<strong>Pico do\u00a0Arieiro → Pico Ruivo</strong><div style="margin-top:6px">7км · 3-4ч · Средняя</div><div style="margin-top:6px">Легендарная тропа между двумя пиками. Тоннели, лестницы, облака под ногами. Самый красивый маршрут острова. Регулярно закрывают на\u00a0ремонт — проверь перед поездкой.</div>' }
       ] },
       { time: 'Вечер', text: '<strong>Заселение: Caminho da Praia da Maiata</strong><em>2 ночи · <a href="https://www.booking.com/Share-A3hqfkW" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=32.7644,-16.8214&navigate=yes', tel: '+351967858836' },
     ]
@@ -1634,8 +1634,8 @@ const DAYS = [
     subtitle: 'Порту-да-Круш · Левада утром — бар вечером',
     events: [
       { time: '09:00', text: '<strong>Поход по\u00a0левадам</strong><em><a href="https://simplifica.madeira.gov.pt/services/78-82-259" target="_blank" style="color:var(--accent)">Регистрация маршрута →</a></em>', tabs: [
-        { label: 'План А', text: '<strong>Levada do\u00a0Rei</strong><br>10км · 2.5-3.5ч · Лёгкая<br>Самая красивая левада Мадейры. Водопады в\u00a0финале, тропический лес, деревянные мостики. На\u00a0машине ~30\u00a0мин от\u00a0дома.' },
-        { label: 'План Б', text: '<strong>Levada do\u00a0Castelejo</strong><br>11км · 3-4ч · Лёгкая-средняя<br>Стартуем пешком от\u00a0дома — машина не\u00a0нужна. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но\u00a0атмосфернее.' }
+        { label: 'План А', text: '<strong>Levada do\u00a0Rei</strong><div style="margin-top:6px">10км · 2.5-3.5ч · Лёгкая</div><div style="margin-top:6px">Самая красивая левада Мадейры. Водопады в\u00a0финале, тропический лес, деревянные мостики. На\u00a0машине ~30\u00a0мин от\u00a0дома.</div>' },
+        { label: 'План Б', text: '<strong>Levada do\u00a0Castelejo</strong><div style="margin-top:6px">11км · 3-4ч · Лёгкая-средняя</div><div style="margin-top:6px">Стартуем пешком от\u00a0дома — машина не\u00a0нужна. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но\u00a0атмосфернее.</div>' }
       ] },
       { time: 'День', text: '<strong>Бассейны Porto da Cruz</strong> <span class="tag-free">бесплатно</span><em>Природные вулканические бассейны прямо в\u00a0океане. Вода прозрачная, волны разбиваются о\u00a0скалы рядом. Один из\u00a0лучших спотов на\u00a0северном побережье.</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
       { time: 'Обед', text: '<strong>A Pipa</strong><em>Praça Velha, Порту-да-Круш</em>', map: 'https://maps.google.com/?q=A+Pipa,+Porto+da+Cruz,+Madeira&navigate=yes' },
