@@ -1595,7 +1595,7 @@ const DAYS = [
       { time: 'Дорога', text: '<strong>Miradouro do Véu da Noiva</strong><em>Водопад с видовой площадки</em>', map: 'https://maps.google.com/?q=Miradouro+Véu+da+Noiva,+Madeira&navigate=yes' },
       { time: 'Дорога', text: '<strong>Перевал Encumeada</strong><em>1000м, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Encumeada,+Madeira&navigate=yes' },
       { time: 'День', text: '<strong>Закупка для барбекю</strong><em>Мясо, уголь, вода. По\u00a0дороге есть супермаркеты в\u00a0Сан-Висенти.</em>' },
-      { time: 'Вечер', text: '<strong>Кемпинг: Chão das Feiteiras (1200м)</strong><em>Мангалы · Вода · Барэшки</em>', map: 'https://maps.google.com/?q=Chão+das+Feiteiras,+Madeira&navigate=yes' },
+      { time: 'Вечер', text: '<strong>Кемпинг: Chão das Feiteiras (1200м)</strong><em>Мангалы · Вода · Барэшки</em>', map: 'https://maps.google.com/?q=Chão+das+Feiteiras,+Madeira&navigate=yes', disabledBtn: 'Документы скоро', contacts: { web: 'https://www.madeiracamping.com/chao-das-feiteiras/', webLabel: 'madeiracamping.com' } },
     ],
     note: 'Ночью 8-12°C, термобельё обязательно. Ранний отбой — подъём в\u00a005:00, горы не\u00a0ждут тех, кто проспал рассвет.', noteIcon: '🌡'
   },
@@ -1639,7 +1639,7 @@ const DAYS = [
       { time: 'Утро', text: '<strong>Бассейны Porto da Cruz</strong> <span class="tag-free">бесплатно</span><em>Вулканические бассейны в\u00a0океане. Утром народу мало — лучшее время.</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
       { time: 'Обед', text: 'В Порту-да-Круш. Не забудь выехать до 11:00!' },
       { time: 'День', text: '<strong>Закупка в\u00a0Machico</strong><em>Мясо для барбекю, рыба, вода (минимум 1.5л на\u00a0человека!). Мадейра славится эспадой (чёрная рыба-сабля) и\u00a0местной говядиной. Супермаркет Pingo Doce — лучший выбор.</em>', map: 'https://maps.google.com/?q=Pingo+Doce,+Machico,+Madeira&navigate=yes' },
-      { time: 'Вечер', text: '<strong>Кемпинг: Boca das Voltas (São Jorge, ~750м)</strong><em>Разрешение: 419372/2026</em>', map: 'https://maps.google.com/?q=32.7731,-16.8417&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883 (лесной пост)', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' } },
+      { time: 'Вечер', text: '<strong>Кемпинг: Boca das Voltas (São Jorge, ~750м)</strong><em>Разрешение: 419372/2026</em>', map: 'https://maps.google.com/?q=Boca+das+Voltas,+São+Jorge,+Madeira&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883 (лесной пост)', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' } },
     ],
     note: 'Огонь только в\u00a0отведённых местах. Мусор с\u00a0собой.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Панорама на\u00a0долину Боа-Вентура — звёзды и\u00a0лавровый лес.', noteIcon: '🌿'
   },
@@ -1656,7 +1656,7 @@ const DAYS = [
       { time: 'День', text: '<strong>Сборы и\u00a0выезд</strong><em>Обед в\u00a0Santana или Machico. Закупка воды и\u00a0еды — на\u00a0PR8 магазинов нет.</em>' },
       { time: '~13:00', text: '<strong>Парковка Baía d\'Abra</strong> <span class="tag-price">€3-4/день</span><em>Оплата на\u00a0месте, автомат. Парковка небольшая — в\u00a0сезон заполняется к\u00a010:00. Мы\u00a0приезжаем после обеда, часть туристов уже уехала.</em>', map: 'https://maps.google.com/?q=Baía+d+Abra,+Madeira&navigate=yes' },
       { time: '~14:00', text: '<strong>Пешком по\u00a0PR8 до\u00a0Casa do\u00a0Sardinha</strong><em>~4км · 1-1.5ч с\u00a0рюкзаками · Тропа по\u00a0хребту — океан с\u00a0двух сторон</em>', map: 'https://maps.google.com/?q=Ponta+de+São+Lourenço+trail,+Madeira&navigate=yes', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' },
-      { time: 'Вечер', text: '<strong>Кемпинг: Casa do Sardinha</strong><em>Разрешение: 415506/2026</em>', map: 'https://maps.google.com/?q=32.7486,-16.7080&navigate=yes', contacts: { tel: '968334032', telLabel: '968 334 032 (лесной пост)', web: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/', webLabel: 'madeiracamping.com' } },
+      { time: 'Вечер', text: '<strong>Кемпинг: Casa do Sardinha</strong><em>Разрешение: 415506/2026</em>', map: 'https://maps.google.com/?q=Casa+do+Sardinha,+Ponta+de+São+Lourenço,+Madeira&navigate=yes', contacts: { tel: '968334032', telLabel: '968 334 032 (лесной пост)', web: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/', webLabel: 'madeiracamping.com' } },
     ],
     note: 'Воды питьевой НЕТ — тащить с\u00a0собой! Туалет €1.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Ветер сильный — палатку крепить на\u00a0совесть. Край земли не\u00a0прощает лени.', noteIcon: '💨'
   },
@@ -1764,7 +1764,7 @@ function buildDayBody(day) {
   // Main events
   day.events.forEach(e => {
     let actions = '';
-    if (e.map || e.link) {
+    if (e.map || e.link || e.disabledBtn) {
       var iconFn = { nav: svgNav, booking: svgBooking, phone: svgPhone, ticket: svgTicket, doc: svgDoc, link: svgLink };
       actions = '<div class="event-actions">';
       // Other actions first
@@ -1772,6 +1772,8 @@ function buildDayBody(day) {
         var ic = e.icon ? iconFn[e.icon]() : svgBooking();
         actions += '<a href="' + e.link + '" target="_blank" class="event-action" title="' + (e.linkTitle || 'Открыть') + '">' + ic + '</a>';
       }
+      // Disabled button (placeholder for future docs)
+      if (e.disabledBtn) actions += '<span class="event-action" style="opacity:0.35;pointer-events:none;cursor:default" title="' + (e.disabledBtn || 'Скоро') + '">' + svgDoc() + '</span>';
       // Map always last (rightmost)
       if (e.map) actions += '<a href="' + e.map + '" target="_blank" class="event-action" title="Навигация">' + svgNav() + '</a>';
       actions += '</div>';
