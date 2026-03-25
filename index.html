@@ -485,8 +485,8 @@
       padding: 6px 12px; border-radius: 12px;
     }
     .event-doc-btn:hover { opacity: 0.8; }
-    .event-doc-disabled { opacity: 1; cursor: default; pointer-events: none; background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.06); color: var(--text-secondary); }
-    .event-doc-disabled svg { color: var(--text-secondary); }
+    .event-doc-disabled { opacity: 1; cursor: default; pointer-events: none; background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); color: #B0B0B0; }
+    .event-doc-disabled svg { color: #B0B0B0; }
     .event-doc-btn svg { flex-shrink: 0; color: var(--accent); }
 
     /* Tip block (recommendations, yellow-orange) */
@@ -506,7 +506,8 @@
     }
 
     /* Tabs inside events */
-    .event-tabs { flex: 1; min-width: 0; background: #F9F9F7; border-radius: 12px; padding: 12px 14px; margin: 4px 0; }
+    .event-tabs { flex: 1; min-width: 0; }
+    .event-tabs-card { background: #F9F9F7; border-radius: 12px; padding: 10px 14px; margin-top: 4px; }
     .event-tabs-bar {
       display: flex; gap: 6px; margin-bottom: 10px;
     }
@@ -519,8 +520,8 @@
     }
     .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
     .event-tab-btn:hover { color: var(--text); }
-    .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 4px; }
-    .event-tab-panel strong { display: block; margin-bottom: 2px; }
+    .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 2px; }
+    .event-tab-panel strong { display: block; margin-bottom: 1px; }
     .event-tab-panel.active { display: block; }
     .event-actions {
       display: flex; gap: 20px; flex-shrink: 0; margin-left: auto; padding-left: 8px;
@@ -1809,7 +1810,7 @@ function buildDayBody(day) {
       });
       tabBar += '</div>';
       var tabTitle = e.text ? '<div class="event-text" style="margin-bottom:8px">' + e.text + '</div>' : '';
-      html += '<div class="event">' + timeCol + '<div class="event-tabs">' + tabTitle + tabBar + tabPanels + '</div></div>';
+      html += '<div class="event">' + timeCol + '<div class="event-tabs">' + tabTitle + '<div class="event-tabs-card">' + tabBar + tabPanels + '</div></div></div>';
     } else {
       var contactsHtml = '';
       var hasContacts = e.contacts || e.tel;
