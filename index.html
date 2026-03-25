@@ -430,6 +430,8 @@
     .event-text strong { font-weight: 600; }
     .event-text em { font-style: normal; font-size: 14px; color: var(--text-secondary); display: block; margin-top: 3px; line-height: 1.5; word-spacing: 1px; }
     .inline-icon { width: 16px; height: 16px; vertical-align: -3px; display: inline; color: var(--text-secondary); }
+    .copy-btn { cursor: pointer; color: var(--accent); font-size: 14px; padding: 2px 4px; border-radius: 4px; }
+    .copy-btn:hover { background: var(--accent-light); }
     .event-text a { color: var(--accent); font-size: 14px; }
     .event-text a:hover { text-decoration: underline; }
     .event-text a[href*="maps.google"] { display: block; margin-top: 2px; }
@@ -1542,7 +1544,7 @@ const DAYS = [
       { time: '~02:30', text: 'Подъём. Собраться. Кофе по желанию.' },
       { time: '~03:00', text: 'Такси / Bolt → аэропорт Вильнюса (~20 мин)' },
       { time: '03:30', text: 'Регистрация и досмотр<em>Регистрация закрывается в 04:20 (за 40 мин до вылета)</em>' },
-      { time: '05:00', text: '<strong>Вылет LX1339</strong> VNO → ZRH<em>Бронь: XPVXVH · 1 багаж 25кг, остальные — только ручная кладь</em>', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
+      { time: '05:00', text: '<strong>Вылет LX1339</strong> VNO → ZRH<em>Бронь: <strong>XPVXVH</strong> <span class="copy-btn" onclick="navigator.clipboard.writeText(\'XPVXVH\');this.textContent=\'✓\';setTimeout(()=>this.textContent=\'⧉\',1500)">⧉</span> · 1 багаж 25кг, остальные — ручная кладь</em><em><a href="https://www.swiss.com/ru/en/online-check-in" target="_blank" style="color:var(--accent)">Онлайн-регистрация Swiss →</a></em>', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
       { time: '06:30', text: '<strong>Прибытие в Цюрих</strong> · 7 часов до следующего рейса<em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2H3z"/><path d="M5 11l1-5h12l1 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg> Автобус ~€4</em><em style="color:var(--text-secondary);background:var(--bg);border:1px solid rgba(0,0,0,0.04);padding:14px 18px;border-radius:12px;margin-top:12px;display:flex;gap:8px;align-items:center"><span style="font-size:16px;flex-shrink:0">🍫</span>Смело садитесь на S-Bahn и езжайте в центр. Старый город, набережная, шоколад Sprüngli, фондю. Пара часов — и вы довольные вернётесь. Много не потратите, а впечатлений — на весь перелёт.</em>' },
       { time: '13:45', text: '<strong>Вылет LX8264</strong> ZRH → FNC · прибытие 16:45', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
       { time: '18:00', text: '<strong>Получение машины</strong> · STONES Rent-A-Car<em>Аэропорт (Meet & Greet) · Dacia Stepway · Заказ #4730</em>', link: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069', icon: 'doc', linkTitle: 'Контракт' },
@@ -1691,14 +1693,10 @@ const DAYS = [
       { time: '~07:15', text: 'Такси / Bolt → аэропорт Фуншала (~20 мин)<em>Машины уже нет — отдали 28-го. Вызывай Bolt заранее!</em>' },
       { time: '08:00', text: 'Регистрация и досмотр<em>Регистрация закрывается в 09:20 (за 40 мин до вылета)</em>' },
       { time: '10:00', text: '<strong>Вылет LX8265</strong> FNC → ZRH · прибытие 14:50', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
-      { time: '14:50', text: '<strong>Прибытие в Цюрих</strong> · 7 часов до рейса домой<em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37</em>' },
+      { time: '14:50', text: '<strong>Прибытие в Цюрих</strong> · 7 часов до рейса домой<em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2H3z"/><path d="M5 11l1-5h12l1 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg> Автобус ~€4</em><em style="color:var(--text-secondary);background:var(--bg);border:1px solid rgba(0,0,0,0.04);padding:14px 18px;border-radius:12px;margin-top:12px;display:flex;gap:8px;align-items:center"><span style="font-size:16px;flex-shrink:0">🍫</span>Вы уже были здесь утром, но Цюрих стоит второго свидания. Закат на набережной Limmat, шоколад на дорогу, последний глоток нормального кофе перед ночным рейсом.</em>' },
       { time: '21:10', text: 'Посадка на LX1338<em>Регистрация закрывается в 21:10 (за 40 мин)</em>' },
       { time: '21:50', text: '<strong>Вылет LX1338</strong> ZRH → VNO · прибытие 01:20 (1 мая)', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
     ],
-    info: [
-      { icon: '✈️', text: 'Бронь Swiss Air: <strong>XPVXVH</strong>' },
-      { icon: '⚠️', text: 'Economy Light — только ручная кладь!' },
-    ]
   },
   {
     date: '1 мая (пт)',
@@ -1707,10 +1705,7 @@ const DAYS = [
     subtitle: 'Приземление → автобус домой',
     events: [
       { time: '01:20', text: 'Прибытие в Вильнюс' },
-      { time: 'Утро', text: '<strong>Автобус Вильнюс → Минск</strong> · данные уточняются' },
-    ],
-    info: [
-      { icon: '🚌', text: '<a href="https://ecolines.net" target="_blank">Ecolines — билеты обратно →</a>' },
+      { time: 'Утро', text: '<strong>Автобус Вильнюс → Минск</strong> · данные уточняются', link: 'https://ecolines.net', icon: 'ticket', linkTitle: 'Билет', contacts: { web: 'https://ecolines.net', webLabel: 'ecolines.net' } },
     ]
   },
 ];
