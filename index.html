@@ -499,14 +499,14 @@
       display: flex; gap: 6px; margin-bottom: 10px;
     }
     .event-tab-btn {
-      padding: 5px 14px; font-size: 13px; font-weight: 500;
-      color: var(--text-secondary); background: var(--bg); border: none;
-      border-radius: 20px;
+      padding: 6px 14px; font-size: 13px; font-weight: 600;
+      color: var(--text-secondary); background: none; border: none;
+      border-bottom: 2px solid transparent;
       cursor: pointer; font-family: inherit;
       transition: var(--transition);
     }
-    .event-tab-btn.active { color: var(--accent); background: rgba(37,99,235,0.06); }
-    .event-tab-btn:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+    .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .event-tab-btn:hover { color: var(--text); }
     .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 8px; }
     .event-tab-panel.active { display: block; }
     .event-actions {
