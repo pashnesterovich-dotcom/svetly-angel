@@ -1336,7 +1336,7 @@ function initApp() {
   // Mobile: bullets to new lines
   if (window.innerWidth < 480) {
     document.querySelectorAll('.event-text em').forEach(function(el) {
-      el.innerHTML = el.innerHTML.replace(/ · /g, '<br>');
+      el.innerHTML = el.innerHTML.replace(/\s*·\s*/g, '<br>· ');
     });
     document.querySelectorAll('.day-subtitle').forEach(function(el) {
       el.innerHTML = el.innerHTML.replace(/ → /g, '<br>→ ');
