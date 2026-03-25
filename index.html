@@ -496,17 +496,17 @@
     /* Tabs inside events */
     .event-tabs { flex: 1; min-width: 0; }
     .event-tabs-bar {
-      display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 10px;
+      display: flex; gap: 6px; margin-bottom: 10px;
     }
     .event-tab-btn {
-      padding: 6px 14px; font-size: 13px; font-weight: 600;
-      color: var(--text-secondary); background: none; border: none;
-      border-bottom: 2px solid transparent;
+      padding: 5px 14px; font-size: 13px; font-weight: 500;
+      color: var(--text-secondary); background: var(--bg); border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 20px;
       cursor: pointer; font-family: inherit;
       transition: var(--transition);
     }
-    .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-    .event-tab-btn:hover { color: var(--text); }
+    .event-tab-btn.active { color: var(--accent); background: rgba(37,99,235,0.06); border-color: rgba(37,99,235,0.15); }
+    .event-tab-btn:hover { color: var(--text); border-color: rgba(0,0,0,0.12); }
     .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 8px; }
     .event-tab-panel.active { display: block; }
     .event-actions {
