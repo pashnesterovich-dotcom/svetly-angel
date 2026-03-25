@@ -485,9 +485,9 @@
       padding: 6px 12px; border-radius: 12px;
     }
     .event-doc-btn:hover { opacity: 0.8; }
-    .event-doc-btn svg { flex-shrink: 0; color: var(--accent); }
+    .event-doc-btn svg { flex-shrink: 0; color: var(--accent); stroke: var(--accent); }
     .event-doc-disabled { opacity: 1; cursor: default; pointer-events: none; background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.06); color: #999; }
-    .event-doc-btn.event-doc-disabled svg { color: #999; }
+    .event-doc-btn.event-doc-disabled svg { color: #999; stroke: #999; }
 
     /* Tip block (recommendations, yellow-orange) */
     .day-tip {
@@ -510,7 +510,7 @@
     .event-tabs-card { background: #F9F9F7; border-radius: 12px; padding: 10px 14px; margin-top: 4px; }
     .event-tabs-bar {
       display: flex; gap: 6px; margin-bottom: 10px;
-      padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     .event-tab-btn {
       padding: 6px 14px; font-size: 13px; font-weight: 600;
