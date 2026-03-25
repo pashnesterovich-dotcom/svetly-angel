@@ -507,7 +507,7 @@
     }
     .event-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
     .event-tab-btn:hover { color: var(--text); }
-    .event-tab-panel { display: none; font-size: 14px; color: var(--text); line-height: 1.45; }
+    .event-tab-panel { display: none; font-size: 14px; color: var(--text-secondary); line-height: 1.5; padding-top: 8px; }
     .event-tab-panel.active { display: block; }
     .event-actions {
       display: flex; gap: 20px; flex-shrink: 0; margin-left: auto; padding-left: 8px;
@@ -1519,7 +1519,7 @@ const DAYS = [
     events: [
       { time: '15:00', text: '<strong>Минск → Вильнюс</strong><em>Центральный вокзал, ул. Бобруйская</em>', map: 'https://maps.google.com/?q=Центральный+автовокзал,+Бобруйская,+Минск&navigate=yes', link: 'https://ecolines.net', icon: 'ticket', linkTitle: 'Билет', contacts: { web: 'https://ecolines.net', webLabel: 'ecolines.net' } },
       { time: '~21:00', text: '<strong>Прибытие в Вильнюс</strong>' },
-      { time: 'Ночь', text: '<strong>Заселение: Cozy Flat</strong><em>2 ночи<br><a href="https://www.booking.com/Share-7Nf6uR5" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=54.6872,25.2797&navigate=yes' },
+      { time: 'Ночь', text: '<strong>Заселение: Cozy Flat</strong><em>2 ночи · <a href="https://www.booking.com/Share-7Nf6uR5" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=54.6872,25.2797&navigate=yes' },
     ],
     note: 'Встречаемся на вокзале заранее. Проверь паспорт, страховку, распечатки.', noteIcon: '🧳'
   },
@@ -1548,7 +1548,7 @@ const DAYS = [
       { time: '06:30', text: '<strong>Прибытие в Цюрих</strong> <span class="tag-price" style="background:#FEF3C7;color:#D97706">7 часов в Цюрихе</span><em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2H3z"/><path d="M5 11l1-5h12l1 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg> Автобус ~€4</em><em style="color:var(--text-secondary);background:var(--bg);border:1px solid rgba(0,0,0,0.04);padding:14px 18px;border-radius:12px;margin-top:12px;display:flex;gap:8px;align-items:flex-start"><span style="font-size:16px;flex-shrink:0">🍫</span>Смело садитесь на\u00a0S-Bahn и\u00a0езжайте в\u00a0центр. Старый город, набережная, шоколад Sprüngli, фондю. Пара часов — и\u00a0вы\u00a0довольные вернётесь.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0"><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Вернуться в\u00a0аэропорт к\u00a0~12:30. Регистрация на\u00a0LX8264 закрывается в\u00a013:05</em>' },
       { time: '13:45', text: '<strong>Вылет LX8264</strong> ZRH → FNC<em>Прибытие 16:45</em>', link: 'https://www.swiss.com/ru/en/online-check-in', icon: 'ticket', linkTitle: 'Регистрация' },
       { time: '18:00', text: '<strong>Получение машины</strong> · STONES Rent-A-Car<em>Аэропорт · Dacia Stepway</em>', link: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069', icon: 'doc', linkTitle: 'Контракт' },
-      { time: '~20:00', text: '<strong>Заселение: Funchal 19</strong><em>1 ночь<br><a href="https://www.airbnb.ru/rooms/1637584730331319648" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Airbnb →</a></em>', map: 'https://maps.google.com/?q=32.649050,-16.903617&navigate=yes', tel: '+351961423326' },
+      { time: '~20:00', text: '<strong>Заселение: Funchal 19</strong><em>1 ночь · <a href="https://www.airbnb.ru/rooms/1637584730331319648" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Airbnb →</a></em>', map: 'https://maps.google.com/?q=32.649050,-16.903617&navigate=yes', tel: '+351961423326' },
     ],
   },
   {
@@ -1576,7 +1576,7 @@ const DAYS = [
       { time: '05:30', text: 'Выезд → Fanal Forest (~15 мин)' },
       { time: '05:45', text: '<strong>Fanal Forest</strong><em>Лавровый лес UNESCO, деревьям 500+ лет, туман клубится. Самое магическое место Мадейры</em>', map: 'https://maps.google.com/?q=Fanal+Forest,+Madeira&navigate=yes' },
       { time: '08:00', text: 'Завтрак на горелке. Заслужили.' },
-      { time: '~13:00', text: '<strong>Заселение: Quinta\' Home</strong><em>1 ночь<br><a href="https://www.booking.com/Share-CPfUlM" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=32.8469,-17.1559&navigate=yes', tel: '+351968509710' },
+      { time: '~13:00', text: '<strong>Заселение: Quinta\' Home</strong><em>1 ночь · <a href="https://www.booking.com/Share-CPfUlM" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=32.8469,-17.1559&navigate=yes', tel: '+351968509710' },
       { time: '14:30', text: '<strong>Выезд в\u00a0Сейшал</strong><em>~15 мин. Деревня с\u00a0чёрными пляжами и\u00a0лавовыми бассейнами на\u00a0северном побережье.</em>' },
       { time: 'День', text: '<strong>Poça das Lesmas</strong> <span class="tag-price">€2,50</span><em>Лавовая арка высотой 6м, природные бассейны в\u00a0скалах</em>', map: 'https://maps.google.com/?q=Poça+das+Lesmas,+Seixal,+Madeira&navigate=yes' },
       { time: 'День', text: '<strong>Praia do Porto do Seixal</strong> <span class="tag-free">бесплатно</span><em>Чёрный вулканический пляж</em>', map: 'https://maps.google.com/?q=Praia+do+Porto+do+Seixal,+Madeira&navigate=yes' },
@@ -1610,7 +1610,7 @@ const DAYS = [
         { label: 'План А', text: '<strong>PR1.1 + PR1.2 → Pico Ruivo (1862м)</strong><br>Два маршрута подряд: Vereda da Ilha (8.2км, ~3ч, средняя) + Vereda do Pico Ruivo (5.6км, ~1.5-3ч). Финиш — высшая точка Мадейры. Туман, ветер, вид на весь остров. Это тот самый момент, ради которого всё затевалось.<br><em>Итого: ~14км, 4.5-6ч · Набор высоты ~800м · Сложность: средняя-высокая</em>', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' },
         { label: 'План Б', text: '<strong>Pico do Arieiro → Pico Ruivo</strong><br>Легендарная тропа между двумя пиками. Тоннели, лестницы, облака под ногами. Самый красивый и самый популярный маршрут острова. Но: его регулярно закрывают на ремонт. Если к 24 апреля откроют — идём сюда.<br><em>7км, ~3-4ч · €7–10.50 · Сложность: средняя · Старт с парковки Pico do Arieiro</em>', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' }
       ] },
-      { time: 'Вечер', text: '<strong>Заселение: Caminho da Praia da Maiata</strong><em>2 ночи<br><a href="https://www.booking.com/Share-A3hqfkW" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=32.7644,-16.8214&navigate=yes', tel: '+351967858836' },
+      { time: 'Вечер', text: '<strong>Заселение: Caminho da Praia da Maiata</strong><em>2 ночи · <a href="https://www.booking.com/Share-A3hqfkW" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=32.7644,-16.8214&navigate=yes', tel: '+351967858836' },
     ]
   },
   {
@@ -1619,9 +1619,9 @@ const DAYS = [
     title: 'Глава 8: Левада, ром и чилл',
     subtitle: 'Порту-да-Круш · Левада утром — бар вечером',
     events: [
-      { time: 'Утро', tabs: [
-        { label: 'Levada do Rei', text: '<strong>PR18 Levada do Rei</strong><br>Самая красивая левада Мадейры. Водопады в финале, тропический лес, деревянные мостики. Едем на машине ~30 мин.<br><em>10км, 2.5-3.5ч · Сложность: лёгкая · На машине от дома</em>' },
-        { label: 'Levada do Castelejo', text: '<strong>Levada do Castelejo</strong><br>Стартуем пешком от дома — не нужна машина. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но атмосфернее.<br><em>11км, 3-4ч · Сложность: лёгкая-средняя · Старт от двери</em>' }
+      { time: 'Утро', text: '<strong>Поход по\u00a0левадам</strong>', tabs: [
+        { label: 'Levada do Rei', text: 'Самая красивая левада Мадейры. Водопады в\u00a0финале, тропический лес, деревянные мостики. На\u00a0машине ~30\u00a0мин от\u00a0дома. 10км, 2.5-3.5ч, лёгкая.' },
+        { label: 'Levada do Castelejo', text: 'Стартуем пешком от\u00a0дома — машина не\u00a0нужна. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но\u00a0атмосфернее. 11км, 3-4ч, лёгкая-средняя.' }
       ] },
       { time: 'День', text: '<strong>Бассейны Porto da Cruz</strong> <span class="tag-free">бесплатно</span><em>Природные вулканические бассейны прямо в\u00a0океане. Вода прозрачная, волны разбиваются о\u00a0скалы рядом. Один из\u00a0лучших спотов на\u00a0северном побережье.</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
       { time: 'Обед', text: '<strong>A Pipa</strong><em>Praça Velha, Порту-да-Круш</em>', map: 'https://maps.google.com/?q=A+Pipa,+Porto+da+Cruz,+Madeira&navigate=yes' },
@@ -1806,7 +1806,8 @@ function buildDayBody(day) {
         tabPanels += '<div class="event-tab-panel' + act + '" data-tabgroup="' + tabId + '" data-tabidx="' + ti + '">' + t.text + tabActions + '</div>';
       });
       tabBar += '</div>';
-      html += '<div class="event">' + timeCol + '<div class="event-tabs">' + tabBar + tabPanels + '</div></div>';
+      var tabTitle = e.text ? '<div class="event-text" style="margin-bottom:8px">' + e.text + '</div>' : '';
+      html += '<div class="event">' + timeCol + '<div class="event-tabs">' + tabTitle + tabBar + tabPanels + '</div></div>';
     } else {
       var contactsHtml = '';
       var hasContacts = e.contacts || e.tel;
