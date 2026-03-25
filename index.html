@@ -1732,7 +1732,7 @@ function renderDays() {
       '<div class="day-body">' + buildDayBody(day) + '</div>';
     list.appendChild(card);
     console.log('Day', i+1, 'rendered:', day.date);
-    } catch(err) { console.error('Day', i+1, 'FAILED:', day.date, err.message); }
+    } catch(err) { console.error('Day', i+1, 'FAILED:', day.date, err.message, err.stack); }
   });
 }
 
