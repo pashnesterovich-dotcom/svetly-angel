@@ -1825,13 +1825,16 @@ function buildDayBody(day) {
       var docsHtml = '';
       if (e.docs && e.docs.length) {
         docsHtml = '<div class="event-docs">';
+        var hasDisabledDoc = false;
         e.docs.forEach(function(d) {
+          if (d.disabled) hasDisabledDoc = true;
           if (d.disabled) {
             docsHtml += '<span class="event-doc-btn event-doc-disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg> ' + d.name + '</span>';
           } else {
             docsHtml += '<a href="' + d.file + '" download class="event-doc-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg> ' + d.name + '</a>';
           }
         });
+        if (hasDisabledDoc) docsHtml += '<div style="font-size:12px;color:#B0B0B0;margin-top:4px">* документы ещё не загружены</div>';
         docsHtml += '</div>';
       }
       html += '<div class="event">' + timeCol + '<div class="event-content"><div class="event-text">' + e.text + '</div>' + contactsHtml + docsHtml + '</div>' + actions + '</div>';
