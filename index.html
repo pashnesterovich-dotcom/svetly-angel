@@ -336,7 +336,6 @@
     .day-title {
       font-size: 18px; font-weight: 700;
       color: var(--text); margin-top: 1px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .day-num {
       display: inline-flex; align-items: center;
@@ -359,7 +358,6 @@
     }
     .day-subtitle {
       font-size: 14px; color: var(--text-secondary);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .day-chevron {
       flex-shrink: 0;
@@ -404,7 +402,7 @@
     .event:has(.event-contacts), .event:has(em), .event:has(.event-tabs) {
       align-items: flex-start;
     }
-    .event-content { flex: 1; min-width: 0; max-width: calc(100% - 170px); }
+    .event-content { flex: 1; min-width: 0; max-width: calc(100% - 120px); }
     .event:last-child { border-bottom: none; }
     .event-time small { font-size: 12px; font-weight: 400; }
     .event-time {
@@ -1339,6 +1337,9 @@ function initApp() {
   if (window.innerWidth < 480) {
     document.querySelectorAll('.event-text em').forEach(function(el) {
       el.innerHTML = el.innerHTML.replace(/ · /g, '<br>');
+    });
+    document.querySelectorAll('.day-subtitle').forEach(function(el) {
+      el.innerHTML = el.innerHTML.replace(/ → /g, '<br>→ ');
     });
   }
   try { initChecklist(); } catch(e) { console.error('initChecklist error:', e); }
