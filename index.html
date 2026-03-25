@@ -445,7 +445,7 @@
       padding-right: 30%;
       margin-top: 16px;
       line-height: 1.5;
-      display: flex; gap: 10px; align-items: center;
+      display: flex; gap: 10px; align-items: flex-start;
     }
     .day-note-icon {
       font-size: 16px; flex-shrink: 0; display: flex; align-items: center;
@@ -487,7 +487,7 @@
       padding-right: 30%;
       margin-top: 10px;
       line-height: 1.5;
-      display: flex; gap: 10px; align-items: center;
+      display: flex; gap: 10px; align-items: flex-start;
     }
     .day-tip-icon {
       font-size: 16px; flex-shrink: 0; line-height: 1.3;
@@ -1597,7 +1597,7 @@ const DAYS = [
       { time: 'День', text: 'Закупить мясо в магазине' },
       { time: 'Вечер', text: '<strong>Chão das Feiteiras (1200м)</strong><em>Бесплатно · Столы · Мангалы · Вода · Кострище</em>', map: 'https://maps.google.com/?q=32.7647,-17.0027&navigate=yes' },
     ],
-    note: 'Ночью 8-12°C — термобельё обязательно. Ранний отбой — подъём в 05:00. Горы не ждут тех, кто проспал рассвет.', noteIcon: '🌡'
+    note: 'Ночью 8-12°C — термобельё обязательно.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Ранний отбой — подъём в\u00a005:00. Горы не\u00a0ждут тех, кто проспал рассвет.', noteIcon: '🌡'
   },
   {
     date: '24 апр (пт)',
@@ -1641,7 +1641,7 @@ const DAYS = [
       { time: 'День', text: 'Закупка мяса/рыбы (Machico)' },
       { time: 'Вечер', text: '<strong>Boca das Voltas (São Jorge, ~750м)</strong><em>Бесплатно · Разрешение: 419372/2026</em>', map: 'https://maps.google.com/?q=32.7731,-16.8417&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883 (лесной пост)', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' } },
     ],
-    note: 'Огонь только в отведённых местах. Мусор с собой. Панорама на долину Боа-Вентура — звёзды и лавровый лес.', noteIcon: '🌿'
+    note: 'Огонь только в\u00a0отведённых местах. Мусор с\u00a0собой.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Панорама на\u00a0долину Боа-Вентура — звёзды и\u00a0лавровый лес.', noteIcon: '🌿'
   },
   {
     date: '27 апр (пн)',
@@ -1650,15 +1650,15 @@ const DAYS = [
     subtitle: 'Pica do Alto Ridge или чилл → PR8 → Casa do Sardinha · Океан с двух сторон',
     events: [
       { time: 'Утро', tabs: [
-        { label: 'Хардкор', text: '<strong>Pico do Alto Ridge — 360° хребет</strong><br>Длинный маршрут по хребту с панорамой на весь остров. Океан слева и справа, зелёные долины внизу. Физически тяжело, но виды — те самые, из National Geographic.<br><em>10.6км, 5-7ч · Набор высоты ~600м · Стартуем от лагеря · Сложность: высокая</em>' },
-        { label: 'Чилл', text: '<strong>Прогулка + кофе + природа</strong><br>Спокойное утро без рюкзаков. Пройтись по окрестностям, подышать лавровым лесом, сварить кофе на горелке. Иногда лучшее приключение — никуда не спешить.<br><em>2-3 часа · Вокруг лагеря · Сложность: нулевая · Удовольствие: максимальное</em>' }
+        { label: 'Хардкор', text: 'Pico do Alto Ridge — маршрут по\u00a0хребту с\u00a0панорамой 360°. Океан слева и\u00a0справа, долины внизу. Физически тяжело, но\u00a0виды из\u00a0National Geographic. 10.6км, 5-7ч, набор высоты ~600м.', link: 'https://simplifica.madeira.gov.pt/services/78-82-259', icon: 'doc', linkTitle: 'Регистрация' },
+        { label: 'Чилл', text: 'Спокойное утро без рюкзаков. Пройтись по\u00a0окрестностям, подышать лавровым лесом, сварить кофе на\u00a0горелке. Иногда лучшее приключение — никуда не\u00a0спешить. 2-3 часа вокруг лагеря.' }
       ] },
       { time: 'День', text: 'Сборы, выезд · Обед в Santana или Machico · Закупка воды и еды' },
-      { time: '~13:00', text: '<strong>Парковка Baía d\'Abra</strong> <span class="tag-price">€3-4/день</span>', map: 'https://maps.google.com/?q=Baía+d+Abra,+Madeira&navigate=yes' },
+      { time: '~13:00', text: '<strong>Парковка Baía d\'Abra</strong> <span class="tag-price">€3-4/день</span><em>Оплата на\u00a0месте, автомат. Парковка небольшая — в\u00a0сезон заполняется к\u00a010:00. Мы\u00a0приезжаем после обеда, часть туристов уже уехала.</em>', map: 'https://maps.google.com/?q=Baía+d+Abra,+Madeira&navigate=yes' },
       { time: '~14:00', text: '<strong>Пешком по PR8</strong> до Casa do Sardinha (~4км, 1-1.5ч с рюкзаками)<em>Тропа по хребту — океан с двух сторон!</em>' },
       { time: 'Вечер', text: '<strong>Лагерь Casa do Sardinha</strong><em>Бесплатно · Разрешение: 415506/2026</em>', map: 'https://maps.google.com/?q=32.7486,-16.7080&navigate=yes', contacts: { tel: '968334032', telLabel: '968 334 032 (лесной пост)', web: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/', webLabel: 'madeiracamping.com' } },
     ],
-    note: 'Воды питьевой НЕТ — тащить с собой! Туалет €1. Ветер сильный — палатку крепить на совесть. Край земли не прощает лени.', noteIcon: '💨'
+    note: 'Воды питьевой НЕТ — тащить с\u00a0собой! Туалет €1.<hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0">Ветер сильный — палатку крепить на\u00a0совесть. Край земли не\u00a0прощает лени.', noteIcon: '💨'
   },
   {
     date: '28 апр (вт)',
