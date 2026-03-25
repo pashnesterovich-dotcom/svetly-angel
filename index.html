@@ -1335,6 +1335,12 @@ function initApp() {
   try { initWidgets(); } catch(e) { console.error('initWidgets error:', e); }
   try { initMap(); } catch(e) { console.error('initMap error:', e); }
   try { renderDays(); } catch(e) { console.error('renderDays error:', e); }
+  // Mobile: bullets to new lines
+  if (window.innerWidth < 480) {
+    document.querySelectorAll('.event-text em').forEach(function(el) {
+      el.innerHTML = el.innerHTML.replace(/ · /g, '<br>');
+    });
+  }
   try { initChecklist(); } catch(e) { console.error('initChecklist error:', e); }
   console.log('initApp done. Days rendered:', document.querySelectorAll('.day-card').length, 'Checklist items:', document.querySelectorAll('.checklist-item').length);
   initScrollSpy();
