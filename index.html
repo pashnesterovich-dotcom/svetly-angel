@@ -1765,8 +1765,8 @@ function buildDayBody(day) {
   // Main events
   day.events.forEach(e => {
     let actions = '';
+    var iconFn = { nav: svgNav, booking: svgBooking, phone: svgPhone, ticket: svgTicket, doc: svgDoc, link: svgLink };
     if (e.map || e.link || e.disabledBtn) {
-      var iconFn = { nav: svgNav, booking: svgBooking, phone: svgPhone, ticket: svgTicket, doc: svgDoc, link: svgLink };
       actions = '<div class="event-actions">';
       // Other actions first
       if (e.link) {
