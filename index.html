@@ -167,8 +167,8 @@
       text-align: center;
     }
     .countdown-until {
-      font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
-      color: rgba(255,255,255,0.75);
+      font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      color: #fff;
       text-transform: none;
       margin-bottom: 12px;
     }
@@ -840,7 +840,6 @@
     <div class="hero-inner">
       <div class="hero-badge">18 апр — 1 мая</div>
       <h1 class="hero-title">Мадейра 🏔</h1>
-      <p class="hero-sub">Трое из Минска. Один остров. Тринадцать дней без плана&nbsp;Б.</p>
 
       <div class="countdown-box">
         <div class="countdown-until" id="countdown-until">до старта экспедиции</div>
@@ -1534,7 +1533,7 @@ const DAYS = [
     subtitle: 'Автобус → Вильнюс · Старт экспедиции',
     events: [
       { time: '15:00', text: '<strong>Минск → Вильнюс</strong><em>Центральный вокзал, ул. Бобруйская</em>', map: 'https://maps.google.com/?q=Центральный+автовокзал,+Бобруйская,+Минск&navigate=yes', link: 'https://ecolines.net', icon: 'ticket', linkTitle: 'Билет', contacts: { web: 'https://ecolines.net', webLabel: 'ecolines.net' } },
-      { time: '~21:00', text: '<strong>Прибытие в Вильнюс</strong>' },
+      { time: '~21:00', text: 'Прибытие в Вильнюс' },
       { time: 'Ночь', text: '<strong>Заселение: Cozy Flat</strong><em>2 ночи · <a href="https://www.booking.com/Share-7Nf6uR5" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=54.6872,25.2797&navigate=yes' },
     ],
     note: 'Встречаемся на вокзале заранее. Проверь паспорт, страховку, распечатки.', noteIcon: '🧳'
@@ -1574,9 +1573,9 @@ const DAYS = [
     subtitle: 'Фуншал → Кабу-Жиран → Пол-да-Серра → Порту-Мониш',
     events: [
       { time: '~09:00', text: 'Выезд из\u00a0Фуншала<em>Дальше — только дикая Мадейра. Цивилизация закончилась.</em>' },
-      { time: 'Утро', text: '<strong>Камара-ди-Лобуш</strong><em>Рыбацкая деревня, где рисовал Черчилль. Понча, набережная 2.2км</em>', map: 'https://maps.google.com/?q=Câmara+de+Lobos,+Madeira&navigate=yes' },
-      { time: 'Утро', text: '<strong>Кабу-Жиран (Cabo Girão)</strong> <span class="tag-price">€3</span><em>Самый высокий утёс в Европе — 580м. Стеклянный пол, под ногами океан. Билеты на месте.</em>', map: 'https://maps.google.com/?q=Cabo+Girão+Skywalk,+Madeira&navigate=yes' },
-      { time: 'День', text: '<strong>Paul da Serra</strong><em>Плато 1500м, ветряки, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Paul+da+Serra,+Madeira&navigate=yes' },
+      { time: 'Утро', text: 'Камара-ди-Лобуш<em>Рыбацкая деревня, где рисовал Черчилль. Понча, набережная 2.2км</em>', map: 'https://maps.google.com/?q=Câmara+de+Lobos,+Madeira&navigate=yes' },
+      { time: 'Утро', text: 'Кабу-Жиран (Cabo Girão) <span class="tag-price">€3</span><em>Самый высокий утёс в Европе — 580м. Стеклянный пол, под ногами океан. Билеты на месте.</em>', map: 'https://maps.google.com/?q=Cabo+Girão+Skywalk,+Madeira&navigate=yes' },
+      { time: 'День', text: 'Paul da Serra<em>Плато 1500м, ветряки, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Paul+da+Serra,+Madeira&navigate=yes' },
       { time: 'Вечер', text: '<strong>Природные бассейны Порту-Мониш</strong> <span class="tag-price">€3</span><em>Работают до\u00a019:00. Если успеете — заскочите поплавать. Но\u00a0скорее всего оставим на\u00a0завтра.</em>', map: 'https://maps.google.com/?q=Piscinas+Naturais+Porto+Moniz,+Madeira&navigate=yes' },
       { time: 'Ночь', text: '<strong>Кемпинг: Porto Moniz</strong><em>1 ночь · Бронь не\u00a0нужна</em>', map: 'https://maps.google.com/?q=Camping+Park+Porto+Moniz,+Madeira&navigate=yes', contacts: { tel: '+351291853856', telLabel: '+351 291 853 856', web: 'https://www.madeiracamping.com/porto-moniz/', webLabel: 'madeiracamping.com' }, docs: [{ name: 'Разрешение', file: '', disabled: true }, { name: 'Квитанция', file: '', disabled: true }] },
     ],
@@ -1593,7 +1592,7 @@ const DAYS = [
       { time: '05:45', text: '<strong>Fanal Forest</strong><em>Лавровый лес UNESCO, деревьям 500+ лет, туман клубится. Самое магическое место Мадейры</em>', map: 'https://maps.google.com/?q=Fanal+Forest,+Madeira&navigate=yes' },
       { time: '08:00', text: 'Завтрак на горелке. Заслужили.' },
       { time: '~13:00', text: '<strong>Заселение: Quinta\' Home</strong><em>1 ночь · <a href="https://www.booking.com/Share-CPfUlM" target="_blank" style="color:var(--accent)">Посмотреть на\u00a0Booking →</a></em>', map: 'https://maps.google.com/?q=Quinta+Home,+Ribeira+da+Janela,+Madeira&navigate=yes', tel: '+351968509710' },
-      { time: '14:30', text: '<strong>Выезд в\u00a0Сейшал</strong><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> ~15 мин на\u00a0машине. Деревня с\u00a0чёрными пляжами и\u00a0лавовыми бассейнами на\u00a0северном побережье.</em>' },
+      { time: '14:30', text: 'Выезд в\u00a0Сейшал<em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> ~15 мин на\u00a0машине. Деревня с\u00a0чёрными пляжами и\u00a0лавовыми бассейнами на\u00a0северном побережье.</em>' },
       { time: 'День', text: '<strong>Poça das Lesmas</strong> <span class="tag-price">€2,50</span><em>Лавовая арка высотой 6м, природные бассейны в\u00a0скалах</em>', map: 'https://maps.google.com/?q=Poça+das+Lesmas,+Seixal,+Madeira&navigate=yes' },
       { time: 'День', text: '<strong>Praia do Porto do Seixal</strong> <span class="tag-free">бесплатно</span><em>Чёрный вулканический пляж</em>', map: 'https://maps.google.com/?q=Praia+do+Porto+do+Seixal,+Madeira&navigate=yes' },
       { time: 'Вечер', text: '<strong>Чилл в Quinta\' Home</strong><em>Тот самый дом, в который заселились в обед. Мадейра славится своими растениями — лавр, эвкалипт и кое-что повеселее. Ну и портвейн, конечно. Крепкий, как ваши намерения.</em>' },
@@ -1607,10 +1606,10 @@ const DAYS = [
     subtitle: 'Сан-Висенти → Кемпинг 1200м · Ночь у костра',
     events: [
       { time: '~11:00', text: 'Выезд из\u00a0дома<em>Прощаемся с\u00a0Рибейра-да-Жанела — впереди горы</em>' },
-      { time: 'Обед', text: '<strong>Сан-Висенти</strong><em>Рестораны: Caravela, Lavrador</em>', map: 'https://maps.google.com/?q=São+Vicente,+Madeira&navigate=yes' },
-      { time: 'Дорога', text: '<strong>Miradouro do Véu da Noiva</strong><em>Водопад с видовой площадки</em>', map: 'https://maps.google.com/?q=Miradouro+Véu+da+Noiva,+Madeira&navigate=yes' },
-      { time: 'Дорога', text: '<strong>Перевал Encumeada</strong><em>1000м, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Encumeada,+Madeira&navigate=yes' },
-      { time: 'День', text: '<strong>Закупка для барбекю</strong><em>Мясо, уголь, вода. По\u00a0дороге есть супермаркеты в\u00a0Сан-Висенти.</em>' },
+      { time: 'Обед', text: 'Сан-Висенти<em>Рестораны: Caravela, Lavrador</em>', map: 'https://maps.google.com/?q=São+Vicente,+Madeira&navigate=yes' },
+      { time: 'Дорога', text: 'Miradouro do Véu da Noiva<em>Водопад с видовой площадки</em>', map: 'https://maps.google.com/?q=Miradouro+Véu+da+Noiva,+Madeira&navigate=yes' },
+      { time: 'Дорога', text: 'Перевал Encumeada<em>1000м, вид на оба побережья одновременно</em>', map: 'https://maps.google.com/?q=Encumeada,+Madeira&navigate=yes' },
+      { time: 'День', text: 'Закупка для барбекю<em>Мясо, уголь, вода. По\u00a0дороге есть супермаркеты в\u00a0Сан-Висенти.</em>' },
       { time: 'Вечер', text: '<strong>Кемпинг: Chão das Feiteiras (1200м)</strong><em>Мангалы · Вода · Барэшки</em>', map: 'https://maps.google.com/?q=Chão+das+Feiteiras,+Madeira&navigate=yes', contacts: { web: 'https://www.madeiracamping.com/feiteiras/', webLabel: 'madeiracamping.com' }, docs: [{ name: 'Разрешение', file: '', disabled: true }, { name: 'Квитанция', file: '', disabled: true }] },
     ],
     note: 'Ночью 8-12°C, термобельё обязательно. Ранний отбой — подъём в\u00a005:00, горы не\u00a0ждут тех, кто проспал рассвет.', noteIcon: '🌡'
@@ -1640,9 +1639,9 @@ const DAYS = [
         { label: 'План Б', text: '<strong>Levada do\u00a0Castelejo</strong><div style="margin-top:6px">11км · 3-4ч · Лёгкая-средняя</div><div style="margin-top:6px">Стартуем пешком от\u00a0дома — машина не\u00a0нужна. Подвесной мост, левада вдоль обрыва. Чуть сложнее, но\u00a0атмосфернее.</div>' }
       ] },
       { time: 'День', text: '<strong>Бассейны Porto da Cruz</strong> <span class="tag-free">бесплатно</span><em>Природные вулканические бассейны прямо в\u00a0океане. Вода прозрачная, волны разбиваются о\u00a0скалы рядом. Один из\u00a0лучших спотов на\u00a0северном побережье.</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
-      { time: 'Обед', text: '<strong>A Pipa</strong><em>Praça Velha, Порту-да-Круш</em>', map: 'https://maps.google.com/?q=A+Pipa,+Porto+da+Cruz,+Madeira&navigate=yes' },
-      { time: 'Вечер', text: '<strong>Ромовая фабрика Engenho Velho</strong> <span class="tag-free">бесплатно</span><em>Дегустация рома, история производства</em>', map: 'https://maps.google.com/?q=Engenho+Velho,+Porto+da+Cruz,+Madeira&navigate=yes' },
-      { time: 'Ночь', text: '<strong>Dino\'s Bar</strong><em>Набережная · Порту-да-Круш</em>', map: 'https://maps.google.com/?q=Dinos+Bar,+Porto+da+Cruz,+Madeira&navigate=yes' },
+      { time: 'Обед', text: 'A Pipa<em>Praça Velha, Порту-да-Круш</em>', map: 'https://maps.google.com/?q=A+Pipa,+Porto+da+Cruz,+Madeira&navigate=yes' },
+      { time: 'Вечер', text: 'Ромовая фабрика Engenho Velho <span class="tag-free">бесплатно</span><em>Дегустация рома, история производства</em>', map: 'https://maps.google.com/?q=Engenho+Velho,+Porto+da+Cruz,+Madeira&navigate=yes' },
+      { time: 'Ночь', text: 'Dino\'s Bar<em>Набережная · Порту-да-Круш</em>', map: 'https://maps.google.com/?q=Dinos+Bar,+Porto+da+Cruz,+Madeira&navigate=yes' },
     ],
     note: 'Набережная Порту-да-Круш, утёс Penha d\'Águia — если останется время.', noteIcon: '🏖'
   },
