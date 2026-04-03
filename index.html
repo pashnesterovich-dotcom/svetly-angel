@@ -1914,7 +1914,7 @@ function microTap() {
   const g = _audioCtx.createGain();
   o.connect(g); g.connect(_audioCtx.destination);
   o.frequency.value = 1800;
-  g.gain.value = 0.03;
+  g.gain.value = 0.015;
   g.gain.exponentialRampToValueAtTime(0.001, _audioCtx.currentTime + 0.04);
   o.start(_audioCtx.currentTime);
   o.stop(_audioCtx.currentTime + 0.04);
