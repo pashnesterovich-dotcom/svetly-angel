@@ -877,7 +877,7 @@
         </div>
         <div class="widget-card">
           <div class="widget-icon">⛽</div>
-          <div class="widget-val">~€1.75</div>
+          <div class="widget-val" id="w-fuel">—</div>
           <div class="widget-label">Бензин 95</div>
         </div>
       </div>
@@ -1405,15 +1405,34 @@ function initWidgets() {
     })
     .catch(() => { document.getElementById('w-temp').textContent = '~20°C'; });
 
-  // EUR/BYN via exchangerate-api (free tier)
-  fetch('https://open.er-api.com/v6/latest/EUR')
+  // EUR/BYN — primary: NBRB (official Belarus national bank), fallback: exchangerate-api
+  fetch('https://api.nbrb.by/exrates/rates/EUR?parammode=2')
     .then(r => r.json())
     .then(data => {
-      if (data.rates && data.rates.BYN) {
-        document.getElementById('w-eur').textContent = data.rates.BYN.toFixed(2);
-      }
+      if (data && data.Cur_OfficialRate) {
+        document.getElementById('w-eur').textContent = data.Cur_OfficialRate.toFixed(2);
+      } else { throw new Error('no rate'); }
     })
-    .catch(() => { document.getElementById('w-eur').textContent = '~3.65'; });
+    .catch(() => {
+      fetch('https://open.er-api.com/v6/latest/EUR')
+        .then(r => r.json())
+        .then(data => {
+          if (data.rates && data.rates.BYN) {
+            document.getElementById('w-eur').textContent = data.rates.BYN.toFixed(2);
+          }
+        })
+        .catch(() => { document.getElementById('w-eur').textContent = '~3.65'; });
+    });
+
+  // Fuel price — Portugal Gasoline 95 via Netlify Function
+  fetch('/.netlify/functions/fuel-price')
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.price) {
+        document.getElementById('w-fuel').textContent = '€' + data.price;
+      } else { throw new Error('no price'); }
+    })
+    .catch(() => { document.getElementById('w-fuel').textContent = '~€1.75'; });
 }
 
 // ════════════════════════════════════
@@ -1569,7 +1588,7 @@ const DAYS = [
       { time: '05:00', text: '<strong>Вылет LX1339</strong> VNO → ZRH<em>1 багаж 25кг, остальные — ручная кладь</em><em><a href="https://www.swiss.com/ru/en/online-check-in" target="_blank" style="color:var(--accent)">Онлайн-регистрация Swiss →</a></em>' },
       { time: '06:30', text: '<strong>Прибытие в Цюрих</strong> <span class="tag-price" style="background:#FFFBEB;color:#92400E;border:1px solid rgba(234,179,8,0.20);font-weight:400">7 часов в Цюрихе</span><em>До центра ~15 мин</em><em><svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="12" y1="3" x2="12" y2="11"/></svg> S-Bahn ~€6 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v2H5z"/><path d="M5 11l2-6h10l2 6"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/></svg> Такси ~€37 · <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2H3z"/><path d="M5 11l1-5h12l1 5"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg> Автобус ~€4</em><em style="color:var(--text-secondary);background:var(--bg);border:1px solid rgba(0,0,0,0.04);padding:14px 18px;border-radius:12px;margin-top:12px;display:flex;gap:8px;align-items:flex-start"><span style="font-size:16px;flex-shrink:0">🍫</span>Смело садитесь на\u00a0S-Bahn и\u00a0езжайте в\u00a0центр. Старый город, набережная, шоколад Sprüngli, фондю. Пара часов — и\u00a0вы\u00a0довольные вернётесь.</em><em style="color:#92400E;background:#FFFBEB;border:1px solid rgba(234,179,8,0.20);padding:14px 18px;border-radius:12px;margin-top:8px;display:flex;gap:8px;align-items:flex-start"><span style="flex-shrink:0;margin-top:2px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Вернуться в\u00a0аэропорт к\u00a0~12:30<br>Регистрация закрывается в\u00a013:05</em>' },
       { time: '13:45', text: '<strong>Вылет LX8264</strong> ZRH → FNC<em>Прибытие 16:45</em>' },
-      { time: '18:00', text: '<strong>Получение машины</strong><em>Аэропорт · Dacia Stepway · Встретят с\u00a0табличкой с\u00a0именем и\u00a0довезут до\u00a0машины</em>', link: 'https://www.stones-rentacar.com', icon: 'link', linkTitle: 'STONES', contacts: { web: 'https://www.stones-rentacar.com', webLabel: 'stones-rentacar.com' } },
+      { time: '18:00', text: '<strong>Получение машины</strong><em>Аэропорт · Dacia Stepway · Встретят с\u00a0табличкой с\u00a0именем и\u00a0довезут до\u00a0машины</em>', link: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069', icon: 'link', linkTitle: 'STONES', contacts: { web: 'https://www.stones-rentacar.com/order-details/?sid=1762672758&ts=1773916069', webLabel: 'stones-rentacar.com' } },
       { time: '~20:00', text: '<strong>Заселение: Funchal 19</strong><em>1 ночь · <a href="https://www.booking.com/Share-5rg7Mq8" target="_blank" style="color:var(--accent)">Booking →</a></em>', map: 'https://maps.google.com/?q=32.649050,-16.903617&navigate=yes', tel: '+351961423326' },
     ],
   },
