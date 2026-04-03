@@ -1157,14 +1157,21 @@
         <div class="doc-arrow">Открыть →</div>
       </a>
 
-      <a class="doc-card" href="https://www.madeiracamping.com/boca-das-voltas/" target="_blank">
-        <div class="doc-icon">⛺</div>
-        <div class="doc-info">
-          <div class="doc-title">Кемпинг Boca das Voltas</div>
-          <div class="doc-sub">São Jorge, ~750м · 26–27 апр · Разрешение: 419372/2026</div>
+      <div class="doc-card" style="flex-direction:column;align-items:stretch;cursor:default">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+          <div class="doc-icon">⛺</div>
+          <div class="doc-info">
+            <div class="doc-title">Кемпинг Boca das Voltas</div>
+            <div class="doc-sub">São Jorge, ~750м · 26–27 апр · 2 разрешения + 2 квитанции</div>
+          </div>
         </div>
-        <div class="doc-arrow">Скачать PDF →</div>
-      </a>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a href="permit-419372.pdf" target="_blank" style="flex:1;min-width:140px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-size:13px;display:flex;align-items:center;gap:8px;transition:border-color 0.2s"><span style="font-size:16px">📄</span><span><strong style="font-size:13px">Разрешение</strong><br><span style="color:var(--text-secondary);font-size:12px">419372 · 3 чел · 26–27</span></span></a>
+          <a href="receipt-419372.pdf" target="_blank" style="flex:1;min-width:140px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-size:13px;display:flex;align-items:center;gap:8px;transition:border-color 0.2s"><span style="font-size:16px">🧾</span><span><strong style="font-size:13px">Квитанция</strong><br><span style="color:var(--text-secondary);font-size:12px">€10 · 26–27 апр</span></span></a>
+          <a href="permit-419439.pdf" target="_blank" style="flex:1;min-width:140px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-size:13px;display:flex;align-items:center;gap:8px;transition:border-color 0.2s"><span style="font-size:16px">📄</span><span><strong style="font-size:13px">Разрешение</strong><br><span style="color:var(--text-secondary);font-size:12px">419439 · 1 чел · 27</span></span></a>
+          <a href="receipt-419439.pdf" target="_blank" style="flex:1;min-width:140px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-size:13px;display:flex;align-items:center;gap:8px;transition:border-color 0.2s"><span style="font-size:16px">🧾</span><span><strong style="font-size:13px">Квитанция</strong><br><span style="color:var(--text-secondary);font-size:12px">€5 · 27 апр</span></span></a>
+        </div>
+      </div>
 
       <a class="doc-card" href="https://www.madeiracamping.com/ponta-de-sao-lourenco/" target="_blank">
         <div class="doc-icon">⛺</div>
@@ -1471,7 +1478,7 @@ function initMap() {
     { n: 9, lat: 32.7611, lng: -16.9419, title: 'Pico Ruivo (1862м)', body: '24 апр · Высшая точка Мадейры · PR1.1 + PR1.2', link: 'https://simplifica.madeira.gov.pt/services/78-82-259' },
     { n: 10, lat: 32.7644, lng: -16.8214, title: 'Порту-да-Круш — жильё', body: '24–26 апр · 7 Rua Dos Muros, 9225-190 · €222 · +351 967 858 836', link: 'https://www.booking.com/Share-A3hqfkW' },
     { n: 11, lat: 32.7777, lng: -16.8752, title: 'Levada do Rei / Castelejo', body: '25 апр · PR18 Levada do Rei: 10км, 2.5-3.5ч', link: 'https://maps.google.com/?q=32.7777,-16.8752' },
-    { n: 12, lat: 32.7731, lng: -16.8417, title: 'Boca das Voltas', body: '26–27 апр · São Jorge, 750м · Разрешение 419372/2026 · Лесной пост: 963 817 883', link: 'https://www.madeiracamping.com/boca-das-voltas/' },
+    { n: 12, lat: 32.7731, lng: -16.8417, title: 'Boca das Voltas', body: '26–27 апр · São Jorge, 750м · Разрешения: 419372 + 419439 · Лесной пост: 963 817 883', link: 'https://www.madeiracamping.com/boca-das-voltas/' },
     { n: 13, lat: 32.7486, lng: -16.7080, title: 'Ponta de São Lourenço', body: '27–28 апр · Край земли · PR8 (~4км от парковки) · Разрешение 415506/2026', link: 'https://www.madeiracamping.com/ponta-de-sao-lourenco/' },
     { n: 14, lat: 32.6495, lng: -16.9088, title: 'Фуншал — Вилла Flávio', body: 'Entrada das Casas Novas 12, 9050-058 · 28–30 апр', link: 'https://maps.google.com/?q=32.6495,-16.9088' },
   ];
@@ -1680,7 +1687,7 @@ const DAYS = [
       { time: 'Утро', text: '<strong>Бассейны Porto da Cruz</strong> <span class="tag-free">бесплатно</span><em>Вулканические бассейны в\u00a0океане. Утром народу мало — лучшее время.</em>', map: 'https://maps.google.com/?q=Porto+da+Cruz+Bathing+Complex,+Madeira&navigate=yes' },
       { time: 'Обед', text: '<strong>В Порту-да-Круш</strong><em>Не забудь выехать до 11:00!</em>' },
       { time: 'День', text: '<strong>Закупка в\u00a0Machico</strong><em>Мясо для барбекю, рыба, вода (минимум 1.5л на\u00a0человека!). Мадейра славится эспадой (чёрная рыба-сабля) и\u00a0местной говядиной. Супермаркет Pingo Doce — лучший выбор.</em>', map: 'https://maps.google.com/?q=Pingo+Doce,+Machico,+Madeira&navigate=yes' },
-      { time: 'Вечер', text: '<strong>Кемпинг: Boca das Voltas (~750м)</strong>', map: 'https://maps.google.com/?q=Boca+das+Voltas,+São+Jorge,+Madeira&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' }, docs: [{ name: 'Разрешение', file: 'permit-419372.pdf' }, { name: 'Квитанция', file: 'receipt-419372.pdf' }] },
+      { time: 'Вечер', text: '<strong>Кемпинг: Boca das Voltas (~750м)</strong>', map: 'https://maps.google.com/?q=Boca+das+Voltas,+São+Jorge,+Madeira&navigate=yes', contacts: { tel: '963817883', telLabel: '963 817 883', web: 'https://www.madeiracamping.com/boca-das-voltas/', webLabel: 'madeiracamping.com' }, docs: [{ name: 'Разрешение 419372', file: 'permit-419372.pdf' }, { name: 'Квитанция €10', file: 'receipt-419372.pdf' }, { name: 'Разрешение 419439', file: 'permit-419439.pdf' }, { name: 'Квитанция €5', file: 'receipt-419439.pdf' }] },
     ],
     note: 'Огонь только в\u00a0мангалах, мусор с\u00a0собой. Зато — панорама на\u00a0долину Боа-Вентура, звёзды и\u00a0лавровый лес.', noteIcon: '🌿'
   },
@@ -1857,7 +1864,7 @@ function buildDayBody(day) {
           if (d.disabled) {
             docsHtml += '<span class="event-doc-btn event-doc-disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg> ' + d.name + '</span>';
           } else {
-            docsHtml += '<a href="' + d.file + '" download class="event-doc-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg> ' + d.name + '</a>';
+            docsHtml += '<a href="' + d.file + '" target="_blank" class="event-doc-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg> ' + d.name + '</a>';
           }
         });
         if (hasDisabledDoc) docsHtml += '<div style="font-size:13px;color:#999;margin-top:4px">* документы ещё не загружены</div>';
@@ -1959,7 +1966,7 @@ const CHECKLIST = [
       { id: 'license', text: '<strong>Водительские права</strong>', note: 'Международные? Уточни' },
       { id: 'insurance', text: '<strong>Страховка</strong>' },
       { id: 'bookings', text: '<strong>Распечатки бронирований</strong>' },
-      { id: 'permits', text: '<strong>Разрешения на кемпинг (PDF)</strong>', note: '419372/2026 + 415506/2026' },
+      { id: 'permits', text: '<strong>Разрешения на кемпинг (PDF)</strong>', note: '419372 + 419439 (Boca das Voltas) · 415506 (Casa do Sardinha)' },
     ]
   },
   {
