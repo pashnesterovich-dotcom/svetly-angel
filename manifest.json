@@ -1,7 +1,8 @@
 {
   "name": "Svetly Angel · Madeira 2026",
   "short_name": "Madeira",
-  "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FAFAF8",
   "theme_color": "#2563EB",
