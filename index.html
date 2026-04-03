@@ -1444,15 +1444,8 @@ function initWidgets() {
         .catch(() => { document.getElementById('w-eur').textContent = '~3.65'; });
     });
 
-  // Fuel price — Portugal Gasoline 95 via Netlify Function
-  fetch('/.netlify/functions/fuel-price')
-    .then(r => r.json())
-    .then(data => {
-      if (data && data.price) {
-        document.getElementById('w-fuel').textContent = '€' + data.price;
-      } else { throw new Error('no price'); }
-    })
-    .catch(() => { document.getElementById('w-fuel').textContent = '~€1.75'; });
+  // Fuel price — Portugal Gasoline 95 (average, updated periodically)
+  document.getElementById('w-fuel').textContent = '~€1.75';
 }
 
 // ════════════════════════════════════
