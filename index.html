@@ -1907,7 +1907,21 @@ function buildDayBody(day) {
   return html;
 }
 
+// Micro-tap sound via AudioContext (works on iOS Safari)
+const _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function microTap() {
+  const o = _audioCtx.createOscillator();
+  const g = _audioCtx.createGain();
+  o.connect(g); g.connect(_audioCtx.destination);
+  o.frequency.value = 1800;
+  g.gain.value = 0.03;
+  g.gain.exponentialRampToValueAtTime(0.001, _audioCtx.currentTime + 0.04);
+  o.start(_audioCtx.currentTime);
+  o.stop(_audioCtx.currentTime + 0.04);
+}
+
 function toggleDay(header) {
+  microTap();
   const card = header.parentElement;
   const body = card.querySelector('.day-body');
   if (card.classList.contains('open')) {
